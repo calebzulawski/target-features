@@ -5,6 +5,9 @@
 
 include!(concat!(env!("OUT_DIR"), "/generated.rs"));
 
+mod simd;
+pub use simd::*;
+
 /// A target architecture.
 #[derive(Copy, Clone, PartialEq, Eq)]
 pub enum Architecture {
