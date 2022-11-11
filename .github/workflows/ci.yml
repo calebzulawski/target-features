@@ -1,0 +1,56 @@
+name: Build
+
+on: [push]
+
+jobs:
+  test:
+    strategy:
+      matrix:
+        version:
+          - 1.61.0
+          - stable
+          - beta
+          - nightly
+        os:
+          - macos-latest
+          - ubuntu-latest
+          - windows-latest
+        features:
+          - --all-features
+          - --no-default-features
+
+    runs-on: ${{ matrix.os }}
+    
+    steps:
+    - uses: actions/checkout@v1
+    - name: Install toolchain
+      uses: actions-rs/toolchain@v1
+      with:
+        toolchain: ${{ matrix.version }}
+        override: true
+        profile: minimal
+    - name: Run tests
+      run: cargo test --verbose ${{ matrix.features }}
+
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: Install toolchain
+      uses: actions-rs/toolchain@v1
+      with:
+        toolchain: nightly
+        override: true
+        profile: minimal
+        components: clippy, rustfmt
+    - name: Clippy lint
+      run: cargo clippy --all-features --all-targets -- -D warnings
+    - name: Clippy lint no-std
+      run: cargo clippy --no-default-features --all-targets -- -D warnings
+    - name: Check formatting
+      run: cargo fmt -- --check
+    - name: Deadlinks
+      run: |
+        cargo install cargo-deadlinks
+        cargo doc
+        cargo deadlinks -v --check-http
