@@ -1,183 +1,911 @@
-rustc 1.67.0-nightly (e75aab045 2022-11-09)
-arm aclass: aclass
-arm aes: aes d32 neon vfp2 vfp3
-arm crc: crc
-arm crt-static: crt-static
-arm crypto: aes crypto d32 neon sha2 vfp2 vfp3
-arm d32: d32
-arm dotprod: d32 dotprod neon vfp2 vfp3
-arm dsp: dsp
-arm fp-armv8: d32 fp-armv8 vfp2 vfp3 vfp4
-arm i8mm: d32 i8mm neon vfp2 vfp3
-arm mclass: mclass
-arm neon: d32 neon vfp2 vfp3
-arm rclass: rclass
-arm sha2: d32 neon sha2 vfp2 vfp3
-arm thumb-mode: thumb-mode
-arm thumb2: thumb2
-arm v5te: v5te
-arm v6: v5te v6
-arm v6k: v5te v6 v6k
-arm v6t2: thumb2 v5te v6 v6k v6t2
-arm v7: thumb2 v5te v6 v6k v6t2 v7
-arm v8: thumb2 v5te v6 v6k v6t2 v7 v8
-arm vfp2: vfp2
-arm vfp3: d32 vfp2 vfp3
-arm vfp4: d32 vfp2 vfp3 vfp4
-aarch64 aes: aes neon
-aarch64 bf16: bf16
-aarch64 bti: bti
-aarch64 crc: crc
-aarch64 crt-static: 
-aarch64 dit: dit
-aarch64 dotprod: dotprod
-aarch64 dpb: dpb
-aarch64 dpb2: dpb2
-aarch64 f32mm: f32mm fp16 neon sve
-aarch64 f64mm: f64mm fp16 neon sve
-aarch64 fcma: fcma neon
-aarch64 fhm: fhm fp16 neon
-aarch64 flagm: flagm
-aarch64 fp16: fp16 neon
-aarch64 frintts: frintts
-aarch64 i8mm: i8mm
-aarch64 jsconv: jsconv neon
-aarch64 lor: lor
-aarch64 lse: lse
-aarch64 mte: mte
-aarch64 neon: neon
-aarch64 paca: paca
-aarch64 pan: pan
-aarch64 pmuv3: pmuv3
-aarch64 rand: rand
-aarch64 ras: ras
-aarch64 rcpc: rcpc
-aarch64 rcpc2: rcpc rcpc2
-aarch64 rdm: rdm
-aarch64 sb: sb
-aarch64 sha2: neon sha2
-aarch64 sha3: neon sha2 sha3
-aarch64 sm4: neon sm4
-aarch64 spe: spe
-aarch64 ssbs: ssbs
-aarch64 sve: fp16 neon sve
-aarch64 sve2: fp16 neon sve sve2
-aarch64 sve2-aes: aes fp16 neon sve sve2 sve2-aes
-aarch64 sve2-bitperm: fp16 neon sve sve2 sve2-bitperm
-aarch64 sve2-sha3: fp16 neon sha2 sha3 sve sve2 sve2-sha3
-aarch64 sve2-sm4: fp16 neon sm4 sve sve2 sve2-sm4
-aarch64 tme: tme
-aarch64 v8.1a: crc lor lse pan rdm v8.1a vh
-aarch64 v8.2a: crc dpb lor lse pan ras rdm v8.1a v8.2a vh
-aarch64 v8.3a: crc dpb fcma jsconv lor lse neon paca pan ras rcpc rdm v8.1a v8.2a v8.3a vh
-aarch64 v8.4a: crc dit dotprod dpb fcma flagm jsconv lor lse neon paca pan ras rcpc rcpc2 rdm v8.1a v8.2a v8.3a v8.4a vh
-aarch64 v8.5a: bti crc dit dotprod dpb dpb2 fcma flagm frintts jsconv lor lse neon paca pan ras rcpc rcpc2 rdm sb ssbs v8.1a v8.2a v8.3a v8.4a v8.5a vh
-aarch64 v8.6a: bf16 bti crc dit dotprod dpb dpb2 fcma flagm frintts i8mm jsconv lor lse neon paca pan ras rcpc rcpc2 rdm sb ssbs v8.1a v8.2a v8.3a v8.4a v8.5a v8.6a vh
-aarch64 v8.7a: bf16 bti crc dit dotprod dpb dpb2 fcma flagm frintts i8mm jsconv lor lse neon paca pan ras rcpc rcpc2 rdm sb ssbs v8.1a v8.2a v8.3a v8.4a v8.5a v8.6a v8.7a vh
-aarch64 vh: vh
-bpf alu32: alu32
-bpf crt-static: 
-hexagon crt-static: crt-static
-hexagon hvx: hvx
-hexagon hvx-length128b: hvx hvx-length128b
-mips crt-static: crt-static fp64
-mips fp64: fp64
-mips msa: fp64 msa
-mips virt: fp64 virt
-powerpc altivec: altivec
-powerpc crt-static: crt-static
-powerpc power8-altivec: altivec power8-altivec
-powerpc power8-vector: altivec power8-altivec power8-vector vsx
-powerpc power9-altivec: altivec power8-altivec power9-altivec
-powerpc power9-vector: altivec power8-altivec power8-vector power9-altivec power9-vector vsx
-powerpc vsx: altivec vsx
-riscv a: a
-riscv c: c
-riscv crt-static: 
-riscv d: d f
-riscv e: e
-riscv f: f
-riscv m: m
-riscv v: d f v
-riscv zba: zba
-riscv zbb: zbb
-riscv zbc: zbc
-riscv zbkb: zbkb
-riscv zbkc: zbkc
-riscv zbkx: zbkx
-riscv zbs: zbs
-riscv zdinx: zdinx zfinx
-riscv zfh: f zfh
-riscv zfhmin: f zfhmin
-riscv zfinx: zfinx
-riscv zhinx: zfinx zhinx
-riscv zhinxmin: zfinx zhinxmin
-riscv zk: zbkb zbkc zbkx zk zkn zknd zkne zknh zkr zkt
-riscv zkn: zbkb zbkc zbkx zkn zknd zkne zknh
-riscv zknd: zknd
-riscv zkne: zkne
-riscv zknh: zknh
-riscv zkr: zkr
-riscv zks: zbkb zbkc zbkx zks zksed zksh
-riscv zksed: zksed
-riscv zksh: zksh
-riscv zkt: zkt
-wasm atomics: atomics
-wasm bulk-memory: bulk-memory
-wasm crt-static: 
-wasm multivalue: multivalue
-wasm mutable-globals: mutable-globals
-wasm nontrapping-fptoint: nontrapping-fptoint
-wasm reference-types: reference-types
-wasm sign-ext: sign-ext
-wasm simd128: simd128
-x86 adx: adx
-x86 aes: aes sse sse2
-x86 avx: avx sse sse2 sse3 sse4.1 ssse3
-x86 avx2: avx avx2 sse sse2 sse3 sse4.1 ssse3
-x86 avx512bf16: avx avx2 avx512bf16 avx512bw avx512f f16c fma sse sse2 sse3 sse4.1 ssse3
-x86 avx512bitalg: avx avx2 avx512bitalg avx512bw avx512f f16c fma sse sse2 sse3 sse4.1 ssse3
-x86 avx512bw: avx avx2 avx512bw avx512f f16c fma sse sse2 sse3 sse4.1 ssse3
-x86 avx512cd: avx avx2 avx512cd avx512f f16c fma sse sse2 sse3 sse4.1 ssse3
-x86 avx512dq: avx avx2 avx512dq avx512f f16c fma sse sse2 sse3 sse4.1 ssse3
-x86 avx512er: avx avx2 avx512er avx512f f16c fma sse sse2 sse3 sse4.1 ssse3
-x86 avx512f: avx avx2 avx512f f16c fma sse sse2 sse3 sse4.1 ssse3
-x86 avx512gfni: avx512gfni sse sse2
-x86 avx512ifma: avx avx2 avx512f avx512ifma f16c fma sse sse2 sse3 sse4.1 ssse3
-x86 avx512pf: avx avx2 avx512f avx512pf f16c fma sse sse2 sse3 sse4.1 ssse3
-x86 avx512vaes: aes avx avx512vaes sse sse2 sse3 sse4.1 ssse3
-x86 avx512vbmi: avx avx2 avx512bw avx512f avx512vbmi f16c fma sse sse2 sse3 sse4.1 ssse3
-x86 avx512vbmi2: avx avx2 avx512bw avx512f avx512vbmi2 f16c fma sse sse2 sse3 sse4.1 ssse3
-x86 avx512vl: avx avx2 avx512f avx512vl f16c fma sse sse2 sse3 sse4.1 ssse3
-x86 avx512vnni: avx avx2 avx512f avx512vnni f16c fma sse sse2 sse3 sse4.1 ssse3
-x86 avx512vp2intersect: avx avx2 avx512f avx512vp2intersect f16c fma sse sse2 sse3 sse4.1 ssse3
-x86 avx512vpclmulqdq: avx avx512vpclmulqdq pclmulqdq sse sse2 sse3 sse4.1 ssse3
-x86 avx512vpopcntdq: avx avx2 avx512f avx512vpopcntdq f16c fma sse sse2 sse3 sse4.1 ssse3
-x86 bmi1: bmi1
-x86 bmi2: bmi2
-x86 cmpxchg16b: cmpxchg16b
-x86 crt-static: 
-x86 ermsb: ermsb
-x86 f16c: avx f16c sse sse2 sse3 sse4.1 ssse3
-x86 fma: avx fma sse sse2 sse3 sse4.1 ssse3
-x86 fxsr: fxsr
-x86 lzcnt: lzcnt
-x86 movbe: movbe
-x86 pclmulqdq: pclmulqdq sse sse2
-x86 popcnt: popcnt
-x86 rdrand: rdrand
-x86 rdseed: rdseed
-x86 rtm: rtm
-x86 sha: sha sse sse2
-x86 sse: sse
-x86 sse2: sse sse2
-x86 sse3: sse sse2 sse3
-x86 sse4.1: sse sse2 sse3 sse4.1 ssse3
-x86 sse4.2: sse sse2 sse3 sse4.1 sse4.2 ssse3
-x86 sse4a: sse sse2 sse3 sse4a
-x86 ssse3: sse sse2 sse3 ssse3
-x86 tbm: tbm
-x86 xsave: xsave
-x86 xsavec: xsave xsavec
-x86 xsaveopt: xsave xsaveopt
-x86 xsaves: xsave xsaves
+rustc_version = rustc 1.67.0-nightly (e75aab045 2022-11-09)
+
+feature = aclass
+arch = Arm
+implies = 
+description = Is application profile ('A' series).
+
+feature = aes
+arch = Arm
+implies = d32 neon vfp2 vfp3
+description = Enable AES support.
+
+feature = crc
+arch = Arm
+implies = 
+description = Enable support for CRC instructions.
+
+feature = crypto
+arch = Arm
+implies = aes d32 neon sha2 vfp2 vfp3
+description = Enable support for Cryptography extensions.
+
+feature = d32
+arch = Arm
+implies = 
+description = Extend FP to 32 double registers.
+
+feature = dotprod
+arch = Arm
+implies = d32 neon vfp2 vfp3
+description = Enable support for dot product instructions.
+
+feature = dsp
+arch = Arm
+implies = 
+description = Supports DSP instructions in ARM and/or Thumb2.
+
+feature = fp-armv8
+arch = Arm
+implies = d32 vfp2 vfp3 vfp4
+description = Enable ARMv8 FP.
+
+feature = i8mm
+arch = Arm
+implies = d32 neon vfp2 vfp3
+description = Enable Matrix Multiply Int8 Extension.
+
+feature = mclass
+arch = Arm
+implies = 
+description = Is microcontroller profile ('M' series).
+
+feature = neon
+arch = Arm
+implies = d32 vfp2 vfp3
+description = Enable NEON instructions.
+
+feature = rclass
+arch = Arm
+implies = 
+description = Is realtime profile ('R' series).
+
+feature = sha2
+arch = Arm
+implies = d32 neon vfp2 vfp3
+description = Enable SHA1 and SHA256 support.
+
+feature = thumb-mode
+arch = Arm
+implies = 
+description = Thumb mode.
+
+feature = thumb2
+arch = Arm
+implies = 
+description = Enable Thumb2 instructions.
+
+feature = v5te
+arch = Arm
+implies = 
+description = Support ARM v5TE, v5TEj, and v5TExp instructions.
+
+feature = v6
+arch = Arm
+implies = v5te
+description = Support ARM v6 instructions.
+
+feature = v6k
+arch = Arm
+implies = v5te v6
+description = Support ARM v6k instructions.
+
+feature = v6t2
+arch = Arm
+implies = thumb2 v5te v6 v6k
+description = Support ARM v6t2 instructions.
+
+feature = v7
+arch = Arm
+implies = thumb2 v5te v6 v6k v6t2
+description = Support ARM v7 instructions.
+
+feature = v8
+arch = Arm
+implies = thumb2 v5te v6 v6k v6t2 v7
+description = Support ARM v8 instructions.
+
+feature = vfp2
+arch = Arm
+implies = 
+description = Enable VFP2 instructions.
+
+feature = vfp3
+arch = Arm
+implies = d32 vfp2
+description = Enable VFP3 instructions.
+
+feature = vfp4
+arch = Arm
+implies = d32 vfp2 vfp3
+description = Enable VFP4 instructions.
+
+feature = crt-static
+arch = Arm
+implies = 
+description = Enables C Run-time Libraries to be statically linked.
+
+feature = aes
+arch = AArch64
+implies = neon
+description = Enable AES support.
+
+feature = bf16
+arch = AArch64
+implies = 
+description = Enable BFloat16 Extension.
+
+feature = bti
+arch = AArch64
+implies = 
+description = Enable Branch Target Identification.
+
+feature = crc
+arch = AArch64
+implies = 
+description = Enable ARMv8 CRC-32 checksum instructions.
+
+feature = dit
+arch = AArch64
+implies = 
+description = Enable v8.4-A Data Independent Timing instructions.
+
+feature = dotprod
+arch = AArch64
+implies = 
+description = Enable dot product support.
+
+feature = dpb
+arch = AArch64
+implies = 
+description = Enable v8.2 data Cache Clean to Point of Persistence.
+
+feature = dpb2
+arch = AArch64
+implies = 
+description = Enable v8.5 Cache Clean to Point of Deep Persistence.
+
+feature = f32mm
+arch = AArch64
+implies = fp16 neon sve
+description = Enable Matrix Multiply FP32 Extension.
+
+feature = f64mm
+arch = AArch64
+implies = fp16 neon sve
+description = Enable Matrix Multiply FP64 Extension.
+
+feature = fcma
+arch = AArch64
+implies = neon
+description = Enable v8.3-A Floating-point complex number support.
+
+feature = fhm
+arch = AArch64
+implies = fp16 neon
+description = Enable FP16 FML instructions.
+
+feature = flagm
+arch = AArch64
+implies = 
+description = Enable v8.4-A Flag Manipulation Instructions.
+
+feature = fp16
+arch = AArch64
+implies = neon
+description = Full FP16.
+
+feature = frintts
+arch = AArch64
+implies = 
+description = Enable FRInt[32|64][Z|X] instructions that round a floating-point number to an integer (in FP format) forcing it to fit into a 32- or 64-bit int.
+
+feature = i8mm
+arch = AArch64
+implies = 
+description = Enable Matrix Multiply Int8 Extension.
+
+feature = jsconv
+arch = AArch64
+implies = neon
+description = Enable v8.3-A JavaScript FP conversion instructions.
+
+feature = lor
+arch = AArch64
+implies = 
+description = Enables ARM v8.1 Limited Ordering Regions extension.
+
+feature = lse
+arch = AArch64
+implies = 
+description = Enable ARMv8.1 Large System Extension (LSE) atomic instructions.
+
+feature = mte
+arch = AArch64
+implies = 
+description = Enable Memory Tagging Extension.
+
+feature = neon
+arch = AArch64
+implies = 
+description = Enable Advanced SIMD instructions.
+
+feature = paca
+arch = AArch64
+implies = pacg
+description = Enable v8.3-A Pointer Authentication extension.
+
+feature = pan
+arch = AArch64
+implies = 
+description = Enables ARM v8.1 Privileged Access-Never extension.
+
+feature = pmuv3
+arch = AArch64
+implies = 
+description = Enable ARMv8 PMUv3 Performance Monitors extension.
+
+feature = rand
+arch = AArch64
+implies = 
+description = Enable Random Number generation instructions.
+
+feature = ras
+arch = AArch64
+implies = 
+description = Enable ARMv8 Reliability, Availability and Serviceability Extensions.
+
+feature = rcpc
+arch = AArch64
+implies = 
+description = Enable support for RCPC extension.
+
+feature = rcpc2
+arch = AArch64
+implies = rcpc
+description = Enable v8.4-A RCPC instructions with Immediate Offsets.
+
+feature = rdm
+arch = AArch64
+implies = 
+description = Enable ARMv8.1 Rounding Double Multiply Add/Subtract instructions.
+
+feature = sb
+arch = AArch64
+implies = 
+description = Enable v8.5 Speculation Barrier.
+
+feature = sha2
+arch = AArch64
+implies = neon
+description = Enable SHA1 and SHA256 support.
+
+feature = sha3
+arch = AArch64
+implies = neon sha2
+description = Enable SHA512 and SHA3 support.
+
+feature = sm4
+arch = AArch64
+implies = neon
+description = Enable SM3 and SM4 support.
+
+feature = spe
+arch = AArch64
+implies = 
+description = Enable Statistical Profiling extension.
+
+feature = ssbs
+arch = AArch64
+implies = 
+description = Enable Speculative Store Bypass Safe bit.
+
+feature = sve
+arch = AArch64
+implies = fp16 neon
+description = Enable Scalable Vector Extension (SVE) instructions.
+
+feature = sve2
+arch = AArch64
+implies = fp16 neon sve
+description = Enable Scalable Vector Extension 2 (SVE2) instructions.
+
+feature = sve2-aes
+arch = AArch64
+implies = aes fp16 neon sve sve2
+description = Enable AES SVE2 instructions.
+
+feature = sve2-bitperm
+arch = AArch64
+implies = fp16 neon sve sve2
+description = Enable bit permutation SVE2 instructions.
+
+feature = sve2-sha3
+arch = AArch64
+implies = fp16 neon sha2 sha3 sve sve2
+description = Enable SHA3 SVE2 instructions.
+
+feature = sve2-sm4
+arch = AArch64
+implies = fp16 neon sm4 sve sve2
+description = Enable SM4 SVE2 instructions.
+
+feature = tme
+arch = AArch64
+implies = 
+description = Enable Transactional Memory Extension.
+
+feature = v8.1a
+arch = AArch64
+implies = crc lor lse pan rdm vh
+description = Support ARM v8.1a instructions.
+
+feature = v8.2a
+arch = AArch64
+implies = crc dpb lor lse pan ras rdm v8.1a vh
+description = Support ARM v8.2a instructions.
+
+feature = v8.3a
+arch = AArch64
+implies = crc dpb fcma jsconv lor lse neon paca pacg pan ras rcpc rdm v8.1a v8.2a vh
+description = Support ARM v8.3a instructions.
+
+feature = v8.4a
+arch = AArch64
+implies = crc dit dotprod dpb fcma flagm jsconv lor lse neon paca pacg pan ras rcpc rcpc2 rdm v8.1a v8.2a v8.3a vh
+description = Support ARM v8.4a instructions.
+
+feature = v8.5a
+arch = AArch64
+implies = bti crc dit dotprod dpb dpb2 fcma flagm frintts jsconv lor lse neon paca pacg pan ras rcpc rcpc2 rdm sb ssbs v8.1a v8.2a v8.3a v8.4a vh
+description = Support ARM v8.5a instructions.
+
+feature = v8.6a
+arch = AArch64
+implies = bf16 bti crc dit dotprod dpb dpb2 fcma flagm frintts i8mm jsconv lor lse neon paca pacg pan ras rcpc rcpc2 rdm sb ssbs v8.1a v8.2a v8.3a v8.4a v8.5a vh
+description = Support ARM v8.6a instructions.
+
+feature = v8.7a
+arch = AArch64
+implies = bf16 bti crc dit dotprod dpb dpb2 fcma flagm frintts i8mm jsconv lor lse neon paca pacg pan ras rcpc rcpc2 rdm sb ssbs v8.1a v8.2a v8.3a v8.4a v8.5a v8.6a vh
+description = Support ARM v8.7a instructions.
+
+feature = vh
+arch = AArch64
+implies = 
+description = Enables ARM v8.1 Virtual Host extension.
+
+feature = crt-static
+arch = AArch64
+implies = 
+description = Enables C Run-time Libraries to be statically linked.
+
+feature = alu32
+arch = Bpf
+implies = 
+description = Enable ALU32 instructions.
+
+feature = crt-static
+arch = Bpf
+implies = 
+description = Enables C Run-time Libraries to be statically linked.
+
+feature = hvx
+arch = Hexagon
+implies = 
+description = Hexagon HVX instructions.
+
+feature = hvx-length128b
+arch = Hexagon
+implies = hvx
+description = Hexagon HVX 128B instructions.
+
+feature = crt-static
+arch = Hexagon
+implies = 
+description = Enables C Run-time Libraries to be statically linked.
+
+feature = fp64
+arch = Mips
+implies = 
+description = Support 64-bit FP registers.
+
+feature = msa
+arch = Mips
+implies = fp64
+description = Mips MSA ASE.
+
+feature = virt
+arch = Mips
+implies = fp64
+description = Mips Virtualization ASE.
+
+feature = crt-static
+arch = Mips
+implies = fp64
+description = Enables C Run-time Libraries to be statically linked.
+
+feature = altivec
+arch = PowerPC
+implies = 
+description = Enable Altivec instructions.
+
+feature = power8-altivec
+arch = PowerPC
+implies = altivec
+description = Enable POWER8 Altivec instructions.
+
+feature = power8-vector
+arch = PowerPC
+implies = altivec power8-altivec vsx
+description = Enable POWER8 vector instructions.
+
+feature = power9-altivec
+arch = PowerPC
+implies = altivec power8-altivec
+description = Enable POWER9 Altivec instructions.
+
+feature = power9-vector
+arch = PowerPC
+implies = altivec power8-altivec power8-vector power9-altivec vsx
+description = Enable POWER9 vector instructions.
+
+feature = vsx
+arch = PowerPC
+implies = altivec
+description = Enable VSX instructions.
+
+feature = crt-static
+arch = PowerPC
+implies = 
+description = Enables C Run-time Libraries to be statically linked.
+
+feature = a
+arch = RiscV
+implies = 
+description = 'A' (Atomic Instructions).
+
+feature = c
+arch = RiscV
+implies = 
+description = 'C' (Compressed Instructions).
+
+feature = d
+arch = RiscV
+implies = f
+description = 'D' (Double-Precision Floating-Point).
+
+feature = e
+arch = RiscV
+implies = 
+description = Implements RV32E (provides 16 rather than 32 GPRs).
+
+feature = f
+arch = RiscV
+implies = 
+description = 'F' (Single-Precision Floating-Point).
+
+feature = m
+arch = RiscV
+implies = 
+description = 'M' (Integer Multiplication and Division).
+
+feature = v
+arch = RiscV
+implies = d f
+description = 'V' (Vector Extension for Application Processors).
+
+feature = zba
+arch = RiscV
+implies = 
+description = 'Zba' (Address Generation Instructions).
+
+feature = zbb
+arch = RiscV
+implies = 
+description = 'Zbb' (Basic Bit-Manipulation).
+
+feature = zbc
+arch = RiscV
+implies = 
+description = 'Zbc' (Carry-Less Multiplication).
+
+feature = zbkb
+arch = RiscV
+implies = 
+description = 'Zbkb' (Bitmanip instructions for Cryptography).
+
+feature = zbkc
+arch = RiscV
+implies = 
+description = 'Zbkc' (Carry-less multiply instructions for Cryptography).
+
+feature = zbkx
+arch = RiscV
+implies = 
+description = 'Zbkx' (Crossbar permutation instructions).
+
+feature = zbs
+arch = RiscV
+implies = 
+description = 'Zbs' (Single-Bit Instructions).
+
+feature = zdinx
+arch = RiscV
+implies = zfinx
+description = 'Zdinx' (Double in Integer).
+
+feature = zfh
+arch = RiscV
+implies = f
+description = 'Zfh' (Half-Precision Floating-Point).
+
+feature = zfhmin
+arch = RiscV
+implies = f
+description = 'Zfhmin' (Half-Precision Floating-Point Minimal).
+
+feature = zfinx
+arch = RiscV
+implies = 
+description = 'Zfinx' (Float in Integer).
+
+feature = zhinx
+arch = RiscV
+implies = zfinx
+description = 'Zhinx' (Half Float in Integer).
+
+feature = zhinxmin
+arch = RiscV
+implies = zfinx
+description = 'Zhinxmin' (Half Float in Integer Minimal).
+
+feature = zk
+arch = RiscV
+implies = zbkb zbkc zbkx zkn zknd zkne zknh zkr zkt
+description = 'Zk' (Standard scalar cryptography extension).
+
+feature = zkn
+arch = RiscV
+implies = zbkb zbkc zbkx zknd zkne zknh
+description = 'Zkn' (NIST Algorithm Suite).
+
+feature = zknd
+arch = RiscV
+implies = 
+description = 'Zknd' (NIST Suite: AES Decryption).
+
+feature = zkne
+arch = RiscV
+implies = 
+description = 'Zkne' (NIST Suite: AES Encryption).
+
+feature = zknh
+arch = RiscV
+implies = 
+description = 'Zknh' (NIST Suite: Hash Function Instructions).
+
+feature = zkr
+arch = RiscV
+implies = 
+description = 'Zkr' (Entropy Source Extension).
+
+feature = zks
+arch = RiscV
+implies = zbkb zbkc zbkx zksed zksh
+description = 'Zks' (ShangMi Algorithm Suite).
+
+feature = zksed
+arch = RiscV
+implies = 
+description = 'Zksed' (ShangMi Suite: SM4 Block Cipher Instructions).
+
+feature = zksh
+arch = RiscV
+implies = 
+description = 'Zksh' (ShangMi Suite: SM3 Hash Function Instructions).
+
+feature = zkt
+arch = RiscV
+implies = 
+description = 'Zkt' (Data Independent Execution Latency).
+
+feature = crt-static
+arch = RiscV
+implies = 
+description = Enables C Run-time Libraries to be statically linked.
+
+feature = atomics
+arch = Wasm
+implies = 
+description = Enable Atomics.
+
+feature = bulk-memory
+arch = Wasm
+implies = 
+description = Enable bulk memory operations.
+
+feature = multivalue
+arch = Wasm
+implies = 
+description = Enable multivalue blocks, instructions, and functions.
+
+feature = mutable-globals
+arch = Wasm
+implies = 
+description = Enable mutable globals.
+
+feature = nontrapping-fptoint
+arch = Wasm
+implies = 
+description = Enable non-trapping float-to-int conversion operators.
+
+feature = reference-types
+arch = Wasm
+implies = 
+description = Enable reference types.
+
+feature = sign-ext
+arch = Wasm
+implies = 
+description = Enable sign extension operators.
+
+feature = simd128
+arch = Wasm
+implies = 
+description = Enable 128-bit SIMD.
+
+feature = crt-static
+arch = Wasm
+implies = 
+description = Enables C Run-time Libraries to be statically linked.
+
+feature = adx
+arch = X86
+implies = 
+description = Support ADX instructions.
+
+feature = aes
+arch = X86
+implies = sse sse2
+description = Enable AES instructions.
+
+feature = avx
+arch = X86
+implies = sse sse2 sse3 sse4.1 ssse3
+description = Enable AVX instructions.
+
+feature = avx2
+arch = X86
+implies = avx sse sse2 sse3 sse4.1 ssse3
+description = Enable AVX2 instructions.
+
+feature = avx512bf16
+arch = X86
+implies = avx avx2 avx512bw avx512f f16c fma sse sse2 sse3 sse4.1 ssse3
+description = Support bfloat16 floating point.
+
+feature = avx512bitalg
+arch = X86
+implies = avx avx2 avx512bw avx512f f16c fma sse sse2 sse3 sse4.1 ssse3
+description = Enable AVX-512 Bit Algorithms.
+
+feature = avx512bw
+arch = X86
+implies = avx avx2 avx512f f16c fma sse sse2 sse3 sse4.1 ssse3
+description = Enable AVX-512 Byte and Word Instructions.
+
+feature = avx512cd
+arch = X86
+implies = avx avx2 avx512f f16c fma sse sse2 sse3 sse4.1 ssse3
+description = Enable AVX-512 Conflict Detection Instructions.
+
+feature = avx512dq
+arch = X86
+implies = avx avx2 avx512f f16c fma sse sse2 sse3 sse4.1 ssse3
+description = Enable AVX-512 Doubleword and Quadword Instructions.
+
+feature = avx512er
+arch = X86
+implies = avx avx2 avx512f f16c fma sse sse2 sse3 sse4.1 ssse3
+description = Enable AVX-512 Exponential and Reciprocal Instructions.
+
+feature = avx512f
+arch = X86
+implies = avx avx2 f16c fma sse sse2 sse3 sse4.1 ssse3
+description = Enable AVX-512 instructions.
+
+feature = avx512gfni
+arch = X86
+implies = sse sse2
+description = Enable Galois Field Arithmetic Instructions.
+
+feature = avx512ifma
+arch = X86
+implies = avx avx2 avx512f f16c fma sse sse2 sse3 sse4.1 ssse3
+description = Enable AVX-512 Integer Fused Multiple-Add.
+
+feature = avx512pf
+arch = X86
+implies = avx avx2 avx512f f16c fma sse sse2 sse3 sse4.1 ssse3
+description = Enable AVX-512 PreFetch Instructions.
+
+feature = avx512vaes
+arch = X86
+implies = aes avx sse sse2 sse3 sse4.1 ssse3
+description = Promote selected AES instructions to AVX512/AVX registers.
+
+feature = avx512vbmi
+arch = X86
+implies = avx avx2 avx512bw avx512f f16c fma sse sse2 sse3 sse4.1 ssse3
+description = Enable AVX-512 Vector Byte Manipulation Instructions.
+
+feature = avx512vbmi2
+arch = X86
+implies = avx avx2 avx512bw avx512f f16c fma sse sse2 sse3 sse4.1 ssse3
+description = Enable AVX-512 further Vector Byte Manipulation Instructions.
+
+feature = avx512vl
+arch = X86
+implies = avx avx2 avx512f f16c fma sse sse2 sse3 sse4.1 ssse3
+description = Enable AVX-512 Vector Length eXtensions.
+
+feature = avx512vnni
+arch = X86
+implies = avx avx2 avx512f f16c fma sse sse2 sse3 sse4.1 ssse3
+description = Enable AVX-512 Vector Neural Network Instructions.
+
+feature = avx512vp2intersect
+arch = X86
+implies = avx avx2 avx512f f16c fma sse sse2 sse3 sse4.1 ssse3
+description = Enable AVX-512 vp2intersect.
+
+feature = avx512vpclmulqdq
+arch = X86
+implies = avx pclmulqdq sse sse2 sse3 sse4.1 ssse3
+description = Enable vpclmulqdq instructions.
+
+feature = avx512vpopcntdq
+arch = X86
+implies = avx avx2 avx512f f16c fma sse sse2 sse3 sse4.1 ssse3
+description = Enable AVX-512 Population Count Instructions.
+
+feature = bmi1
+arch = X86
+implies = 
+description = Support BMI instructions.
+
+feature = bmi2
+arch = X86
+implies = 
+description = Support BMI2 instructions.
+
+feature = cmpxchg16b
+arch = X86
+implies = 
+description = 64-bit with cmpxchg16b (this is true for most x86-64 chips, but not the first AMD chips).
+
+feature = ermsb
+arch = X86
+implies = 
+description = REP MOVS/STOS are fast.
+
+feature = f16c
+arch = X86
+implies = avx sse sse2 sse3 sse4.1 ssse3
+description = Support 16-bit floating point conversion instructions.
+
+feature = fma
+arch = X86
+implies = avx sse sse2 sse3 sse4.1 ssse3
+description = Enable three-operand fused multiple-add.
+
+feature = fxsr
+arch = X86
+implies = 
+description = Support fxsave/fxrestore instructions.
+
+feature = lzcnt
+arch = X86
+implies = 
+description = Support LZCNT instruction.
+
+feature = movbe
+arch = X86
+implies = 
+description = Support MOVBE instruction.
+
+feature = pclmulqdq
+arch = X86
+implies = sse sse2
+description = Enable packed carry-less multiplication instructions.
+
+feature = popcnt
+arch = X86
+implies = 
+description = Support POPCNT instruction.
+
+feature = rdrand
+arch = X86
+implies = 
+description = Support RDRAND instruction.
+
+feature = rdseed
+arch = X86
+implies = 
+description = Support RDSEED instruction.
+
+feature = rtm
+arch = X86
+implies = 
+description = Support RTM instructions.
+
+feature = sha
+arch = X86
+implies = sse sse2
+description = Enable SHA instructions.
+
+feature = sse
+arch = X86
+implies = 
+description = Enable SSE instructions.
+
+feature = sse2
+arch = X86
+implies = sse
+description = Enable SSE2 instructions.
+
+feature = sse3
+arch = X86
+implies = sse sse2
+description = Enable SSE3 instructions.
+
+feature = sse4.1
+arch = X86
+implies = sse sse2 sse3 ssse3
+description = Enable SSE 4.1 instructions.
+
+feature = sse4.2
+arch = X86
+implies = sse sse2 sse3 sse4.1 ssse3
+description = Enable SSE 4.2 instructions.
+
+feature = sse4a
+arch = X86
+implies = sse sse2 sse3
+description = Support SSE 4a instructions.
+
+feature = ssse3
+arch = X86
+implies = sse sse2 sse3
+description = Enable SSSE3 instructions.
+
+feature = tbm
+arch = X86
+implies = 
+description = Enable TBM instructions.
+
+feature = xsave
+arch = X86
+implies = 
+description = Support xsave instructions.
+
+feature = xsavec
+arch = X86
+implies = xsave
+description = Support xsavec instructions.
+
+feature = xsaveopt
+arch = X86
+implies = xsave
+description = Support xsaveopt instructions.
+
+feature = xsaves
+arch = X86
+implies = xsave
+description = Support xsaves instructions.
+
+feature = crt-static
+arch = X86
+implies = 
+description = Enables C Run-time Libraries to be statically linked.
