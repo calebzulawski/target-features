@@ -18,6 +18,10 @@ mod unconstructible {
 use unconstructible::Unconstructible;
 
 /// Proof of target feature support.
+///
+/// # Safety
+/// The type must be implemented such that it's impossible to safely construct without ensuring the
+/// specified target features are supported.
 unsafe trait Proof: Sized {
     /// The proven target
     const TARGET: Target;
