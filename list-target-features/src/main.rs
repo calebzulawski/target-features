@@ -72,31 +72,42 @@ fn get_all_features(triple: &str) -> Vec<Feature> {
     };
 
     let mut features = Vec::new();
+    let make_feature = |feature: &str, description: &str| {
+        let mut implies = get_features(
+            triple,
+            &format!(
+                "{},+{}{}",
+                disable_default_features, feature, required_arch_features
+            ),
+        );
+        implies.sort();
+        implies.retain(|f| f != &feature);
+
+        Feature {
+            feature: feature.to_string(),
+            description: description.to_string(),
+            implies,
+        }
+    };
+
+    // Add listed features
     for line in std::str::from_utf8(&output.stdout).unwrap().lines().skip(1) {
         let mut split = line.split(" - ");
-        let feature = split.next().unwrap().trim().to_string();
+        let feature = split.next().unwrap().trim();
         if feature.is_empty() {
             break;
         } else {
-            let description = split.next().unwrap().trim().to_string();
+            let description = split.next().unwrap().trim();
+            features.push(make_feature(feature, description));
 
-            let mut implies = get_features(
-                triple,
-                &format!(
-                    "{},+{}{}",
-                    disable_default_features, feature, required_arch_features
-                ),
-            );
-            implies.sort();
-            implies.retain(|f| f != &feature);
-
-            features.push(Feature {
-                feature,
-                description,
-                implies,
-            });
+            // aarch64 pacg is omitted from the list
+            // it's technically not the same feature as paca, but it's "tied" to it in rustc
+            if triple.starts_with("aarch64") && feature == "paca" {
+                features.push(make_feature("pacg", description));
+            };
         }
     }
+
     features
 }
 

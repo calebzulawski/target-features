@@ -50,14 +50,14 @@ fn main() -> Result<(), Box<dyn Error>> {
     for (feature, arch, description, implies) in &features {
         let implies = implies
             .iter()
-            .filter_map(|implied_feature| {
-                let index = features
-                    .iter()
-                    .position(|(f, a, _, _)| implied_feature == f && arch == a)
-                    .map(|i| format!("Feature({i})"));
-                // The pacg feature is a "tied" feature (basically an alias for paca), but isn't listed as a feature.
-                assert!(index.is_some() || implied_feature == &"pacg");
-                index
+            .map(|implied_feature| {
+                format!(
+                    "Feature({})",
+                    features
+                        .iter()
+                        .position(|(f, a, _, _)| implied_feature == f && arch == a)
+                        .unwrap()
+                )
             })
             .collect::<Vec<_>>()
             .join(", ");
