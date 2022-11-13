@@ -70,7 +70,10 @@ fn safe_avx_fn<P: Proof>(_: P) {
 
     // Future improvements to const generics might make it possible to assert this at compile time.
     // Since P::TARGET is const, this assert disappears if the required features are present.
-    assert!(P::TARGET.supports_feature_str("avx"), "avx feature not supported");
+    assert!(
+        P::TARGET.supports_feature_str("avx"),
+        "avx feature not supported"
+    );
     unsafe { unsafe_avx_fn() }
 }
 
