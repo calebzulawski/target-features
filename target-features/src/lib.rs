@@ -2,6 +2,7 @@
 //! Provides a database of target features available to the Rust compiler.
 //!
 #![doc = include_str!(concat!(env!("OUT_DIR"), "/features.md"))]
+#![no_std]
 
 include!(concat!(env!("OUT_DIR"), "/generated.rs"));
 
