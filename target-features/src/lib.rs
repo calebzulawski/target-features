@@ -9,6 +9,24 @@ include!(concat!(env!("OUT_DIR"), "/generated.rs"));
 mod simd;
 pub use simd::*;
 
+const fn str_eq(a: &str, b: &str) -> bool {
+    let a = a.as_bytes();
+    let b = b.as_bytes();
+
+    if a.len() != b.len() {
+        return false;
+    }
+
+    let mut i = 0;
+    while i < a.len() {
+        if a[i] != b[i] {
+            return false;
+        }
+        i += 1;
+    }
+    true
+}
+
 /// A target architecture.
 #[derive(Copy, Clone, PartialEq, Eq)]
 pub enum Architecture {
@@ -34,8 +52,42 @@ pub enum Architecture {
     Unsupported,
 }
 
+impl Architecture {
+    /// Create a new `Architecture` from its name.
+    pub const fn from_str(architecture: &str) -> Self {
+        if str_eq(architecture, "arm") {
+            Self::Arm
+        } else if str_eq(architecture, "aarch64") {
+            Self::AArch64
+        } else if str_eq(architecture, "bpf") {
+            Self::Bpf
+        } else if str_eq(architecture, "hexagon") {
+            Self::Hexagon
+        } else if str_eq(architecture, "mips") || str_eq(architecture, "mips64") {
+            Self::Mips
+        } else if str_eq(architecture, "powerpc") || str_eq(architecture, "powerpc64") {
+            Self::PowerPC
+        } else if str_eq(architecture, "riscv32") || str_eq(architecture, "riscv64") {
+            Self::RiscV
+        } else if str_eq(architecture, "wasm32") || str_eq(architecture, "wasm64") {
+            Self::Wasm
+        } else if str_eq(architecture, "x86") || str_eq(architecture, "x86_64") {
+            Self::X86
+        } else {
+            Self::Unsupported
+        }
+    }
+}
+
 /// Returned by [`Feature::new`] when the requested feature can't be found.
+#[derive(Copy, Clone, Debug)]
 pub struct UnknownFeature;
+
+impl core::fmt::Display for UnknownFeature {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        write!(f, "unknown target feature")
+    }
+}
 
 /// A target feature.
 #[derive(PartialEq, Eq)]
@@ -44,24 +96,6 @@ pub struct Feature(usize);
 impl Feature {
     /// Look up a feature.
     pub const fn new(architecture: Architecture, feature: &str) -> Result<Self, UnknownFeature> {
-        const fn str_eq(a: &str, b: &str) -> bool {
-            let a = a.as_bytes();
-            let b = b.as_bytes();
-
-            if a.len() != b.len() {
-                return false;
-            }
-
-            let mut i = 0;
-            while i < a.len() {
-                if a[i] != b[i] {
-                    return false;
-                }
-                i += 1;
-            }
-            true
-        }
-
         let mut i = 0;
         while i < FEATURES.len() {
             if (architecture as u8) == (FEATURES[i].0 as u8) && str_eq(feature, FEATURES[i].1) {
