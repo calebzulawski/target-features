@@ -1,10 +1,15 @@
 //! # Target features
 //! Provides a database of target features available to the Rust compiler.
 //!
-#![doc = include_str!(concat!(env!("OUT_DIR"), "/features.md"))]
+#![doc = include_str!(concat!(env!("OUT_DIR"), "/generated.md"))]
 #![no_std]
 
 include!(concat!(env!("OUT_DIR"), "/generated.rs"));
+
+/// List of features available for each architecture.
+pub mod docs {
+    include!(concat!(env!("OUT_DIR"), "/docs.rs"));
+}
 
 mod simd;
 pub use simd::*;
@@ -89,8 +94,18 @@ impl core::fmt::Display for UnknownFeature {
     }
 }
 
+/// Returned by [`Target::from_cpu`] when the requested CPU can't be found.
+#[derive(Copy, Clone, Debug)]
+pub struct UnknownCpu;
+
+impl core::fmt::Display for UnknownCpu {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        write!(f, "unknown target CPU")
+    }
+}
+
 /// A target feature.
-#[derive(PartialEq, Eq)]
+#[derive(Copy, Clone, PartialEq, Eq)]
 pub struct Feature(usize);
 
 impl Feature {
@@ -144,6 +159,24 @@ impl Target {
             architecture,
             features: [false; FEATURES.len()],
         }
+    }
+
+    /// Create a target based on a particular CPU.
+    pub const fn from_cpu(architecture: Architecture, cpu: &str) -> Result<Self, UnknownCpu> {
+        let mut target = Self::new(architecture);
+        let mut i = 0;
+        while i < CPUS.len() {
+            if architecture as u8 == CPUS[i].0 as u8 && str_eq(cpu, CPUS[i].1) {
+                let mut j = 0;
+                while j < CPUS[i].2.len() {
+                    target = target.with_feature(CPUS[i].2[j]);
+                    j += 1;
+                }
+                return Ok(target);
+            }
+            i += 1;
+        }
+        Err(UnknownCpu)
     }
 
     /// Returns the target architecture.

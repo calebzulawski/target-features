@@ -1,21 +1,15 @@
 use std::{collections::HashMap, error::Error, fs::File, io::Write, path::Path};
 
 fn main() -> Result<(), Box<dyn Error>> {
-    let generated = include_str!("target-features.txt");
+    let rustc_version = include_str!("rustc-version.txt");
+    let target_features = include_str!("target-features.txt");
+    let target_cpus = include_str!("target-cpus.txt");
     let out_dir = std::env::var_os("OUT_DIR").unwrap();
 
-    let mut lines = generated.lines();
-
     // Parse the generated features file
-    let rustc_version = lines
-        .next()
-        .unwrap()
-        .strip_prefix("rustc_version =")
-        .unwrap()
-        .trim();
-
+    let mut lines = target_features.lines().peekable();
     let mut features = Vec::new();
-    while lines.next().is_some() {
+    while lines.peek().is_some() {
         let feature = lines
             .next()
             .unwrap()
@@ -38,11 +32,37 @@ fn main() -> Result<(), Box<dyn Error>> {
             .strip_prefix("description =")
             .unwrap()
             .trim();
+        let _ = lines.next();
         features.push((feature, arch, description, implies));
     }
 
-    // Generate the features module
+    // Parse the generated CPUs file
+    let mut lines = target_cpus.lines().peekable();
+    let mut cpus = Vec::new();
+    while lines.peek().is_some() {
+        let cpu = lines.next().unwrap().strip_prefix("cpu =").unwrap().trim();
+        let arch = lines.next().unwrap().strip_prefix("arch =").unwrap().trim();
+        let features = lines
+            .next()
+            .unwrap()
+            .strip_prefix("features =")
+            .unwrap()
+            .trim()
+            .split(' ')
+            .filter(|s| !s.is_empty())
+            .collect::<Vec<_>>();
+        let _ = lines.next();
+        cpus.push((cpu, arch, features));
+    }
+
+    // Write the generated docs
+    let mut rustc_docs = File::create(Path::new(&out_dir).join("generated.md"))?;
+    writeln!(rustc_docs, "Generated with {rustc_version}.")?;
+
+    // Write a module
     let mut module = File::create(Path::new(&out_dir).join("generated.rs"))?;
+
+    // Generate the features array
     writeln!(
         module,
         "const FEATURES: &[(crate::Architecture, &str, &str, &[Feature])] = &["
@@ -64,6 +84,32 @@ fn main() -> Result<(), Box<dyn Error>> {
         writeln!(
             module,
             "    (crate::Architecture::{arch}, \"{feature}\", \"{description}\", &[{implies}]),"
+        )?;
+    }
+    writeln!(module, "];")?;
+
+    // Generate the CPUs array
+    writeln!(
+        module,
+        "const CPUS: &[(crate::Architecture, &str, &[Feature])] = &["
+    )?;
+    for (cpu, arch, cpu_features) in &cpus {
+        let cpu_features = cpu_features
+            .iter()
+            .map(|feature| {
+                format!(
+                    "Feature({})",
+                    features
+                        .iter()
+                        .position(|(f, a, _, _)| feature == f && arch == a)
+                        .unwrap()
+                )
+            })
+            .collect::<Vec<_>>()
+            .join(", ");
+        writeln!(
+            module,
+            "    (crate::Architecture::{arch}, \"{cpu}\", &[{cpu_features}]),"
         )?;
     }
     writeln!(module, "];")?;
@@ -95,26 +141,51 @@ fn main() -> Result<(), Box<dyn Error>> {
     writeln!(module, "}};")?;
 
     // Generate the features docs
-    let mut feature_docs = File::create(Path::new(&out_dir).join("features.md"))?;
-    let mut features_by_arch = HashMap::<_, Vec<_>>::new();
+    let mut docs = File::create(Path::new(&out_dir).join("docs.rs"))?;
+    let mut by_arch = HashMap::<_, (Vec<_>, Vec<_>)>::new();
     for (feature, arch, description, _) in features {
-        features_by_arch
+        by_arch
             .entry(arch)
             .or_default()
+            .0
             .push((feature, description));
     }
-    let mut features_by_arch = features_by_arch.drain().collect::<Vec<_>>();
-    features_by_arch.sort();
-    writeln!(feature_docs, "Generated with {rustc_version}")?;
-    for (arch, features) in features_by_arch.drain(..) {
-        writeln!(feature_docs, "## {} features", arch.to_lowercase())?;
+    for (cpu, arch, features) in cpus {
+        by_arch.entry(arch).or_default().1.push((cpu, features));
+    }
+    let mut by_arch = by_arch.drain().collect::<Vec<_>>();
+    by_arch.sort();
+    for (arch, (features, cpus)) in by_arch.drain(..) {
+        writeln!(docs, "/// {} documentation", arch.to_lowercase())?;
+        writeln!(docs, "///")?;
+        writeln!(docs, "/// ## Features")?;
+        writeln!(docs, "/// | Feature | Description |")?;
+        writeln!(docs, "/// | ------- | ----------- |")?;
         for (feature, description) in features {
-            writeln!(feature_docs, " * `{feature}` - {description}")?
+            writeln!(docs, "/// | `{feature}` | {description} |")?
         }
+        writeln!(docs, "///")?;
+        writeln!(docs, "/// ## CPUs")?;
+        writeln!(docs, "/// | CPU | Enabled Features |")?;
+        writeln!(docs, "/// | --- | -------- |")?;
+        for (cpu, features) in cpus {
+            writeln!(
+                docs,
+                "/// | `{cpu}` | {} |",
+                features
+                    .iter()
+                    .map(|f| format!("`{f}`"))
+                    .collect::<Vec<_>>()
+                    .join(", ")
+            )?;
+        }
+        writeln!(docs, "pub mod {} {{}}", arch.to_lowercase())?;
     }
 
     // Rerun build if the source features changed
+    println!("cargo:rerun-if-changed=rustc-version.txt");
     println!("cargo:rerun-if-changed=target-features.txt");
+    println!("cargo:rerun-if-changed=target-cpuss.txt");
     println!("cargo:rerun-if-changed=build.rs");
     Ok(())
 }
