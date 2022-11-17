@@ -244,29 +244,7 @@ impl Target {
 
     /// Returns whether the target supports the specified feature.
     pub const fn supports_feature(&self, feature: Feature) -> bool {
-        // First check the target specifically
-        if self.features[feature.0] {
-            return true;
-        }
-
-        // Next check implied features
-        let mut i = 0;
-        while i < self.features.len() {
-            if self.features[i] {
-                let implies = Feature(i).implies();
-                let mut j = 0;
-                while j < implies.len() {
-                    if feature.0 == implies[0].0 {
-                        return true;
-                    }
-                    j += 1;
-                }
-            }
-            i += 1;
-        }
-
-        // The feature is neither specified or implied
-        false
+        self.features[feature.0]
     }
 
     /// Returns whether the target supports the specified feature.
@@ -288,6 +266,14 @@ impl Target {
     pub const fn with_feature(mut self, feature: Feature) -> Self {
         assert!(feature.architecture() as u8 == self.architecture as u8);
         self.features[feature.0] = true;
+
+        let mut i = 0;
+        let implies = feature.implies();
+        while i < implies.len() {
+            self.features[implies[i].0] = true;
+            i += 1;
+        }
+
         self
     }
 
@@ -298,28 +284,6 @@ impl Target {
     pub const fn with_feature_str(self, feature: &str) -> Self {
         if let Ok(feature) = Feature::new(self.architecture, feature) {
             self.with_feature(feature)
-        } else {
-            panic!("unknown feature");
-        }
-    }
-
-    /// Remove a feature from the target.
-    ///
-    /// # Panics
-    /// Panics if the feature doesn't belong to the target architecture.
-    pub const fn without_feature(mut self, feature: Feature) -> Self {
-        assert!(feature.architecture() as u8 == self.architecture as u8);
-        self.features[feature.0] = false;
-        self
-    }
-
-    /// Remove a feature from the target.
-    ///
-    /// # Panics
-    /// Panics if the requested feature name doesn't exist for the target architecture.
-    pub const fn without_feature_str(self, feature: &str) -> Self {
-        if let Ok(feature) = Feature::new(self.architecture, feature) {
-            self.without_feature(feature)
         } else {
             panic!("unknown feature");
         }
