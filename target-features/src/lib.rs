@@ -33,7 +33,7 @@ const fn str_eq(a: &str, b: &str) -> bool {
 }
 
 /// A target architecture.
-#[derive(Copy, Clone, PartialEq, Eq)]
+#[derive(Copy, Clone, PartialEq, Eq, Debug)]
 pub enum Architecture {
     /// Arm
     Arm,
@@ -108,6 +108,15 @@ impl core::fmt::Display for UnknownCpu {
 #[derive(Copy, Clone, PartialEq, Eq)]
 pub struct Feature(usize);
 
+impl core::fmt::Debug for Feature {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> Result<(), core::fmt::Error> {
+        f.debug_struct("Feature")
+            .field("architecture", &self.architecture())
+            .field("name", &self.name())
+            .finish()
+    }
+}
+
 impl Feature {
     /// Look up a feature.
     pub const fn new(architecture: Architecture, feature: &str) -> Result<Self, UnknownFeature> {
@@ -142,6 +151,47 @@ impl Feature {
     /// For example, "avx2" implies the existence of "avx" on x86 architectures.
     pub const fn implies(&self) -> &'static [Feature] {
         FEATURES[self.0].3
+    }
+}
+
+/// Iterator returned by [`Target::features`].
+pub struct FeaturesIter {
+    target: Target,
+    index: usize,
+}
+
+impl Iterator for FeaturesIter {
+    type Item = Feature;
+
+    fn next(&mut self) -> Option<Self::Item> {
+        while self.index < self.target.features.len() {
+            let feature = if self.target.features[self.index] {
+                Some(Feature(self.index))
+            } else {
+                None
+            };
+            self.index += 1;
+            if feature.is_some() {
+                return feature;
+            }
+        }
+        None
+    }
+}
+
+impl core::fmt::Debug for Target {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> Result<(), core::fmt::Error> {
+        struct FeaturesHelper(Target);
+        impl core::fmt::Debug for FeaturesHelper {
+            fn fmt(&self, f: &mut core::fmt::Formatter) -> Result<(), core::fmt::Error> {
+                f.debug_list().entries(self.0.features()).finish()
+            }
+        }
+
+        f.debug_struct("Target")
+            .field("architecture", &self.architecture())
+            .field("features", &FeaturesHelper(*self))
+            .finish()
     }
 }
 
@@ -182,6 +232,14 @@ impl Target {
     /// Returns the target architecture.
     pub const fn architecture(&self) -> Architecture {
         self.architecture
+    }
+
+    /// Returns an iterator over the features.
+    pub const fn features(&self) -> FeaturesIter {
+        FeaturesIter {
+            target: *self,
+            index: 0,
+        }
     }
 
     /// Returns whether the target supports the specified feature.
