@@ -1,5 +1,5 @@
 //! # Target features
-//! Provides a database of target features available to the Rust compiler.
+//! A database of target features available to the Rust compiler.
 //!
 #![doc = include_str!(concat!(env!("OUT_DIR"), "/generated.md"))]
 #![no_std]
@@ -43,7 +43,7 @@ pub enum Architecture {
     Bpf,
     /// Hexagon
     Hexagon,
-    /// MIPS,
+    /// MIPS
     Mips,
     /// PowerPC
     PowerPC,
