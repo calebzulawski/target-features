@@ -1,7 +1,7 @@
 use std::{collections::HashMap, error::Error, fs::File, io::Write, path::Path};
 
 fn main() -> Result<(), Box<dyn Error>> {
-    let rustc_version = include_str!("rustc-version.txt");
+    let rustc_version = include_str!("rustc-version.txt").trim();
     let target_features = include_str!("target-features.txt");
     let target_cpus = include_str!("target-cpus.txt");
     let out_dir = std::env::var_os("OUT_DIR").unwrap();
