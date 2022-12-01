@@ -6,11 +6,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [0.1.1] - 2022-30-11
+## [0.1.1] - 2022-11-30
 ### Fixed
 - Added missing features using new rustc nightly (https://github.com/rust-lang/rust/pull/104627)
 
-## [0.1.0] - 2022-19-11
+## [0.1.0] - 2022-11-19
 ### Added
 - Initial release
 
