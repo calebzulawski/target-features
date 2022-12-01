@@ -796,7 +796,7 @@ features =
 
 cpu = future
 arch = PowerPC
-features = altivec power8-altivec power8-vector power9-altivec power9-vector vsx
+features = altivec power10-vector power8-altivec power8-vector power9-altivec power9-vector vsx
 
 cpu = g3
 arch = PowerPC
@@ -836,7 +836,7 @@ features = altivec power8-altivec power8-vector vsx
 
 cpu = pwr10
 arch = PowerPC
-features = altivec power8-altivec power8-vector power9-altivec power9-vector vsx
+features = altivec power10-vector power8-altivec power8-vector power9-altivec power9-vector vsx
 
 cpu = pwr3
 arch = PowerPC
@@ -964,7 +964,7 @@ features =
 
 cpu = alderlake
 arch = X86
-features = adx aes avx avx2 avx512gfni avx512vaes avx512vpclmulqdq bmi1 bmi2 cmpxchg16b f16c fma fxsr lzcnt movbe pclmulqdq popcnt rdrand rdseed sha sse sse2 sse3 sse4.1 sse4.2 ssse3 xsave xsavec xsaveopt xsaves
+features = adx aes avx avx2 avx512gfni avx512vaes avx512vpclmulqdq bmi1 bmi2 cmpxchg16b f16c fma fxsr gfni lzcnt movbe pclmulqdq popcnt rdrand rdseed sha sse sse2 sse3 sse4.1 sse4.2 ssse3 vaes vpclmulqdq xsave xsavec xsaveopt xsaves
 
 cpu = amdfam10
 arch = X86
@@ -1120,11 +1120,11 @@ features = sse sse2
 
 cpu = icelake-client
 arch = X86
-features = adx aes avx avx2 avx512bitalg avx512bw avx512cd avx512dq avx512f avx512gfni avx512ifma avx512vaes avx512vbmi avx512vbmi2 avx512vl avx512vnni avx512vpclmulqdq avx512vpopcntdq bmi1 bmi2 cmpxchg16b ermsb f16c fma fxsr lzcnt movbe pclmulqdq popcnt rdrand rdseed sha sse sse2 sse3 sse4.1 sse4.2 ssse3 xsave xsavec xsaveopt xsaves
+features = adx aes avx avx2 avx512bitalg avx512bw avx512cd avx512dq avx512f avx512gfni avx512ifma avx512vaes avx512vbmi avx512vbmi2 avx512vl avx512vnni avx512vpclmulqdq avx512vpopcntdq bmi1 bmi2 cmpxchg16b ermsb f16c fma fxsr gfni lzcnt movbe pclmulqdq popcnt rdrand rdseed sha sse sse2 sse3 sse4.1 sse4.2 ssse3 vaes vpclmulqdq xsave xsavec xsaveopt xsaves
 
 cpu = icelake-server
 arch = X86
-features = adx aes avx avx2 avx512bitalg avx512bw avx512cd avx512dq avx512f avx512gfni avx512ifma avx512vaes avx512vbmi avx512vbmi2 avx512vl avx512vnni avx512vpclmulqdq avx512vpopcntdq bmi1 bmi2 cmpxchg16b ermsb f16c fma fxsr lzcnt movbe pclmulqdq popcnt rdrand rdseed sha sse sse2 sse3 sse4.1 sse4.2 ssse3 xsave xsavec xsaveopt xsaves
+features = adx aes avx avx2 avx512bitalg avx512bw avx512cd avx512dq avx512f avx512gfni avx512ifma avx512vaes avx512vbmi avx512vbmi2 avx512vl avx512vnni avx512vpclmulqdq avx512vpopcntdq bmi1 bmi2 cmpxchg16b ermsb f16c fma fxsr gfni lzcnt movbe pclmulqdq popcnt rdrand rdseed sha sse sse2 sse3 sse4.1 sse4.2 ssse3 vaes vpclmulqdq xsave xsavec xsaveopt xsaves
 
 cpu = ivybridge
 arch = X86
@@ -1224,7 +1224,7 @@ features = fxsr sse sse2 sse3
 
 cpu = rocketlake
 arch = X86
-features = adx aes avx avx2 avx512bitalg avx512bw avx512cd avx512dq avx512f avx512gfni avx512ifma avx512vaes avx512vbmi avx512vbmi2 avx512vl avx512vnni avx512vpclmulqdq avx512vpopcntdq bmi1 bmi2 cmpxchg16b ermsb f16c fma fxsr lzcnt movbe pclmulqdq popcnt rdrand rdseed sha sse sse2 sse3 sse4.1 sse4.2 ssse3 xsave xsavec xsaveopt xsaves
+features = adx aes avx avx2 avx512bitalg avx512bw avx512cd avx512dq avx512f avx512gfni avx512ifma avx512vaes avx512vbmi avx512vbmi2 avx512vl avx512vnni avx512vpclmulqdq avx512vpopcntdq bmi1 bmi2 cmpxchg16b ermsb f16c fma fxsr gfni lzcnt movbe pclmulqdq popcnt rdrand rdseed sha sse sse2 sse3 sse4.1 sse4.2 ssse3 vaes vpclmulqdq xsave xsavec xsaveopt xsaves
 
 cpu = sandybridge
 arch = X86
@@ -1232,7 +1232,7 @@ features = avx cmpxchg16b fxsr pclmulqdq popcnt sse sse2 sse3 sse4.1 sse4.2 ssse
 
 cpu = sapphirerapids
 arch = X86
-features = adx aes avx avx2 avx512bf16 avx512bitalg avx512bw avx512cd avx512dq avx512f avx512gfni avx512ifma avx512vaes avx512vbmi avx512vbmi2 avx512vl avx512vnni avx512vpclmulqdq avx512vpopcntdq bmi1 bmi2 cmpxchg16b ermsb f16c fma fxsr lzcnt movbe pclmulqdq popcnt rdrand rdseed sha sse sse2 sse3 sse4.1 sse4.2 ssse3 xsave xsavec xsaveopt xsaves
+features = adx aes avx avx2 avx512bf16 avx512bitalg avx512bw avx512cd avx512dq avx512f avx512gfni avx512ifma avx512vaes avx512vbmi avx512vbmi2 avx512vl avx512vnni avx512vpclmulqdq avx512vpopcntdq bmi1 bmi2 cmpxchg16b ermsb f16c fma fxsr gfni lzcnt movbe pclmulqdq popcnt rdrand rdseed sha sse sse2 sse3 sse4.1 sse4.2 ssse3 vaes vpclmulqdq xsave xsavec xsaveopt xsaves
 
 cpu = silvermont
 arch = X86
@@ -1256,11 +1256,11 @@ features = cmpxchg16b fxsr movbe pclmulqdq popcnt rdrand sse sse2 sse3 sse4.1 ss
 
 cpu = tigerlake
 arch = X86
-features = adx aes avx avx2 avx512bitalg avx512bw avx512cd avx512dq avx512f avx512gfni avx512ifma avx512vaes avx512vbmi avx512vbmi2 avx512vl avx512vnni avx512vp2intersect avx512vpclmulqdq avx512vpopcntdq bmi1 bmi2 cmpxchg16b ermsb f16c fma fxsr lzcnt movbe pclmulqdq popcnt rdrand rdseed sha sse sse2 sse3 sse4.1 sse4.2 ssse3 xsave xsavec xsaveopt xsaves
+features = adx aes avx avx2 avx512bitalg avx512bw avx512cd avx512dq avx512f avx512gfni avx512ifma avx512vaes avx512vbmi avx512vbmi2 avx512vl avx512vnni avx512vp2intersect avx512vpclmulqdq avx512vpopcntdq bmi1 bmi2 cmpxchg16b ermsb f16c fma fxsr gfni lzcnt movbe pclmulqdq popcnt rdrand rdseed sha sse sse2 sse3 sse4.1 sse4.2 ssse3 vaes vpclmulqdq xsave xsavec xsaveopt xsaves
 
 cpu = tremont
 arch = X86
-features = aes avx512gfni cmpxchg16b fxsr movbe pclmulqdq popcnt rdrand rdseed sha sse sse2 sse3 sse4.1 sse4.2 ssse3 xsave xsavec xsaveopt xsaves
+features = aes avx512gfni cmpxchg16b fxsr gfni movbe pclmulqdq popcnt rdrand rdseed sha sse sse2 sse3 sse4.1 sse4.2 ssse3 xsave xsavec xsaveopt xsaves
 
 cpu = westmere
 arch = X86
@@ -1304,5 +1304,5 @@ features = adx aes avx avx2 bmi1 bmi2 cmpxchg16b f16c fma fxsr lzcnt movbe pclmu
 
 cpu = znver3
 arch = X86
-features = adx aes avx avx2 avx512vaes avx512vpclmulqdq bmi1 bmi2 cmpxchg16b f16c fma fxsr lzcnt movbe pclmulqdq popcnt rdrand rdseed sha sse sse2 sse3 sse4.1 sse4.2 sse4a ssse3 xsave xsavec xsaveopt xsaves
+features = adx aes avx avx2 avx512vaes avx512vpclmulqdq bmi1 bmi2 cmpxchg16b f16c fma fxsr lzcnt movbe pclmulqdq popcnt rdrand rdseed sha sse sse2 sse3 sse4.1 sse4.2 sse4a ssse3 vaes vpclmulqdq xsave xsavec xsaveopt xsaves
 

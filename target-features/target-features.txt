@@ -238,6 +238,11 @@ arch = AArch64
 implies = paca
 description = Enable v8.3-A Pointer Authentication extension.
 
+feature = pacg
+arch = AArch64
+implies = paca
+description = Enable v8.3-A Pointer Authentication extension.
+
 feature = pan
 arch = AArch64
 implies = 
@@ -432,6 +437,11 @@ feature = altivec
 arch = PowerPC
 implies = 
 description = Enable Altivec instructions.
+
+feature = power10-vector
+arch = PowerPC
+implies = altivec power8-altivec power8-vector power9-altivec power9-vector vsx
+description = Enable POWER10 vector instructions.
 
 feature = power8-altivec
 arch = PowerPC
@@ -720,7 +730,7 @@ description = Enable AVX-512 instructions.
 
 feature = avx512gfni
 arch = X86
-implies = sse sse2
+implies = gfni sse sse2
 description = Enable Galois Field Arithmetic Instructions.
 
 feature = avx512ifma
@@ -735,7 +745,7 @@ description = Enable AVX-512 PreFetch Instructions.
 
 feature = avx512vaes
 arch = X86
-implies = aes avx sse sse2 sse3 sse4.1 ssse3
+implies = aes avx sse sse2 sse3 sse4.1 ssse3 vaes
 description = Promote selected AES instructions to AVX512/AVX registers.
 
 feature = avx512vbmi
@@ -765,7 +775,7 @@ description = Enable AVX-512 vp2intersect.
 
 feature = avx512vpclmulqdq
 arch = X86
-implies = avx pclmulqdq sse sse2 sse3 sse4.1 ssse3
+implies = avx pclmulqdq sse sse2 sse3 sse4.1 ssse3 vpclmulqdq
 description = Enable vpclmulqdq instructions.
 
 feature = avx512vpopcntdq
@@ -807,6 +817,11 @@ feature = fxsr
 arch = X86
 implies = 
 description = Support fxsave/fxrestore instructions.
+
+feature = gfni
+arch = X86
+implies = avx512gfni sse sse2
+description = Enable Galois Field Arithmetic Instructions.
 
 feature = lzcnt
 arch = X86
@@ -887,6 +902,16 @@ feature = tbm
 arch = X86
 implies = 
 description = Enable TBM instructions.
+
+feature = vaes
+arch = X86
+implies = aes avx avx512vaes sse sse2 sse3 sse4.1 ssse3
+description = Promote selected AES instructions to AVX512/AVX registers.
+
+feature = vpclmulqdq
+arch = X86
+implies = avx avx512vpclmulqdq pclmulqdq sse sse2 sse3 sse4.1 ssse3
+description = Enable vpclmulqdq instructions.
 
 feature = xsave
 arch = X86

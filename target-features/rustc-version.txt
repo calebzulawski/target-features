@@ -1,1 +1,1 @@
-rustc 1.67.0-nightly (c1a859b25 2022-11-10)
+rustc 1.67.0-nightly (c97b539e4 2022-11-30)
