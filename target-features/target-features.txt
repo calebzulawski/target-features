@@ -238,11 +238,6 @@ arch = AArch64
 implies = paca
 description = Enable v8.3-A Pointer Authentication extension.
 
-feature = pacg
-arch = AArch64
-implies = paca
-description = Enable v8.3-A Pointer Authentication extension.
-
 feature = pan
 arch = AArch64
 implies = 

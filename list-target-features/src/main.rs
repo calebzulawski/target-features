@@ -135,12 +135,6 @@ fn get_all_features(triple: &str) -> Vec<Feature> {
         } else {
             let description = split.next().unwrap().trim();
             features.push(make_feature(feature, description));
-
-            // aarch64 pacg is omitted from the list
-            // it's technically not the same feature as paca, but it's "tied" to it in rustc
-            if triple.starts_with("aarch64") && feature == "paca" {
-                features.push(make_feature("pacg", description));
-            };
         }
     }
 
