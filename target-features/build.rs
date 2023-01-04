@@ -185,7 +185,7 @@ fn main() -> Result<(), Box<dyn Error>> {
     // Rerun build if the source features changed
     println!("cargo:rerun-if-changed=rustc-version.txt");
     println!("cargo:rerun-if-changed=target-features.txt");
-    println!("cargo:rerun-if-changed=target-cpuss.txt");
+    println!("cargo:rerun-if-changed=target-cpus.txt");
     println!("cargo:rerun-if-changed=build.rs");
     Ok(())
 }
