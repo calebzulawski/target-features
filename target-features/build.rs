@@ -159,8 +159,14 @@ fn main() -> Result<(), Box<dyn Error>> {
         writeln!(docs, "/// {} documentation", arch.to_lowercase())?;
         writeln!(docs, "///")?;
         writeln!(docs, "/// ## Features")?;
-        writeln!(docs, "/// | Feature | Description | Also Enables<sup>†</sup> |")?;
-        writeln!(docs, "/// | ------- | ----------- | ------------------------ |")?;
+        writeln!(
+            docs,
+            "/// | Feature | Description | Also Enables<sup>†</sup> |"
+        )?;
+        writeln!(
+            docs,
+            "/// | ------- | ----------- | ------------------------ |"
+        )?;
         for (feature, description, implies) in features {
             write!(docs, "/// | `{feature}` | {description} | ")?;
             for (i, feature) in implies.into_iter().enumerate() {
