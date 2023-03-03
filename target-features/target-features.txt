@@ -653,6 +653,11 @@ arch = Wasm
 implies = 
 description = Enable reference types.
 
+feature = relaxed-simd
+arch = Wasm
+implies = 
+description = Enable relaxed-simd instructions.
+
 feature = sign-ext
 arch = Wasm
 implies = 
