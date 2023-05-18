@@ -126,217 +126,217 @@ description = Enables C Run-time Libraries to be statically linked.
 feature = aes
 arch = AArch64
 implies = neon
-description = Enable AES support.
+description = Enable AES support (FEAT_AES, FEAT_PMULL).
 
 feature = bf16
 arch = AArch64
 implies = 
-description = Enable BFloat16 Extension.
+description = Enable BFloat16 Extension (FEAT_BF16).
 
 feature = bti
 arch = AArch64
 implies = 
-description = Enable Branch Target Identification.
+description = Enable Branch Target Identification (FEAT_BTI).
 
 feature = crc
 arch = AArch64
 implies = 
-description = Enable ARMv8 CRC-32 checksum instructions.
+description = Enable ARMv8 CRC-32 checksum instructions (FEAT_CRC32).
 
 feature = dit
 arch = AArch64
 implies = 
-description = Enable v8.4-A Data Independent Timing instructions.
+description = Enable v8.4-A Data Independent Timing instructions (FEAT_DIT).
 
 feature = dotprod
 arch = AArch64
 implies = 
-description = Enable dot product support.
+description = Enable dot product support (FEAT_DotProd).
 
 feature = dpb
 arch = AArch64
 implies = 
-description = Enable v8.2 data Cache Clean to Point of Persistence.
+description = Enable v8.2 data Cache Clean to Point of Persistence (FEAT_DPB).
 
 feature = dpb2
 arch = AArch64
 implies = 
-description = Enable v8.5 Cache Clean to Point of Deep Persistence.
+description = Enable v8.5 Cache Clean to Point of Deep Persistence (FEAT_DPB2).
 
 feature = f32mm
 arch = AArch64
 implies = fp16 neon sve
-description = Enable Matrix Multiply FP32 Extension.
+description = Enable Matrix Multiply FP32 Extension (FEAT_F32MM).
 
 feature = f64mm
 arch = AArch64
 implies = fp16 neon sve
-description = Enable Matrix Multiply FP64 Extension.
+description = Enable Matrix Multiply FP64 Extension (FEAT_F64MM).
 
 feature = fcma
 arch = AArch64
 implies = neon
-description = Enable v8.3-A Floating-point complex number support.
+description = Enable v8.3-A Floating-point complex number support (FEAT_FCMA).
 
 feature = fhm
 arch = AArch64
 implies = fp16 neon
-description = Enable FP16 FML instructions.
+description = Enable FP16 FML instructions (FEAT_FHM).
 
 feature = flagm
 arch = AArch64
 implies = 
-description = Enable v8.4-A Flag Manipulation Instructions.
+description = Enable v8.4-A Flag Manipulation Instructions (FEAT_FlagM).
 
 feature = fp16
 arch = AArch64
 implies = neon
-description = Full FP16.
+description = Full FP16 (FEAT_FP16).
 
 feature = frintts
 arch = AArch64
 implies = 
-description = Enable FRInt[32|64][Z|X] instructions that round a floating-point number to an integer (in FP format) forcing it to fit into a 32- or 64-bit int.
+description = Enable FRInt[32|64][Z|X] instructions that round a floating-point number to an integer (in FP format) forcing it to fit into a 32- or 64-bit int (FEAT_FRINTTS).
 
 feature = i8mm
 arch = AArch64
 implies = 
-description = Enable Matrix Multiply Int8 Extension.
+description = Enable Matrix Multiply Int8 Extension (FEAT_I8MM).
 
 feature = jsconv
 arch = AArch64
 implies = neon
-description = Enable v8.3-A JavaScript FP conversion instructions.
+description = Enable v8.3-A JavaScript FP conversion instructions (FEAT_JSCVT).
 
 feature = lor
 arch = AArch64
 implies = 
-description = Enables ARM v8.1 Limited Ordering Regions extension.
+description = Enables ARM v8.1 Limited Ordering Regions extension (FEAT_LOR).
 
 feature = lse
 arch = AArch64
 implies = 
-description = Enable ARMv8.1 Large System Extension (LSE) atomic instructions.
+description = Enable ARMv8.1 Large System Extension (LSE) atomic instructions (FEAT_LSE).
 
 feature = mte
 arch = AArch64
 implies = 
-description = Enable Memory Tagging Extension.
+description = Enable Memory Tagging Extension (FEAT_MTE, FEAT_MTE2).
 
 feature = neon
 arch = AArch64
 implies = 
-description = Enable Advanced SIMD instructions.
+description = Enable Advanced SIMD instructions (FEAT_AdvSIMD).
 
 feature = paca
 arch = AArch64
 implies = pacg
-description = Enable v8.3-A Pointer Authentication extension.
+description = Enable v8.3-A Pointer Authentication extension (FEAT_PAuth).
 
 feature = pacg
 arch = AArch64
 implies = paca
-description = Enable v8.3-A Pointer Authentication extension.
+description = Enable v8.3-A Pointer Authentication extension (FEAT_PAuth).
 
 feature = pan
 arch = AArch64
 implies = 
-description = Enables ARM v8.1 Privileged Access-Never extension.
+description = Enables ARM v8.1 Privileged Access-Never extension (FEAT_PAN).
 
 feature = pmuv3
 arch = AArch64
 implies = 
-description = Enable ARMv8 PMUv3 Performance Monitors extension.
+description = Enable Code Generation for ARMv8 PMUv3 Performance Monitors extension (FEAT_PMUv3).
 
 feature = rand
 arch = AArch64
 implies = 
-description = Enable Random Number generation instructions.
+description = Enable Random Number generation instructions (FEAT_RNG).
 
 feature = ras
 arch = AArch64
 implies = 
-description = Enable ARMv8 Reliability, Availability and Serviceability Extensions.
+description = Enable ARMv8 Reliability, Availability and Serviceability Extensions (FEAT_RAS, FEAT_RASv1p1).
 
 feature = rcpc
 arch = AArch64
 implies = 
-description = Enable support for RCPC extension.
+description = Enable support for RCPC extension (FEAT_LRCPC).
 
 feature = rcpc2
 arch = AArch64
 implies = rcpc
-description = Enable v8.4-A RCPC instructions with Immediate Offsets.
+description = Enable v8.4-A RCPC instructions with Immediate Offsets (FEAT_LRCPC2).
 
 feature = rdm
 arch = AArch64
 implies = 
-description = Enable ARMv8.1 Rounding Double Multiply Add/Subtract instructions.
+description = Enable ARMv8.1 Rounding Double Multiply Add/Subtract instructions (FEAT_RDM).
 
 feature = sb
 arch = AArch64
 implies = 
-description = Enable v8.5 Speculation Barrier.
+description = Enable v8.5 Speculation Barrier (FEAT_SB).
 
 feature = sha2
 arch = AArch64
 implies = neon
-description = Enable SHA1 and SHA256 support.
+description = Enable SHA1 and SHA256 support (FEAT_SHA1, FEAT_SHA256).
 
 feature = sha3
 arch = AArch64
 implies = neon sha2
-description = Enable SHA512 and SHA3 support.
+description = Enable SHA512 and SHA3 support (FEAT_SHA3, FEAT_SHA512).
 
 feature = sm4
 arch = AArch64
 implies = neon
-description = Enable SM3 and SM4 support.
+description = Enable SM3 and SM4 support (FEAT_SM4, FEAT_SM3).
 
 feature = spe
 arch = AArch64
 implies = 
-description = Enable Statistical Profiling extension.
+description = Enable Statistical Profiling extension (FEAT_SPE).
 
 feature = ssbs
 arch = AArch64
 implies = 
-description = Enable Speculative Store Bypass Safe bit.
+description = Enable Speculative Store Bypass Safe bit (FEAT_SSBS, FEAT_SSBS2).
 
 feature = sve
 arch = AArch64
 implies = fp16 neon
-description = Enable Scalable Vector Extension (SVE) instructions.
+description = Enable Scalable Vector Extension (SVE) instructions (FEAT_SVE).
 
 feature = sve2
 arch = AArch64
 implies = fp16 neon sve
-description = Enable Scalable Vector Extension 2 (SVE2) instructions.
+description = Enable Scalable Vector Extension 2 (SVE2) instructions (FEAT_SVE2).
 
 feature = sve2-aes
 arch = AArch64
 implies = aes fp16 neon sve sve2
-description = Enable AES SVE2 instructions.
+description = Enable AES SVE2 instructions (FEAT_SVE_AES, FEAT_SVE_PMULL128).
 
 feature = sve2-bitperm
 arch = AArch64
 implies = fp16 neon sve sve2
-description = Enable bit permutation SVE2 instructions.
+description = Enable bit permutation SVE2 instructions (FEAT_SVE_BitPerm).
 
 feature = sve2-sha3
 arch = AArch64
 implies = fp16 neon sha2 sha3 sve sve2
-description = Enable SHA3 SVE2 instructions.
+description = Enable SHA3 SVE2 instructions (FEAT_SVE_SHA3).
 
 feature = sve2-sm4
 arch = AArch64
 implies = fp16 neon sm4 sve sve2
-description = Enable SM4 SVE2 instructions.
+description = Enable SM4 SVE2 instructions (FEAT_SVE_SM4).
 
 feature = tme
 arch = AArch64
 implies = 
-description = Enable Transactional Memory Extension.
+description = Enable Transactional Memory Extension (FEAT_TME).
 
 feature = v8.1a
 arch = AArch64
@@ -376,7 +376,7 @@ description = Support ARM v8.7a instructions.
 feature = vh
 arch = AArch64
 implies = 
-description = Enables ARM v8.1 Virtual Host extension.
+description = Enables ARM v8.1 Virtual Host extension (FEAT_VHE).
 
 feature = crt-static
 arch = AArch64
@@ -497,6 +497,11 @@ feature = m
 arch = RiscV
 implies = 
 description = 'M' (Integer Multiplication and Division).
+
+feature = relax
+arch = RiscV
+implies = 
+description = Enable Linker relaxation..
 
 feature = v
 arch = RiscV
@@ -728,11 +733,6 @@ arch = X86
 implies = avx avx2 f16c fma sse sse2 sse3 sse4.1 ssse3
 description = Enable AVX-512 instructions.
 
-feature = avx512gfni
-arch = X86
-implies = gfni sse sse2
-description = Enable Galois Field Arithmetic Instructions.
-
 feature = avx512ifma
 arch = X86
 implies = avx avx2 avx512f f16c fma sse sse2 sse3 sse4.1 ssse3
@@ -742,11 +742,6 @@ feature = avx512pf
 arch = X86
 implies = avx avx2 avx512f f16c fma sse sse2 sse3 sse4.1 ssse3
 description = Enable AVX-512 PreFetch Instructions.
-
-feature = avx512vaes
-arch = X86
-implies = aes avx sse sse2 sse3 sse4.1 ssse3 vaes
-description = Promote selected AES instructions to AVX512/AVX registers.
 
 feature = avx512vbmi
 arch = X86
@@ -772,11 +767,6 @@ feature = avx512vp2intersect
 arch = X86
 implies = avx avx2 avx512f f16c fma sse sse2 sse3 sse4.1 ssse3
 description = Enable AVX-512 vp2intersect.
-
-feature = avx512vpclmulqdq
-arch = X86
-implies = avx pclmulqdq sse sse2 sse3 sse4.1 ssse3 vpclmulqdq
-description = Enable vpclmulqdq instructions.
 
 feature = avx512vpopcntdq
 arch = X86
@@ -820,7 +810,7 @@ description = Support fxsave/fxrestore instructions.
 
 feature = gfni
 arch = X86
-implies = avx512gfni sse sse2
+implies = sse sse2
 description = Enable Galois Field Arithmetic Instructions.
 
 feature = lzcnt
@@ -905,12 +895,12 @@ description = Enable TBM instructions.
 
 feature = vaes
 arch = X86
-implies = aes avx avx512vaes sse sse2 sse3 sse4.1 ssse3
+implies = aes avx sse sse2 sse3 sse4.1 ssse3
 description = Promote selected AES instructions to AVX512/AVX registers.
 
 feature = vpclmulqdq
 arch = X86
-implies = avx avx512vpclmulqdq pclmulqdq sse sse2 sse3 sse4.1 ssse3
+implies = avx pclmulqdq sse sse2 sse3 sse4.1 ssse3
 description = Enable vpclmulqdq instructions.
 
 feature = xsave

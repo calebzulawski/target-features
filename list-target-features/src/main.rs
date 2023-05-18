@@ -67,7 +67,7 @@ fn get_all_cpus(triple: &str) -> Vec<Cpu> {
     // Add listed CPUS
     let mut cpus = Vec::new();
     for line in std::str::from_utf8(&output.stdout).unwrap().lines().skip(1) {
-        let cpu = line.trim().to_string();
+        let cpu = line.trim().split(' ').next().unwrap().trim().to_string();
         if cpu.starts_with("native") {
             continue;
         }
