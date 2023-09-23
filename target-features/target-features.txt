@@ -13,11 +13,6 @@ arch = Arm
 implies = 
 description = Enable support for CRC instructions.
 
-feature = crypto
-arch = Arm
-implies = aes d32 neon sha2 vfp2 vfp3
-description = Enable support for Cryptography extensions.
-
 feature = d32
 arch = Arm
 implies = 
@@ -73,6 +68,11 @@ arch = Arm
 implies = 
 description = Enable Thumb2 instructions.
 
+feature = trustzone
+arch = Arm
+implies = 
+description = Enable support for TrustZone security extensions.
+
 feature = v5te
 arch = Arm
 implies = 
@@ -117,6 +117,11 @@ feature = vfp4
 arch = Arm
 implies = d32 vfp2 vfp3
 description = Enable VFP4 instructions.
+
+feature = virtualization
+arch = Arm
+implies = 
+description = Supports Virtualization extension.
 
 feature = crt-static
 arch = Arm
@@ -486,7 +491,7 @@ description = 'D' (Double-Precision Floating-Point).
 feature = e
 arch = RiscV
 implies = 
-description = Implements RV32E (provides 16 rather than 32 GPRs).
+description = Implements RV{32,64}E (provides 16 rather than 32 GPRs).
 
 feature = f
 arch = RiscV
@@ -502,6 +507,11 @@ feature = relax
 arch = RiscV
 implies = 
 description = Enable Linker relaxation..
+
+feature = unaligned-scalar-mem
+arch = RiscV
+implies = 
+description = Has reasonably performant unaligned scalar loads and stores.
 
 feature = v
 arch = RiscV
@@ -637,6 +647,11 @@ feature = bulk-memory
 arch = Wasm
 implies = 
 description = Enable bulk memory operations.
+
+feature = exception-handling
+arch = Wasm
+implies = 
+description = Enable Wasm exception handling.
 
 feature = multivalue
 arch = Wasm
