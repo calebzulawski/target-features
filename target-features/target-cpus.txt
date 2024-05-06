@@ -1000,11 +1000,11 @@ features = a c d f m
 
 cpu = sifive-p450
 arch = RiscV
-features = a c d f fast-unaligned-access m zba zbb zbs zfhmin
+features = a c d f m unaligned-scalar-mem zba zbb zbs zfhmin
 
 cpu = sifive-p670
 arch = RiscV
-features = a c d f fast-unaligned-access m v zba zbb zbs zfhmin
+features = a c d f m unaligned-scalar-mem v zba zbb zbs zfhmin
 
 cpu = sifive-s21
 arch = RiscV

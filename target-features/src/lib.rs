@@ -152,6 +152,11 @@ impl Feature {
     pub const fn implies(&self) -> &'static [Feature] {
         FEATURES[self.0].3
     }
+
+    /// Whether or not this feature can be detected at runtime.
+    pub const fn can_detect_at_runtime(&self) -> bool {
+        FEATURES[self.0].4
+    }
 }
 
 /// Iterator returned by [`Target::features`].

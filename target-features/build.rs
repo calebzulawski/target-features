@@ -32,8 +32,14 @@ fn main() -> Result<(), Box<dyn Error>> {
             .strip_prefix("description =")
             .unwrap()
             .trim();
+        let runtime = lines
+            .next()
+            .unwrap()
+            .strip_prefix("runtime =")
+            .unwrap()
+            .trim();
         let _ = lines.next();
-        features.push((feature, arch, description, implies));
+        features.push((feature, arch, description, implies, runtime));
     }
 
     // Parse the generated CPUs file
@@ -65,9 +71,9 @@ fn main() -> Result<(), Box<dyn Error>> {
     // Generate the features array
     writeln!(
         module,
-        "const FEATURES: &[(crate::Architecture, &str, &str, &[Feature])] = &["
+        "const FEATURES: &[(crate::Architecture, &str, &str, &[Feature], bool)] = &["
     )?;
-    for (feature, arch, description, implies) in &features {
+    for (feature, arch, description, implies, runtime) in &features {
         let implies = implies
             .iter()
             .map(|implied_feature| {
@@ -75,7 +81,7 @@ fn main() -> Result<(), Box<dyn Error>> {
                     "Feature({})",
                     features
                         .iter()
-                        .position(|(f, a, _, _)| implied_feature == f && arch == a)
+                        .position(|(f, a, _, _, _)| implied_feature == f && arch == a)
                         .unwrap()
                 )
             })
@@ -83,7 +89,7 @@ fn main() -> Result<(), Box<dyn Error>> {
             .join(", ");
         writeln!(
             module,
-            "    (crate::Architecture::{arch}, \"{feature}\", \"{description}\", &[{implies}]),"
+            "    (crate::Architecture::{arch}, \"{feature}\", \"{description}\", &[{implies}], {runtime}),"
         )?;
     }
     writeln!(module, "];")?;
@@ -101,7 +107,7 @@ fn main() -> Result<(), Box<dyn Error>> {
                     "Feature({})",
                     features
                         .iter()
-                        .position(|(f, a, _, _)| feature == f && arch == a)
+                        .position(|(f, a, _, _, _)| feature == f && arch == a)
                         .unwrap()
                 )
             })
@@ -143,12 +149,12 @@ fn main() -> Result<(), Box<dyn Error>> {
     // Generate the features docs
     let mut docs = File::create(Path::new(&out_dir).join("docs.rs"))?;
     let mut by_arch = HashMap::<_, (Vec<_>, Vec<_>)>::new();
-    for (feature, arch, description, implies) in features {
+    for (feature, arch, description, implies, runtime) in features {
         by_arch
             .entry(arch)
             .or_default()
             .0
-            .push((feature, description, implies));
+            .push((feature, description, implies, runtime));
     }
     for (cpu, arch, features) in cpus {
         by_arch.entry(arch).or_default().1.push((cpu, features));
@@ -167,7 +173,7 @@ fn main() -> Result<(), Box<dyn Error>> {
             docs,
             "/// | ------- | ----------- | ------------------------ |"
         )?;
-        for (feature, description, implies) in features {
+        for (feature, description, implies, _) in features {
             write!(docs, "/// | `{feature}` | {description} | ")?;
             for (i, feature) in implies.into_iter().enumerate() {
                 if i != 0 {

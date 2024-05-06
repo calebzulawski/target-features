@@ -28,6 +28,7 @@ struct Feature {
     feature: String,
     description: String,
     implies: Vec<String>,
+    runtime: bool,
 }
 
 fn get_features(triple: &str, target_feature: &str, target_cpu: &str) -> Vec<String> {
@@ -52,6 +53,24 @@ fn get_features(triple: &str, target_feature: &str, target_cpu: &str) -> Vec<Str
         })
         .filter(|f| f != "llvm14-builtins-abi")
         .collect()
+}
+
+fn detect_at_runtime(triple: &str, target_feature: &str) -> bool {
+    Command::new("cargo")
+        .args([
+            "+nightly",
+            "build",
+            "--manifest-path=detect-feature/Cargo.toml",
+            "-Zbuild-std",
+            "--target",
+            triple,
+        ])
+        .env("PATH", std::env::var("PATH").unwrap())
+        .env("FEATURE", target_feature)
+        .output()
+        .unwrap()
+        .status
+        .success()
 }
 
 fn get_all_cpus(triple: &str) -> Vec<Cpu> {
@@ -119,10 +138,13 @@ fn get_all_features(triple: &str) -> Vec<Feature> {
         implies.sort();
         implies.retain(|f| f != &feature);
 
+        let runtime = detect_at_runtime(triple, feature);
+
         Feature {
             feature: feature.to_string(),
             description: description.to_string(),
             implies,
+            runtime,
         }
     };
 
@@ -162,16 +184,19 @@ fn main() {
         std::fs::File::create(std::env::current_dir().unwrap().join("target-features.txt"))
             .unwrap();
     for (arch, triple) in arches {
+        println!("reading arch: {arch}");
         for Feature {
             feature,
             description,
             implies,
+            runtime,
         } in get_all_features(triple)
         {
             writeln!(features, "feature = {feature}").unwrap();
             writeln!(features, "arch = {arch}").unwrap();
             writeln!(features, "implies = {}", implies.join(" ")).unwrap();
             writeln!(features, "description = {description}").unwrap();
+            writeln!(features, "runtime = {runtime}").unwrap();
             writeln!(features, "").unwrap();
         }
     }
@@ -179,6 +204,7 @@ fn main() {
     let mut cpus =
         std::fs::File::create(std::env::current_dir().unwrap().join("target-cpus.txt")).unwrap();
     for (arch, triple) in arches {
+        println!("reading CPUs for arch: {arch}");
         for Cpu { cpu, features } in get_all_cpus(triple) {
             writeln!(cpus, "cpu = {cpu}").unwrap();
             writeln!(cpus, "arch = {arch}").unwrap();
