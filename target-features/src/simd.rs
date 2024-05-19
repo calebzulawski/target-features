@@ -78,6 +78,27 @@ impl crate::Target {
     /// particular operations--it's just a guess, and should be accurate at least for basic arithmetic.
     /// * Variable length vector instruction sets (ARM SVE and RISC-V V) only return the minimum
     /// vector length.
+    ///
+    /// The following features are accounted for:
+    ///
+    /// | Architecture    | Feature          | Width |
+    /// | --------------- | ---------------- | ----- |
+    /// | `arm`           | `neon`           | 128-bit (excluding `f64`) |
+    /// | `aarch64`       | `neon`           | 128-bit |
+    /// | `hexagon`       | `hvx-length128b` | 1024-bit (only integers) |
+    /// | `hexagon`       | `hvx`            | 512-bit (only integers) |
+    /// | `loongarch64`   | `lasx`           | 256-bit |
+    /// | `loongarch64`   | `lsx`            | 128-bit |
+    /// | `mips{64}`      | `msa`            | 128-bit |
+    /// | `powerpc{64}`   | `vsx`            | 128-bit |
+    /// | `powerpc{64}`   | `altivec`        | 128-bit (excluding `f64`) |
+    /// | `riscv{32,64}`  | `v`              | 128-bit (minimum guaranteed) |
+    /// | `wasm{32,64}`   | `simd128`        | 128-bit |
+    /// | `x86{_64}`      | `avx512f`        | 512-bit |
+    /// | `x86{_64}`      | `avx2`           | 256-bit |
+    /// | `x86{_64}`      | `avx`            | 256-bit (only integers) |
+    /// | `x86{_64}`      | `sse2`           | 128-bit |
+    /// | `x86{_64}`      | `sse`            | 128-bit (`f32` only) |
     pub const fn suggested_simd_width<T: SimdType>(&self) -> Option<usize> {
         let is_f32 = T::IMPL as u8 == SimdTypeImpl::Float32 as u8;
         let is_f64 = T::IMPL as u8 == SimdTypeImpl::Float64 as u8;
@@ -108,6 +129,14 @@ impl crate::Target {
                 Some(v1024)
             } else if self.supports_feature_str("hvx") {
                 Some(v512)
+            } else {
+                None
+            }
+        } else if let Architecture::LoongArch64 = self.architecture() {
+            if self.supports_feature_str("lasx") {
+                Some(v256)
+            } else if self.supports_feature_str("lsx") {
+                Some(v128)
             } else {
                 None
             }
