@@ -184,7 +184,8 @@ fn main() {
         ("S390X", "s390x-unknown-linux-gnu"),
         ("Sparc", "sparc-unknown-linux-gnu"),
         ("Sparc64", "sparc64-unknown-linux-gnu"),
-        ("Wasm", "wasm32-unknown-unknown"),
+        ("Wasm32", "wasm32-unknown-unknown"),
+        ("Wasm64", "wasm64-unknown-unknown"),
         ("X86", "i586-unknown-linux-gnu"),
         ("X86_64", "x86_64-unknown-linux-gnu"),
     ];

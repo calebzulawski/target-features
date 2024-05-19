@@ -1859,16 +1859,28 @@ arch = Sparc64
 features = 
 
 cpu = bleeding-edge
-arch = Wasm
+arch = Wasm32
 features = atomics bulk-memory mutable-globals nontrapping-fptoint sign-ext simd128
 
 cpu = generic
-arch = Wasm
+arch = Wasm32
 features = mutable-globals sign-ext
 
 cpu = mvp
-arch = Wasm
+arch = Wasm32
 features = 
+
+cpu = bleeding-edge
+arch = Wasm64
+features = atomics bulk-memory mutable-globals nontrapping-fptoint sign-ext simd128
+
+cpu = generic
+arch = Wasm64
+features = bulk-memory mutable-globals nontrapping-fptoint sign-ext
+
+cpu = mvp
+arch = Wasm64
+features = bulk-memory mutable-globals nontrapping-fptoint sign-ext
 
 cpu = alderlake
 arch = X86

@@ -1121,73 +1121,145 @@ description = Enables C Run-time Libraries to be statically linked.
 runtime = false
 
 feature = atomics
-arch = Wasm
+arch = Wasm32
 implies = 
 description = Enable Atomics.
 runtime = false
 
 feature = bulk-memory
-arch = Wasm
+arch = Wasm32
 implies = 
 description = Enable bulk memory operations.
 runtime = false
 
 feature = exception-handling
-arch = Wasm
+arch = Wasm32
 implies = 
 description = Enable Wasm exception handling.
 runtime = false
 
 feature = extended-const
-arch = Wasm
+arch = Wasm32
 implies = 
 description = Enable extended const expressions.
 runtime = false
 
 feature = multivalue
-arch = Wasm
+arch = Wasm32
 implies = 
 description = Enable multivalue blocks, instructions, and functions.
 runtime = false
 
 feature = mutable-globals
-arch = Wasm
+arch = Wasm32
 implies = 
 description = Enable mutable globals.
 runtime = false
 
 feature = nontrapping-fptoint
-arch = Wasm
+arch = Wasm32
 implies = 
 description = Enable non-trapping float-to-int conversion operators.
 runtime = false
 
 feature = reference-types
-arch = Wasm
+arch = Wasm32
 implies = 
 description = Enable reference types.
 runtime = false
 
 feature = relaxed-simd
-arch = Wasm
+arch = Wasm32
 implies = 
 description = Enable relaxed-simd instructions.
 runtime = false
 
 feature = sign-ext
-arch = Wasm
+arch = Wasm32
 implies = 
 description = Enable sign extension operators.
 runtime = false
 
 feature = simd128
-arch = Wasm
+arch = Wasm32
 implies = 
 description = Enable 128-bit SIMD.
 runtime = false
 
 feature = crt-static
-arch = Wasm
+arch = Wasm32
+implies = 
+description = Enables C Run-time Libraries to be statically linked.
+runtime = false
+
+feature = atomics
+arch = Wasm64
+implies = 
+description = Enable Atomics.
+runtime = false
+
+feature = bulk-memory
+arch = Wasm64
+implies = 
+description = Enable bulk memory operations.
+runtime = false
+
+feature = exception-handling
+arch = Wasm64
+implies = 
+description = Enable Wasm exception handling.
+runtime = false
+
+feature = extended-const
+arch = Wasm64
+implies = 
+description = Enable extended const expressions.
+runtime = false
+
+feature = multivalue
+arch = Wasm64
+implies = 
+description = Enable multivalue blocks, instructions, and functions.
+runtime = false
+
+feature = mutable-globals
+arch = Wasm64
+implies = 
+description = Enable mutable globals.
+runtime = false
+
+feature = nontrapping-fptoint
+arch = Wasm64
+implies = 
+description = Enable non-trapping float-to-int conversion operators.
+runtime = false
+
+feature = reference-types
+arch = Wasm64
+implies = 
+description = Enable reference types.
+runtime = false
+
+feature = relaxed-simd
+arch = Wasm64
+implies = 
+description = Enable relaxed-simd instructions.
+runtime = false
+
+feature = sign-ext
+arch = Wasm64
+implies = 
+description = Enable sign extension operators.
+runtime = false
+
+feature = simd128
+arch = Wasm64
+implies = 
+description = Enable 128-bit SIMD.
+runtime = false
+
+feature = crt-static
+arch = Wasm64
 implies = 
 description = Enables C Run-time Libraries to be statically linked.
 runtime = false

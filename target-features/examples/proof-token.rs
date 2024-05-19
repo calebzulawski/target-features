@@ -43,7 +43,7 @@ macro_rules! make_target_proof {
 
         unsafe impl Proof for $proof {
             // Build on the already-known target features
-            const TARGET: Target = target_features::CURRENT_TARGET$(.with_feature_str($feature))*;
+            const TARGET: Target = target_features::BUILD_TARGET$(.with_feature_str($feature))*;
 
             fn detect() -> Option<Self> {
                 if true $(&& is_x86_feature_detected!($feature))* {

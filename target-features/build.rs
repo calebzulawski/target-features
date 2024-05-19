@@ -135,9 +135,9 @@ fn main() -> Result<(), Box<dyn Error>> {
         "x86" | "x86_64" => "X86",
         _ => "Unsupported",
     };
-    writeln!(module, "/// The target of the current build.")?;
+    writeln!(module, "/// The target of this build.")?;
     writeln!(module, "#[allow(clippy::let_and_return)]")?;
-    writeln!(module, "pub const CURRENT_TARGET: Target = {{")?;
+    writeln!(module, "pub const BUILD_TARGET: Target = {{")?;
     writeln!(module, "    let arch = Architecture::{build_arch};")?;
     writeln!(module, "    let target = Target::new(arch);")?;
     for feature in build_features {

@@ -111,13 +111,13 @@ impl crate::Target {
             } else {
                 None
             }
-        } else if let Architecture::Mips = self.architecture() {
+        } else if self.architecture().is_mips_family() {
             if self.supports_feature_str("msa") {
                 Some(v128)
             } else {
                 None
             }
-        } else if let Architecture::PowerPC = self.architecture() {
+        } else if self.architecture().is_powerpc_family() {
             // Altivec without VSX doesn't support f64
             if self.supports_feature_str("vsx") || (self.supports_feature_str("altivec") && !is_f64)
             {
@@ -125,20 +125,20 @@ impl crate::Target {
             } else {
                 None
             }
-        } else if let Architecture::RiscV = self.architecture() {
+        } else if self.architecture().is_riscv_family() {
             // V provides at least 128-bit vectors
             if self.supports_feature_str("v") {
                 Some(v128)
             } else {
                 None
             }
-        } else if let Architecture::Wasm = self.architecture() {
+        } else if self.architecture().is_wasm_family() {
             if self.supports_feature_str("simd128") {
                 Some(v128)
             } else {
                 None
             }
-        } else if let Architecture::X86 = self.architecture() {
+        } else if self.architecture().is_x86_family() {
             if self.supports_feature_str("avx512f") {
                 Some(v512)
             } else if self.supports_feature_str("avx2")

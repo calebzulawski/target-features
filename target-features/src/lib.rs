@@ -53,16 +53,48 @@ macro_rules! architectures {
                 Self::Unsupported
             }
 
-            /// Return the string for this architecture.
+            /// Return the name of this architecture.
             pub const fn as_str(&self) -> Option<&'static str> {
                 $(
-                if self == Self::$enum {
+                if let Self::$enum = self {
                     return Some($str)
                 }
                 )*
                 None
             }
         }
+    }
+}
+
+impl Architecture {
+    /// Is arm or aarch64
+    pub const fn is_arm_family(&self) -> bool {
+        matches!(self, Self::Arm | Self::AArch64)
+    }
+
+    /// Is mips or mips64
+    pub const fn is_mips_family(&self) -> bool {
+        matches!(self, Self::Mips | Self::Mips64)
+    }
+
+    /// Is powerpc or powerpc64
+    pub const fn is_powerpc_family(&self) -> bool {
+        matches!(self, Self::PowerPC | Self::PowerPC64)
+    }
+
+    /// Is riscv32 or riscv64
+    pub const fn is_riscv_family(&self) -> bool {
+        matches!(self, Self::RiscV32 | Self::RiscV64)
+    }
+
+    /// Is wasm32 or wasm64
+    pub const fn is_wasm_family(&self) -> bool {
+        matches!(self, Self::Wasm32 | Self::Wasm64)
+    }
+
+    /// Is x86 or x86_64
+    pub const fn is_x86_family(&self) -> bool {
+        matches!(self, Self::X86 | Self::X86_64)
     }
 }
 
@@ -83,7 +115,8 @@ architectures! {
     "s390x": S390X,
     "sparc": Sparc,
     "sparc64": Sparc64,
-    "wasm": Wasm,
+    "wasm32": Wasm32,
+    "wasm64": Wasm64,
     "x86": X86,
     "x86_64": X86_64,
 }
