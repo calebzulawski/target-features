@@ -8,13 +8,13 @@ feature = aes
 arch = Arm
 implies = d32 neon vfp2 vfp3
 description = Enable AES support.
-runtime = false
+runtime = true
 
 feature = crc
 arch = Arm
 implies = 
 description = Enable support for CRC instructions.
-runtime = false
+runtime = true
 
 feature = d32
 arch = Arm
@@ -26,7 +26,7 @@ feature = dotprod
 arch = Arm
 implies = d32 neon vfp2 vfp3
 description = Enable support for dot product instructions.
-runtime = false
+runtime = true
 
 feature = dsp
 arch = Arm
@@ -44,7 +44,7 @@ feature = i8mm
 arch = Arm
 implies = d32 neon vfp2 vfp3
 description = Enable Matrix Multiply Int8 Extension.
-runtime = false
+runtime = true
 
 feature = mclass
 arch = Arm
@@ -56,7 +56,7 @@ feature = neon
 arch = Arm
 implies = d32 vfp2 vfp3
 description = Enable NEON instructions.
-runtime = false
+runtime = true
 
 feature = rclass
 arch = Arm
@@ -68,7 +68,7 @@ feature = sha2
 arch = Arm
 implies = d32 neon vfp2 vfp3
 description = Enable SHA1 and SHA256 support.
-runtime = false
+runtime = true
 
 feature = thumb-mode
 arch = Arm
@@ -520,11 +520,101 @@ implies = fp64
 description = Enables C Run-time Libraries to be statically linked.
 runtime = false
 
+feature = fp64
+arch = Mips64
+implies = 
+description = Support 64-bit FP registers.
+runtime = false
+
+feature = msa
+arch = Mips64
+implies = fp64
+description = Mips MSA ASE.
+runtime = true
+
+feature = virt
+arch = Mips64
+implies = fp64
+description = Mips Virtualization ASE.
+runtime = false
+
+feature = crt-static
+arch = Mips64
+implies = fp64
+description = Enables C Run-time Libraries to be statically linked.
+runtime = false
+
+feature = d
+arch = LoongArch64
+implies = f
+description = 'D' (Double-Precision Floating-Point).
+runtime = false
+
+feature = f
+arch = LoongArch64
+implies = 
+description = 'F' (Single-Precision Floating-Point).
+runtime = false
+
+feature = frecipe
+arch = LoongArch64
+implies = 
+description = Support frecipe.{s/d} and frsqrte.{s/d} instructions..
+runtime = false
+
+feature = lasx
+arch = LoongArch64
+implies = d f lsx
+description = 'LASX' (Loongson Advanced SIMD Extension).
+runtime = false
+
+feature = lbt
+arch = LoongArch64
+implies = 
+description = 'LBT' (Loongson Binary Translation Extension).
+runtime = false
+
+feature = lsx
+arch = LoongArch64
+implies = d f
+description = 'LSX' (Loongson SIMD Extension).
+runtime = false
+
+feature = lvz
+arch = LoongArch64
+implies = 
+description = 'LVZ' (Loongson Virtualization Extension).
+runtime = false
+
+feature = relax
+arch = LoongArch64
+implies = 
+description = Enable Linker relaxation.
+runtime = false
+
+feature = ual
+arch = LoongArch64
+implies = 
+description = Allow memory accesses to be unaligned.
+runtime = false
+
+feature = crt-static
+arch = LoongArch64
+implies = 
+description = Enables C Run-time Libraries to be statically linked.
+runtime = false
+
+feature = crt-static
+arch = Nvptx64
+implies = 
+description = Enables C Run-time Libraries to be statically linked.
+runtime = false
+
 feature = altivec
 arch = PowerPC
 implies = 
 description = Enable Altivec instructions.
-runtime = false
+runtime = true
 
 feature = power10-vector
 arch = PowerPC
@@ -560,7 +650,7 @@ feature = vsx
 arch = PowerPC
 implies = altivec
 description = Enable VSX instructions.
-runtime = false
+runtime = true
 
 feature = crt-static
 arch = PowerPC
@@ -568,200 +658,464 @@ implies =
 description = Enables C Run-time Libraries to be statically linked.
 runtime = false
 
+feature = altivec
+arch = PowerPC64
+implies = 
+description = Enable Altivec instructions.
+runtime = true
+
+feature = power10-vector
+arch = PowerPC64
+implies = altivec power8-altivec power8-vector power9-altivec power9-vector vsx
+description = Enable POWER10 vector instructions.
+runtime = false
+
+feature = power8-altivec
+arch = PowerPC64
+implies = altivec
+description = Enable POWER8 Altivec instructions.
+runtime = false
+
+feature = power8-vector
+arch = PowerPC64
+implies = altivec power8-altivec vsx
+description = Enable POWER8 vector instructions.
+runtime = false
+
+feature = power9-altivec
+arch = PowerPC64
+implies = altivec power8-altivec
+description = Enable POWER9 Altivec instructions.
+runtime = false
+
+feature = power9-vector
+arch = PowerPC64
+implies = altivec power8-altivec power8-vector power9-altivec vsx
+description = Enable POWER9 vector instructions.
+runtime = false
+
+feature = vsx
+arch = PowerPC64
+implies = altivec
+description = Enable VSX instructions.
+runtime = true
+
+feature = crt-static
+arch = PowerPC64
+implies = 
+description = Enables C Run-time Libraries to be statically linked.
+runtime = false
+
 feature = a
-arch = RiscV
+arch = RiscV32
 implies = 
 description = 'A' (Atomic Instructions).
-runtime = false
+runtime = true
 
 feature = c
-arch = RiscV
+arch = RiscV32
 implies = 
 description = 'C' (Compressed Instructions).
-runtime = false
+runtime = true
 
 feature = d
-arch = RiscV
+arch = RiscV32
 implies = f
 description = 'D' (Double-Precision Floating-Point).
 runtime = false
 
 feature = e
-arch = RiscV
+arch = RiscV32
 implies = 
 description = Implements RV{32,64}E (provides 16 rather than 32 GPRs).
 runtime = false
 
 feature = f
-arch = RiscV
+arch = RiscV32
 implies = 
 description = 'F' (Single-Precision Floating-Point).
 runtime = false
 
 feature = m
-arch = RiscV
+arch = RiscV32
 implies = 
 description = 'M' (Integer Multiplication and Division).
-runtime = false
+runtime = true
 
 feature = relax
-arch = RiscV
+arch = RiscV32
 implies = 
 description = Enable Linker relaxation..
 runtime = false
 
 feature = unaligned-scalar-mem
-arch = RiscV
+arch = RiscV32
 implies = 
 description = Has reasonably performant unaligned loads and stores (both scalar and vector).
 runtime = false
 
 feature = v
-arch = RiscV
+arch = RiscV32
 implies = d f
 description = 'V' (Vector Extension for Application Processors).
 runtime = false
 
 feature = zba
-arch = RiscV
+arch = RiscV32
 implies = 
 description = 'Zba' (Address Generation Instructions).
-runtime = false
+runtime = true
 
 feature = zbb
-arch = RiscV
+arch = RiscV32
 implies = 
 description = 'Zbb' (Basic Bit-Manipulation).
-runtime = false
+runtime = true
 
 feature = zbc
-arch = RiscV
+arch = RiscV32
 implies = 
 description = 'Zbc' (Carry-Less Multiplication).
-runtime = false
+runtime = true
 
 feature = zbkb
-arch = RiscV
+arch = RiscV32
 implies = 
 description = 'Zbkb' (Bitmanip instructions for Cryptography).
-runtime = false
+runtime = true
 
 feature = zbkc
-arch = RiscV
+arch = RiscV32
 implies = 
 description = 'Zbkc' (Carry-less multiply instructions for Cryptography).
-runtime = false
+runtime = true
 
 feature = zbkx
-arch = RiscV
+arch = RiscV32
 implies = 
 description = 'Zbkx' (Crossbar permutation instructions).
-runtime = false
+runtime = true
 
 feature = zbs
-arch = RiscV
+arch = RiscV32
 implies = 
 description = 'Zbs' (Single-Bit Instructions).
-runtime = false
+runtime = true
 
 feature = zdinx
-arch = RiscV
+arch = RiscV32
 implies = zfinx
 description = 'Zdinx' (Double in Integer).
 runtime = false
 
 feature = zfh
-arch = RiscV
+arch = RiscV32
 implies = f zfhmin
 description = 'Zfh' (Half-Precision Floating-Point).
 runtime = false
 
 feature = zfhmin
-arch = RiscV
+arch = RiscV32
 implies = f
 description = 'Zfhmin' (Half-Precision Floating-Point Minimal).
 runtime = false
 
 feature = zfinx
-arch = RiscV
+arch = RiscV32
 implies = 
 description = 'Zfinx' (Float in Integer).
 runtime = false
 
 feature = zhinx
-arch = RiscV
+arch = RiscV32
 implies = zfinx zhinxmin
 description = 'Zhinx' (Half Float in Integer).
 runtime = false
 
 feature = zhinxmin
-arch = RiscV
+arch = RiscV32
 implies = zfinx
 description = 'Zhinxmin' (Half Float in Integer Minimal).
 runtime = false
 
 feature = zk
-arch = RiscV
+arch = RiscV32
 implies = zbkb zbkc zbkx zkn zknd zkne zknh zkr zkt
 description = 'Zk' (Standard scalar cryptography extension).
-runtime = false
+runtime = true
 
 feature = zkn
-arch = RiscV
+arch = RiscV32
 implies = zbkb zbkc zbkx zknd zkne zknh
 description = 'Zkn' (NIST Algorithm Suite).
-runtime = false
+runtime = true
 
 feature = zknd
-arch = RiscV
+arch = RiscV32
 implies = 
 description = 'Zknd' (NIST Suite: AES Decryption).
-runtime = false
+runtime = true
 
 feature = zkne
-arch = RiscV
+arch = RiscV32
 implies = 
 description = 'Zkne' (NIST Suite: AES Encryption).
-runtime = false
+runtime = true
 
 feature = zknh
-arch = RiscV
+arch = RiscV32
 implies = 
 description = 'Zknh' (NIST Suite: Hash Function Instructions).
-runtime = false
+runtime = true
 
 feature = zkr
-arch = RiscV
+arch = RiscV32
 implies = 
 description = 'Zkr' (Entropy Source Extension).
-runtime = false
+runtime = true
 
 feature = zks
-arch = RiscV
+arch = RiscV32
 implies = zbkb zbkc zbkx zksed zksh
 description = 'Zks' (ShangMi Algorithm Suite).
-runtime = false
+runtime = true
 
 feature = zksed
-arch = RiscV
+arch = RiscV32
 implies = 
 description = 'Zksed' (ShangMi Suite: SM4 Block Cipher Instructions).
-runtime = false
+runtime = true
 
 feature = zksh
-arch = RiscV
+arch = RiscV32
 implies = 
 description = 'Zksh' (ShangMi Suite: SM3 Hash Function Instructions).
-runtime = false
+runtime = true
 
 feature = zkt
-arch = RiscV
+arch = RiscV32
 implies = 
 description = 'Zkt' (Data Independent Execution Latency).
+runtime = true
+
+feature = crt-static
+arch = RiscV32
+implies = 
+description = Enables C Run-time Libraries to be statically linked.
+runtime = false
+
+feature = a
+arch = RiscV64
+implies = 
+description = 'A' (Atomic Instructions).
+runtime = true
+
+feature = c
+arch = RiscV64
+implies = 
+description = 'C' (Compressed Instructions).
+runtime = true
+
+feature = d
+arch = RiscV64
+implies = f
+description = 'D' (Double-Precision Floating-Point).
+runtime = false
+
+feature = e
+arch = RiscV64
+implies = 
+description = Implements RV{32,64}E (provides 16 rather than 32 GPRs).
+runtime = false
+
+feature = f
+arch = RiscV64
+implies = 
+description = 'F' (Single-Precision Floating-Point).
+runtime = false
+
+feature = m
+arch = RiscV64
+implies = 
+description = 'M' (Integer Multiplication and Division).
+runtime = true
+
+feature = relax
+arch = RiscV64
+implies = 
+description = Enable Linker relaxation..
+runtime = false
+
+feature = unaligned-scalar-mem
+arch = RiscV64
+implies = 
+description = Has reasonably performant unaligned loads and stores (both scalar and vector).
+runtime = false
+
+feature = v
+arch = RiscV64
+implies = d f
+description = 'V' (Vector Extension for Application Processors).
+runtime = false
+
+feature = zba
+arch = RiscV64
+implies = 
+description = 'Zba' (Address Generation Instructions).
+runtime = true
+
+feature = zbb
+arch = RiscV64
+implies = 
+description = 'Zbb' (Basic Bit-Manipulation).
+runtime = true
+
+feature = zbc
+arch = RiscV64
+implies = 
+description = 'Zbc' (Carry-Less Multiplication).
+runtime = true
+
+feature = zbkb
+arch = RiscV64
+implies = 
+description = 'Zbkb' (Bitmanip instructions for Cryptography).
+runtime = true
+
+feature = zbkc
+arch = RiscV64
+implies = 
+description = 'Zbkc' (Carry-less multiply instructions for Cryptography).
+runtime = true
+
+feature = zbkx
+arch = RiscV64
+implies = 
+description = 'Zbkx' (Crossbar permutation instructions).
+runtime = true
+
+feature = zbs
+arch = RiscV64
+implies = 
+description = 'Zbs' (Single-Bit Instructions).
+runtime = true
+
+feature = zdinx
+arch = RiscV64
+implies = zfinx
+description = 'Zdinx' (Double in Integer).
+runtime = false
+
+feature = zfh
+arch = RiscV64
+implies = f zfhmin
+description = 'Zfh' (Half-Precision Floating-Point).
+runtime = false
+
+feature = zfhmin
+arch = RiscV64
+implies = f
+description = 'Zfhmin' (Half-Precision Floating-Point Minimal).
+runtime = false
+
+feature = zfinx
+arch = RiscV64
+implies = 
+description = 'Zfinx' (Float in Integer).
+runtime = false
+
+feature = zhinx
+arch = RiscV64
+implies = zfinx zhinxmin
+description = 'Zhinx' (Half Float in Integer).
+runtime = false
+
+feature = zhinxmin
+arch = RiscV64
+implies = zfinx
+description = 'Zhinxmin' (Half Float in Integer Minimal).
+runtime = false
+
+feature = zk
+arch = RiscV64
+implies = zbkb zbkc zbkx zkn zknd zkne zknh zkr zkt
+description = 'Zk' (Standard scalar cryptography extension).
+runtime = true
+
+feature = zkn
+arch = RiscV64
+implies = zbkb zbkc zbkx zknd zkne zknh
+description = 'Zkn' (NIST Algorithm Suite).
+runtime = true
+
+feature = zknd
+arch = RiscV64
+implies = 
+description = 'Zknd' (NIST Suite: AES Decryption).
+runtime = true
+
+feature = zkne
+arch = RiscV64
+implies = 
+description = 'Zkne' (NIST Suite: AES Encryption).
+runtime = true
+
+feature = zknh
+arch = RiscV64
+implies = 
+description = 'Zknh' (NIST Suite: Hash Function Instructions).
+runtime = true
+
+feature = zkr
+arch = RiscV64
+implies = 
+description = 'Zkr' (Entropy Source Extension).
+runtime = true
+
+feature = zks
+arch = RiscV64
+implies = zbkb zbkc zbkx zksed zksh
+description = 'Zks' (ShangMi Algorithm Suite).
+runtime = true
+
+feature = zksed
+arch = RiscV64
+implies = 
+description = 'Zksed' (ShangMi Suite: SM4 Block Cipher Instructions).
+runtime = true
+
+feature = zksh
+arch = RiscV64
+implies = 
+description = 'Zksh' (ShangMi Suite: SM3 Hash Function Instructions).
+runtime = true
+
+feature = zkt
+arch = RiscV64
+implies = 
+description = 'Zkt' (Data Independent Execution Latency).
+runtime = true
+
+feature = crt-static
+arch = RiscV64
+implies = 
+description = Enables C Run-time Libraries to be statically linked.
 runtime = false
 
 feature = crt-static
-arch = RiscV
+arch = S390X
+implies = 
+description = Enables C Run-time Libraries to be statically linked.
+runtime = false
+
+feature = crt-static
+arch = Sparc
+implies = 
+description = Enables C Run-time Libraries to be statically linked.
+runtime = false
+
+feature = crt-static
+arch = Sparc64
 implies = 
 description = Enables C Run-time Libraries to be statically linked.
 runtime = false
@@ -1152,6 +1506,324 @@ runtime = true
 
 feature = crt-static
 arch = X86
+implies = 
+description = Enables C Run-time Libraries to be statically linked.
+runtime = false
+
+feature = adx
+arch = X86_64
+implies = 
+description = Support ADX instructions.
+runtime = true
+
+feature = aes
+arch = X86_64
+implies = sse sse2
+description = Enable AES instructions.
+runtime = true
+
+feature = avx
+arch = X86_64
+implies = sse sse2 sse3 sse4.1 ssse3
+description = Enable AVX instructions.
+runtime = true
+
+feature = avx2
+arch = X86_64
+implies = avx sse sse2 sse3 sse4.1 ssse3
+description = Enable AVX2 instructions.
+runtime = true
+
+feature = avx512bf16
+arch = X86_64
+implies = avx avx2 avx512bw avx512f f16c fma sse sse2 sse3 sse4.1 ssse3
+description = Support bfloat16 floating point.
+runtime = true
+
+feature = avx512bitalg
+arch = X86_64
+implies = avx avx2 avx512bw avx512f f16c fma sse sse2 sse3 sse4.1 ssse3
+description = Enable AVX-512 Bit Algorithms.
+runtime = true
+
+feature = avx512bw
+arch = X86_64
+implies = avx avx2 avx512f f16c fma sse sse2 sse3 sse4.1 ssse3
+description = Enable AVX-512 Byte and Word Instructions.
+runtime = true
+
+feature = avx512cd
+arch = X86_64
+implies = avx avx2 avx512f f16c fma sse sse2 sse3 sse4.1 ssse3
+description = Enable AVX-512 Conflict Detection Instructions.
+runtime = true
+
+feature = avx512dq
+arch = X86_64
+implies = avx avx2 avx512f f16c fma sse sse2 sse3 sse4.1 ssse3
+description = Enable AVX-512 Doubleword and Quadword Instructions.
+runtime = true
+
+feature = avx512er
+arch = X86_64
+implies = avx avx2 avx512f f16c fma sse sse2 sse3 sse4.1 ssse3
+description = Enable AVX-512 Exponential and Reciprocal Instructions.
+runtime = true
+
+feature = avx512f
+arch = X86_64
+implies = avx avx2 f16c fma sse sse2 sse3 sse4.1 ssse3
+description = Enable AVX-512 instructions.
+runtime = true
+
+feature = avx512fp16
+arch = X86_64
+implies = avx avx2 avx512bw avx512dq avx512f avx512vl f16c fma sse sse2 sse3 sse4.1 ssse3
+description = Support 16-bit floating point.
+runtime = true
+
+feature = avx512ifma
+arch = X86_64
+implies = avx avx2 avx512f f16c fma sse sse2 sse3 sse4.1 ssse3
+description = Enable AVX-512 Integer Fused Multiple-Add.
+runtime = true
+
+feature = avx512pf
+arch = X86_64
+implies = avx avx2 avx512f f16c fma sse sse2 sse3 sse4.1 ssse3
+description = Enable AVX-512 PreFetch Instructions.
+runtime = true
+
+feature = avx512vbmi
+arch = X86_64
+implies = avx avx2 avx512bw avx512f f16c fma sse sse2 sse3 sse4.1 ssse3
+description = Enable AVX-512 Vector Byte Manipulation Instructions.
+runtime = true
+
+feature = avx512vbmi2
+arch = X86_64
+implies = avx avx2 avx512bw avx512f f16c fma sse sse2 sse3 sse4.1 ssse3
+description = Enable AVX-512 further Vector Byte Manipulation Instructions.
+runtime = true
+
+feature = avx512vl
+arch = X86_64
+implies = avx avx2 avx512f f16c fma sse sse2 sse3 sse4.1 ssse3
+description = Enable AVX-512 Vector Length eXtensions.
+runtime = true
+
+feature = avx512vnni
+arch = X86_64
+implies = avx avx2 avx512f f16c fma sse sse2 sse3 sse4.1 ssse3
+description = Enable AVX-512 Vector Neural Network Instructions.
+runtime = true
+
+feature = avx512vp2intersect
+arch = X86_64
+implies = avx avx2 avx512f f16c fma sse sse2 sse3 sse4.1 ssse3
+description = Enable AVX-512 vp2intersect.
+runtime = true
+
+feature = avx512vpopcntdq
+arch = X86_64
+implies = avx avx2 avx512f f16c fma sse sse2 sse3 sse4.1 ssse3
+description = Enable AVX-512 Population Count Instructions.
+runtime = true
+
+feature = bmi1
+arch = X86_64
+implies = 
+description = Support BMI instructions.
+runtime = true
+
+feature = bmi2
+arch = X86_64
+implies = 
+description = Support BMI2 instructions.
+runtime = true
+
+feature = cmpxchg16b
+arch = X86_64
+implies = 
+description = 64-bit with cmpxchg16b (this is true for most x86-64 chips, but not the first AMD chips).
+runtime = true
+
+feature = ermsb
+arch = X86_64
+implies = 
+description = REP MOVS/STOS are fast.
+runtime = true
+
+feature = f16c
+arch = X86_64
+implies = avx sse sse2 sse3 sse4.1 ssse3
+description = Support 16-bit floating point conversion instructions.
+runtime = true
+
+feature = fma
+arch = X86_64
+implies = avx sse sse2 sse3 sse4.1 ssse3
+description = Enable three-operand fused multiple-add.
+runtime = true
+
+feature = fxsr
+arch = X86_64
+implies = 
+description = Support fxsave/fxrestore instructions.
+runtime = true
+
+feature = gfni
+arch = X86_64
+implies = sse sse2
+description = Enable Galois Field Arithmetic Instructions.
+runtime = true
+
+feature = lahfsahf
+arch = X86_64
+implies = 
+description = Support LAHF and SAHF instructions in 64-bit mode.
+runtime = false
+
+feature = lzcnt
+arch = X86_64
+implies = 
+description = Support LZCNT instruction.
+runtime = true
+
+feature = movbe
+arch = X86_64
+implies = 
+description = Support MOVBE instruction.
+runtime = true
+
+feature = pclmulqdq
+arch = X86_64
+implies = sse sse2
+description = Enable packed carry-less multiplication instructions.
+runtime = true
+
+feature = popcnt
+arch = X86_64
+implies = 
+description = Support POPCNT instruction.
+runtime = true
+
+feature = prfchw
+arch = X86_64
+implies = 
+description = Support PRFCHW instructions.
+runtime = false
+
+feature = rdrand
+arch = X86_64
+implies = 
+description = Support RDRAND instruction.
+runtime = true
+
+feature = rdseed
+arch = X86_64
+implies = 
+description = Support RDSEED instruction.
+runtime = true
+
+feature = rtm
+arch = X86_64
+implies = 
+description = Support RTM instructions.
+runtime = true
+
+feature = sha
+arch = X86_64
+implies = sse sse2
+description = Enable SHA instructions.
+runtime = true
+
+feature = sse
+arch = X86_64
+implies = 
+description = Enable SSE instructions.
+runtime = true
+
+feature = sse2
+arch = X86_64
+implies = sse
+description = Enable SSE2 instructions.
+runtime = true
+
+feature = sse3
+arch = X86_64
+implies = sse sse2
+description = Enable SSE3 instructions.
+runtime = true
+
+feature = sse4.1
+arch = X86_64
+implies = sse sse2 sse3 ssse3
+description = Enable SSE 4.1 instructions.
+runtime = true
+
+feature = sse4.2
+arch = X86_64
+implies = sse sse2 sse3 sse4.1 ssse3
+description = Enable SSE 4.2 instructions.
+runtime = true
+
+feature = sse4a
+arch = X86_64
+implies = sse sse2 sse3
+description = Support SSE 4a instructions.
+runtime = true
+
+feature = ssse3
+arch = X86_64
+implies = sse sse2 sse3
+description = Enable SSSE3 instructions.
+runtime = true
+
+feature = tbm
+arch = X86_64
+implies = 
+description = Enable TBM instructions.
+runtime = true
+
+feature = vaes
+arch = X86_64
+implies = aes avx avx2 sse sse2 sse3 sse4.1 ssse3
+description = Promote selected AES instructions to AVX512/AVX registers.
+runtime = true
+
+feature = vpclmulqdq
+arch = X86_64
+implies = avx pclmulqdq sse sse2 sse3 sse4.1 ssse3
+description = Enable vpclmulqdq instructions.
+runtime = true
+
+feature = xsave
+arch = X86_64
+implies = 
+description = Support xsave instructions.
+runtime = true
+
+feature = xsavec
+arch = X86_64
+implies = xsave
+description = Support xsavec instructions.
+runtime = true
+
+feature = xsaveopt
+arch = X86_64
+implies = xsave
+description = Support xsaveopt instructions.
+runtime = true
+
+feature = xsaves
+arch = X86_64
+implies = xsave
+description = Support xsaves instructions.
+runtime = true
+
+feature = crt-static
+arch = X86_64
 implies = 
 description = Enables C Run-time Libraries to be statically linked.
 runtime = false

@@ -4,10 +4,11 @@ fn main() {
     let mut lib = std::fs::File::create(&format!("{}/lib.rs", out_dir)).unwrap();
 
     let arch = std::env::var("CARGO_CFG_TARGET_ARCH").unwrap();
-    let arch = if arch == "x86_64" {
-        "x86".to_string()
-    } else {
-        arch
+    let arch = match arch.as_str() {
+        "x86_64" => "x86",
+        "riscv32" => "riscv",
+        "riscv64" => "riscv",
+        arch => arch,
     };
 
     write!(

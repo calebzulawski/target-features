@@ -94,6 +94,10 @@ fn get_all_cpus(triple: &str) -> Vec<Cpu> {
             break;
         }
 
+        if cpu == "mips5" {
+            continue; // unsupported by LLVM
+        }
+
         let features = get_features(triple, "", &cpu);
 
         cpus.push(Cpu { cpu, features })
@@ -169,11 +173,20 @@ fn main() {
         ("AArch64", "aarch64-unknown-linux-gnu"),
         ("Bpf", "bpfeb-unknown-none"),
         ("Hexagon", "hexagon-unknown-linux-musl"),
-        ("Mips", "mips64-unknown-linux-gnuabi64"),
-        ("PowerPC", "powerpc64-unknown-linux-gnu"),
-        ("RiscV", "riscv64gc-unknown-linux-gnu"),
+        ("Mips", "mips-unknown-linux-gnu"),
+        ("Mips64", "mips64-unknown-linux-gnuabi64"),
+        ("LoongArch64", "loongarch64-unknown-linux-gnu"),
+        ("Nvptx64", "nvptx64-nvidia-cuda"),
+        ("PowerPC", "powerpc-unknown-linux-gnu"),
+        ("PowerPC64", "powerpc64-unknown-linux-gnu"),
+        ("RiscV32", "riscv32gc-unknown-linux-gnu"),
+        ("RiscV64", "riscv64gc-unknown-linux-gnu"),
+        ("S390X", "s390x-unknown-linux-gnu"),
+        ("Sparc", "sparc-unknown-linux-gnu"),
+        ("Sparc64", "sparc64-unknown-linux-gnu"),
         ("Wasm", "wasm32-unknown-unknown"),
-        ("X86", "x86_64-unknown-linux-gnu"),
+        ("X86", "i586-unknown-linux-gnu"),
+        ("X86_64", "x86_64-unknown-linux-gnu"),
     ];
 
     let mut rust_version =

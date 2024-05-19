@@ -32,56 +32,60 @@ const fn str_eq(a: &str, b: &str) -> bool {
     true
 }
 
-/// A target architecture.
-#[derive(Copy, Clone, PartialEq, Eq, Debug)]
-pub enum Architecture {
-    /// Arm
-    Arm,
-    /// AArch64
-    AArch64,
-    /// BPF
-    Bpf,
-    /// Hexagon
-    Hexagon,
-    /// MIPS
-    Mips,
-    /// PowerPC
-    PowerPC,
-    /// RISC-V
-    RiscV,
-    /// WASM
-    Wasm,
-    /// x86 and x86-64
-    X86,
-    /// Another target, which doesn't have features
-    Unsupported,
-}
+macro_rules! architectures {
+    { $($str:literal: $enum:ident,)* } => {
+        #[derive(Copy, Clone, PartialEq, Eq, Debug)]
+        #[non_exhaustive]
+        pub enum Architecture {
+            /// A target which is not supported by this crate, and has no features.
+            Unsupported,
+            $($enum),*
+        }
 
-impl Architecture {
-    /// Create a new `Architecture` from its name.
-    pub const fn from_str(architecture: &str) -> Self {
-        if str_eq(architecture, "arm") {
-            Self::Arm
-        } else if str_eq(architecture, "aarch64") {
-            Self::AArch64
-        } else if str_eq(architecture, "bpf") {
-            Self::Bpf
-        } else if str_eq(architecture, "hexagon") {
-            Self::Hexagon
-        } else if str_eq(architecture, "mips") || str_eq(architecture, "mips64") {
-            Self::Mips
-        } else if str_eq(architecture, "powerpc") || str_eq(architecture, "powerpc64") {
-            Self::PowerPC
-        } else if str_eq(architecture, "riscv32") || str_eq(architecture, "riscv64") {
-            Self::RiscV
-        } else if str_eq(architecture, "wasm32") || str_eq(architecture, "wasm64") {
-            Self::Wasm
-        } else if str_eq(architecture, "x86") || str_eq(architecture, "x86_64") {
-            Self::X86
-        } else {
-            Self::Unsupported
+        impl Architecture {
+            /// Create a new `Architecture` from its name.
+            pub const fn from_str(architecture: &str) -> Self {
+                $(
+                if str_eq(architecture, $str) {
+                    return Self::$enum
+                }
+                )*
+                Self::Unsupported
+            }
+
+            /// Return the string for this architecture.
+            pub const fn as_str(&self) -> Option<&'static str> {
+                $(
+                if self == Self::$enum {
+                    return Some($str)
+                }
+                )*
+                None
+            }
         }
     }
+}
+
+architectures! {
+    "arm": Arm,
+    "aarch64": AArch64,
+    "bpf": Bpf,
+    "hexagon": Hexagon,
+    "mips": Mips,
+    "mips64": Mips64,
+    "loongarch64": LoongArch64,
+    "nvptx": Nvptx,
+    "nvptx64": Nvptx64,
+    "powerpc": PowerPC,
+    "powerpc64": PowerPC64,
+    "riscv32": RiscV32,
+    "riscv64": RiscV64,
+    "s390x": S390X,
+    "sparc": Sparc,
+    "sparc64": Sparc64,
+    "wasm": Wasm,
+    "x86": X86,
+    "x86_64": X86_64,
 }
 
 /// Returned by [`Feature::new`] when the requested feature can't be found.

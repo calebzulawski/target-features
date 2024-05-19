@@ -720,15 +720,15 @@ features = hvx hvx-length128b
 
 cpu = generic
 arch = Mips
-features = fp64
+features = 
 
 cpu = mips1
 arch = Mips
-features = fp64
+features = 
 
 cpu = mips2
 arch = Mips
-features = fp64
+features = 
 
 cpu = mips3
 arch = Mips
@@ -736,29 +736,25 @@ features = fp64
 
 cpu = mips32
 arch = Mips
-features = fp64
+features = 
 
 cpu = mips32r2
 arch = Mips
-features = fp64
+features = 
 
 cpu = mips32r3
 arch = Mips
-features = fp64
+features = 
 
 cpu = mips32r5
 arch = Mips
-features = fp64
+features = 
 
 cpu = mips32r6
 arch = Mips
 features = fp64
 
 cpu = mips4
-arch = Mips
-features = fp64
-
-cpu = mips5
 arch = Mips
 features = fp64
 
@@ -792,7 +788,183 @@ features = fp64
 
 cpu = p5600
 arch = Mips
+features = 
+
+cpu = generic
+arch = Mips64
 features = fp64
+
+cpu = mips1
+arch = Mips64
+features = fp64
+
+cpu = mips2
+arch = Mips64
+features = fp64
+
+cpu = mips3
+arch = Mips64
+features = fp64
+
+cpu = mips32
+arch = Mips64
+features = fp64
+
+cpu = mips32r2
+arch = Mips64
+features = fp64
+
+cpu = mips32r3
+arch = Mips64
+features = fp64
+
+cpu = mips32r5
+arch = Mips64
+features = fp64
+
+cpu = mips32r6
+arch = Mips64
+features = fp64
+
+cpu = mips4
+arch = Mips64
+features = fp64
+
+cpu = mips64
+arch = Mips64
+features = fp64
+
+cpu = mips64r2
+arch = Mips64
+features = fp64
+
+cpu = mips64r3
+arch = Mips64
+features = fp64
+
+cpu = mips64r5
+arch = Mips64
+features = fp64
+
+cpu = mips64r6
+arch = Mips64
+features = fp64
+
+cpu = octeon
+arch = Mips64
+features = fp64
+
+cpu = octeon+
+arch = Mips64
+features = fp64
+
+cpu = p5600
+arch = Mips64
+features = fp64
+
+cpu = generic
+arch = LoongArch64
+features = d f lasx lbt lsx lvz ual
+
+cpu = generic-la32
+arch = LoongArch64
+features = d f
+
+cpu = generic-la64
+arch = LoongArch64
+features = d f ual
+
+cpu = la464
+arch = LoongArch64
+features = d f lasx lbt lsx lvz ual
+
+cpu = loongarch64
+arch = LoongArch64
+features = d f ual
+
+cpu = sm_20
+arch = Nvptx64
+features = 
+
+cpu = sm_21
+arch = Nvptx64
+features = 
+
+cpu = sm_30
+arch = Nvptx64
+features = 
+
+cpu = sm_32
+arch = Nvptx64
+features = 
+
+cpu = sm_35
+arch = Nvptx64
+features = 
+
+cpu = sm_37
+arch = Nvptx64
+features = 
+
+cpu = sm_50
+arch = Nvptx64
+features = 
+
+cpu = sm_52
+arch = Nvptx64
+features = 
+
+cpu = sm_53
+arch = Nvptx64
+features = 
+
+cpu = sm_60
+arch = Nvptx64
+features = 
+
+cpu = sm_61
+arch = Nvptx64
+features = 
+
+cpu = sm_62
+arch = Nvptx64
+features = 
+
+cpu = sm_70
+arch = Nvptx64
+features = 
+
+cpu = sm_72
+arch = Nvptx64
+features = 
+
+cpu = sm_75
+arch = Nvptx64
+features = 
+
+cpu = sm_80
+arch = Nvptx64
+features = 
+
+cpu = sm_86
+arch = Nvptx64
+features = 
+
+cpu = sm_87
+arch = Nvptx64
+features = 
+
+cpu = sm_89
+arch = Nvptx64
+features = 
+
+cpu = sm_90
+arch = Nvptx64
+features = 
+
+cpu = sm_90a
+arch = Nvptx64
+features = 
 
 cpu = 440
 arch = PowerPC
@@ -946,109 +1118,745 @@ cpu = pwr9
 arch = PowerPC
 features = altivec power8-altivec power8-vector power9-altivec power9-vector vsx
 
+cpu = 440
+arch = PowerPC64
+features = 
+
+cpu = 450
+arch = PowerPC64
+features = 
+
+cpu = 601
+arch = PowerPC64
+features = 
+
+cpu = 602
+arch = PowerPC64
+features = 
+
+cpu = 603
+arch = PowerPC64
+features = 
+
+cpu = 603e
+arch = PowerPC64
+features = 
+
+cpu = 603ev
+arch = PowerPC64
+features = 
+
+cpu = 604
+arch = PowerPC64
+features = 
+
+cpu = 604e
+arch = PowerPC64
+features = 
+
+cpu = 620
+arch = PowerPC64
+features = 
+
+cpu = 7400
+arch = PowerPC64
+features = altivec
+
+cpu = 7450
+arch = PowerPC64
+features = altivec
+
+cpu = 750
+arch = PowerPC64
+features = 
+
+cpu = 970
+arch = PowerPC64
+features = altivec
+
+cpu = a2
+arch = PowerPC64
+features = 
+
+cpu = e500
+arch = PowerPC64
+features = 
+
+cpu = e500mc
+arch = PowerPC64
+features = 
+
+cpu = e5500
+arch = PowerPC64
+features = 
+
+cpu = future
+arch = PowerPC64
+features = altivec power10-vector power8-altivec power8-vector power9-altivec power9-vector vsx
+
+cpu = g3
+arch = PowerPC64
+features = 
+
+cpu = g4
+arch = PowerPC64
+features = altivec
+
+cpu = g4+
+arch = PowerPC64
+features = altivec
+
+cpu = g5
+arch = PowerPC64
+features = altivec
+
 cpu = generic
-arch = RiscV
+arch = PowerPC64
+features = 
+
+cpu = ppc
+arch = PowerPC64
+features = 
+
+cpu = ppc32
+arch = PowerPC64
+features = 
+
+cpu = ppc64
+arch = PowerPC64
+features = altivec
+
+cpu = ppc64le
+arch = PowerPC64
+features = altivec power8-altivec power8-vector vsx
+
+cpu = pwr10
+arch = PowerPC64
+features = altivec power10-vector power8-altivec power8-vector power9-altivec power9-vector vsx
+
+cpu = pwr3
+arch = PowerPC64
+features = altivec
+
+cpu = pwr4
+arch = PowerPC64
+features = altivec
+
+cpu = pwr5
+arch = PowerPC64
+features = altivec
+
+cpu = pwr5x
+arch = PowerPC64
+features = altivec
+
+cpu = pwr6
+arch = PowerPC64
+features = altivec
+
+cpu = pwr6x
+arch = PowerPC64
+features = altivec
+
+cpu = pwr7
+arch = PowerPC64
+features = altivec vsx
+
+cpu = pwr8
+arch = PowerPC64
+features = altivec power8-altivec power8-vector vsx
+
+cpu = pwr9
+arch = PowerPC64
+features = altivec power8-altivec power8-vector power9-altivec power9-vector vsx
+
+cpu = generic
+arch = RiscV32
 features = a c d f m
 
 cpu = generic-rv32
-arch = RiscV
+arch = RiscV32
 features = a c d f m
 
 cpu = generic-rv64
-arch = RiscV
+arch = RiscV32
 features = a c d f m
 
 cpu = rocket
-arch = RiscV
+arch = RiscV32
 features = a c d f m
 
 cpu = rocket-rv32
-arch = RiscV
+arch = RiscV32
 features = a c d f m
 
 cpu = rocket-rv64
-arch = RiscV
+arch = RiscV32
 features = a c d f m
 
 cpu = sifive-7-series
-arch = RiscV
+arch = RiscV32
 features = a c d f m
 
 cpu = sifive-e20
-arch = RiscV
+arch = RiscV32
 features = a c d f m
 
 cpu = sifive-e21
-arch = RiscV
+arch = RiscV32
 features = a c d f m
 
 cpu = sifive-e24
-arch = RiscV
+arch = RiscV32
 features = a c d f m
 
 cpu = sifive-e31
-arch = RiscV
+arch = RiscV32
 features = a c d f m
 
 cpu = sifive-e34
-arch = RiscV
+arch = RiscV32
 features = a c d f m
 
 cpu = sifive-e76
-arch = RiscV
+arch = RiscV32
 features = a c d f m
 
 cpu = sifive-p450
-arch = RiscV
+arch = RiscV32
 features = a c d f m unaligned-scalar-mem zba zbb zbs zfhmin
 
 cpu = sifive-p670
-arch = RiscV
+arch = RiscV32
 features = a c d f m unaligned-scalar-mem v zba zbb zbs zfhmin
 
 cpu = sifive-s21
-arch = RiscV
+arch = RiscV32
 features = a c d f m
 
 cpu = sifive-s51
-arch = RiscV
+arch = RiscV32
 features = a c d f m
 
 cpu = sifive-s54
-arch = RiscV
+arch = RiscV32
 features = a c d f m
 
 cpu = sifive-s76
-arch = RiscV
+arch = RiscV32
 features = a c d f m
 
 cpu = sifive-u54
-arch = RiscV
+arch = RiscV32
 features = a c d f m
 
 cpu = sifive-u74
-arch = RiscV
+arch = RiscV32
 features = a c d f m
 
 cpu = sifive-x280
-arch = RiscV
+arch = RiscV32
 features = a c d f m v zba zbb zfh zfhmin
 
 cpu = syntacore-scr1-base
-arch = RiscV
+arch = RiscV32
 features = a c d f m
 
 cpu = syntacore-scr1-max
-arch = RiscV
+arch = RiscV32
 features = a c d f m
 
 cpu = veyron-v1
-arch = RiscV
+arch = RiscV32
 features = a c d f m zba zbb zbc zbs
 
 cpu = xiangshan-nanhu
-arch = RiscV
+arch = RiscV32
 features = a c d f m zba zbb zbc zbkb zbkc zbkx zbs zkn zknd zkne zknh zksed zksh
+
+cpu = generic
+arch = RiscV64
+features = a c d f m
+
+cpu = generic-rv32
+arch = RiscV64
+features = a c d f m
+
+cpu = generic-rv64
+arch = RiscV64
+features = a c d f m
+
+cpu = rocket
+arch = RiscV64
+features = a c d f m
+
+cpu = rocket-rv32
+arch = RiscV64
+features = a c d f m
+
+cpu = rocket-rv64
+arch = RiscV64
+features = a c d f m
+
+cpu = sifive-7-series
+arch = RiscV64
+features = a c d f m
+
+cpu = sifive-e20
+arch = RiscV64
+features = a c d f m
+
+cpu = sifive-e21
+arch = RiscV64
+features = a c d f m
+
+cpu = sifive-e24
+arch = RiscV64
+features = a c d f m
+
+cpu = sifive-e31
+arch = RiscV64
+features = a c d f m
+
+cpu = sifive-e34
+arch = RiscV64
+features = a c d f m
+
+cpu = sifive-e76
+arch = RiscV64
+features = a c d f m
+
+cpu = sifive-p450
+arch = RiscV64
+features = a c d f m unaligned-scalar-mem zba zbb zbs zfhmin
+
+cpu = sifive-p670
+arch = RiscV64
+features = a c d f m unaligned-scalar-mem v zba zbb zbs zfhmin
+
+cpu = sifive-s21
+arch = RiscV64
+features = a c d f m
+
+cpu = sifive-s51
+arch = RiscV64
+features = a c d f m
+
+cpu = sifive-s54
+arch = RiscV64
+features = a c d f m
+
+cpu = sifive-s76
+arch = RiscV64
+features = a c d f m
+
+cpu = sifive-u54
+arch = RiscV64
+features = a c d f m
+
+cpu = sifive-u74
+arch = RiscV64
+features = a c d f m
+
+cpu = sifive-x280
+arch = RiscV64
+features = a c d f m v zba zbb zfh zfhmin
+
+cpu = syntacore-scr1-base
+arch = RiscV64
+features = a c d f m
+
+cpu = syntacore-scr1-max
+arch = RiscV64
+features = a c d f m
+
+cpu = veyron-v1
+arch = RiscV64
+features = a c d f m zba zbb zbc zbs
+
+cpu = xiangshan-nanhu
+arch = RiscV64
+features = a c d f m zba zbb zbc zbkb zbkc zbkx zbs zkn zknd zkne zknh zksed zksh
+
+cpu = arch10
+arch = S390X
+features = 
+
+cpu = arch11
+arch = S390X
+features = 
+
+cpu = arch12
+arch = S390X
+features = 
+
+cpu = arch13
+arch = S390X
+features = 
+
+cpu = arch14
+arch = S390X
+features = 
+
+cpu = arch8
+arch = S390X
+features = 
+
+cpu = arch9
+arch = S390X
+features = 
+
+cpu = generic
+arch = S390X
+features = 
+
+cpu = z10
+arch = S390X
+features = 
+
+cpu = z13
+arch = S390X
+features = 
+
+cpu = z14
+arch = S390X
+features = 
+
+cpu = z15
+arch = S390X
+features = 
+
+cpu = z16
+arch = S390X
+features = 
+
+cpu = z196
+arch = S390X
+features = 
+
+cpu = zEC12
+arch = S390X
+features = 
+
+cpu = at697e
+arch = Sparc
+features = 
+
+cpu = at697f
+arch = Sparc
+features = 
+
+cpu = f934
+arch = Sparc
+features = 
+
+cpu = generic
+arch = Sparc
+features = 
+
+cpu = gr712rc
+arch = Sparc
+features = 
+
+cpu = gr740
+arch = Sparc
+features = 
+
+cpu = hypersparc
+arch = Sparc
+features = 
+
+cpu = leon2
+arch = Sparc
+features = 
+
+cpu = leon3
+arch = Sparc
+features = 
+
+cpu = leon4
+arch = Sparc
+features = 
+
+cpu = ma2080
+arch = Sparc
+features = 
+
+cpu = ma2085
+arch = Sparc
+features = 
+
+cpu = ma2100
+arch = Sparc
+features = 
+
+cpu = ma2150
+arch = Sparc
+features = 
+
+cpu = ma2155
+arch = Sparc
+features = 
+
+cpu = ma2450
+arch = Sparc
+features = 
+
+cpu = ma2455
+arch = Sparc
+features = 
+
+cpu = ma2480
+arch = Sparc
+features = 
+
+cpu = ma2485
+arch = Sparc
+features = 
+
+cpu = ma2x5x
+arch = Sparc
+features = 
+
+cpu = ma2x8x
+arch = Sparc
+features = 
+
+cpu = myriad2
+arch = Sparc
+features = 
+
+cpu = myriad2.1
+arch = Sparc
+features = 
+
+cpu = myriad2.2
+arch = Sparc
+features = 
+
+cpu = myriad2.3
+arch = Sparc
+features = 
+
+cpu = niagara
+arch = Sparc
+features = 
+
+cpu = niagara2
+arch = Sparc
+features = 
+
+cpu = niagara3
+arch = Sparc
+features = 
+
+cpu = niagara4
+arch = Sparc
+features = 
+
+cpu = sparclet
+arch = Sparc
+features = 
+
+cpu = sparclite
+arch = Sparc
+features = 
+
+cpu = sparclite86x
+arch = Sparc
+features = 
+
+cpu = supersparc
+arch = Sparc
+features = 
+
+cpu = tsc701
+arch = Sparc
+features = 
+
+cpu = ultrasparc
+arch = Sparc
+features = 
+
+cpu = ultrasparc3
+arch = Sparc
+features = 
+
+cpu = ut699
+arch = Sparc
+features = 
+
+cpu = v7
+arch = Sparc
+features = 
+
+cpu = v8
+arch = Sparc
+features = 
+
+cpu = v9
+arch = Sparc
+features = 
+
+cpu = at697e
+arch = Sparc64
+features = 
+
+cpu = at697f
+arch = Sparc64
+features = 
+
+cpu = f934
+arch = Sparc64
+features = 
+
+cpu = generic
+arch = Sparc64
+features = 
+
+cpu = gr712rc
+arch = Sparc64
+features = 
+
+cpu = gr740
+arch = Sparc64
+features = 
+
+cpu = hypersparc
+arch = Sparc64
+features = 
+
+cpu = leon2
+arch = Sparc64
+features = 
+
+cpu = leon3
+arch = Sparc64
+features = 
+
+cpu = leon4
+arch = Sparc64
+features = 
+
+cpu = ma2080
+arch = Sparc64
+features = 
+
+cpu = ma2085
+arch = Sparc64
+features = 
+
+cpu = ma2100
+arch = Sparc64
+features = 
+
+cpu = ma2150
+arch = Sparc64
+features = 
+
+cpu = ma2155
+arch = Sparc64
+features = 
+
+cpu = ma2450
+arch = Sparc64
+features = 
+
+cpu = ma2455
+arch = Sparc64
+features = 
+
+cpu = ma2480
+arch = Sparc64
+features = 
+
+cpu = ma2485
+arch = Sparc64
+features = 
+
+cpu = ma2x5x
+arch = Sparc64
+features = 
+
+cpu = ma2x8x
+arch = Sparc64
+features = 
+
+cpu = myriad2
+arch = Sparc64
+features = 
+
+cpu = myriad2.1
+arch = Sparc64
+features = 
+
+cpu = myriad2.2
+arch = Sparc64
+features = 
+
+cpu = myriad2.3
+arch = Sparc64
+features = 
+
+cpu = niagara
+arch = Sparc64
+features = 
+
+cpu = niagara2
+arch = Sparc64
+features = 
+
+cpu = niagara3
+arch = Sparc64
+features = 
+
+cpu = niagara4
+arch = Sparc64
+features = 
+
+cpu = sparclet
+arch = Sparc64
+features = 
+
+cpu = sparclite
+arch = Sparc64
+features = 
+
+cpu = sparclite86x
+arch = Sparc64
+features = 
+
+cpu = supersparc
+arch = Sparc64
+features = 
+
+cpu = tsc701
+arch = Sparc64
+features = 
+
+cpu = ultrasparc
+arch = Sparc64
+features = 
+
+cpu = ultrasparc3
+arch = Sparc64
+features = 
+
+cpu = ut699
+arch = Sparc64
+features = 
+
+cpu = v7
+arch = Sparc64
+features = 
+
+cpu = v8
+arch = Sparc64
+features = 
+
+cpu = v9
+arch = Sparc64
+features = 
 
 cpu = bleeding-edge
 arch = Wasm
@@ -1084,11 +1892,11 @@ features = adx aes avx avx2 bmi1 bmi2 cmpxchg16b f16c fma fxsr gfni lahfsahf lzc
 
 cpu = athlon
 arch = X86
-features = sse sse2
+features = 
 
 cpu = athlon-4
 arch = X86
-features = fxsr sse sse2
+features = fxsr sse
 
 cpu = athlon-fx
 arch = X86
@@ -1096,15 +1904,15 @@ features = fxsr sse sse2
 
 cpu = athlon-mp
 arch = X86
-features = fxsr sse sse2
+features = fxsr sse
 
 cpu = athlon-tbird
 arch = X86
-features = sse sse2
+features = 
 
 cpu = athlon-xp
 arch = X86
-features = fxsr sse sse2
+features = fxsr sse
 
 cpu = athlon64
 arch = X86
@@ -1164,11 +1972,11 @@ features = aes avx bmi1 cmpxchg16b f16c fxsr lahfsahf lzcnt movbe pclmulqdq popc
 
 cpu = c3
 arch = X86
-features = sse sse2
+features = 
 
 cpu = c3-2
 arch = X86
-features = fxsr sse sse2
+features = fxsr sse
 
 cpu = cannonlake
 arch = X86
@@ -1252,11 +2060,11 @@ features = adx aes avx avx2 avx512bf16 avx512bitalg avx512bw avx512cd avx512dq a
 
 cpu = generic
 arch = X86
-features = sse sse2
+features = 
 
 cpu = geode
 arch = X86
-features = sse sse2
+features = 
 
 cpu = goldmont
 arch = X86
@@ -1296,19 +2104,19 @@ features = avx avx2 bmi1 bmi2 cmpxchg16b ermsb f16c fma fxsr lahfsahf lzcnt movb
 
 cpu = i386
 arch = X86
-features = sse sse2
+features = 
 
 cpu = i486
 arch = X86
-features = sse sse2
+features = 
 
 cpu = i586
 arch = X86
-features = sse sse2
+features = 
 
 cpu = i686
 arch = X86
-features = sse sse2
+features = 
 
 cpu = icelake-client
 arch = X86
@@ -1332,15 +2140,15 @@ features = avx cmpxchg16b f16c fxsr lahfsahf pclmulqdq popcnt rdrand sse sse2 ss
 
 cpu = k6
 arch = X86
-features = sse sse2
+features = 
 
 cpu = k6-2
 arch = X86
-features = sse sse2
+features = 
 
 cpu = k6-3
 arch = X86
-features = sse sse2
+features = 
 
 cpu = k8
 arch = X86
@@ -1360,7 +2168,7 @@ features = adx aes avx avx2 avx512cd avx512er avx512f avx512pf avx512vpopcntdq b
 
 cpu = lakemont
 arch = X86
-features = sse sse2
+features = 
 
 cpu = lunarlake
 arch = X86
@@ -1400,7 +2208,7 @@ features = cmpxchg16b fxsr lahfsahf sse sse2 sse3 sse4.1 ssse3
 
 cpu = pentium
 arch = X86
-features = sse sse2
+features = 
 
 cpu = pentium-m
 arch = X86
@@ -1408,19 +2216,19 @@ features = fxsr sse sse2
 
 cpu = pentium-mmx
 arch = X86
-features = sse sse2
+features = 
 
 cpu = pentium2
 arch = X86
-features = fxsr sse sse2
+features = fxsr
 
 cpu = pentium3
 arch = X86
-features = fxsr sse sse2
+features = fxsr sse
 
 cpu = pentium3m
 arch = X86
-features = fxsr sse sse2
+features = fxsr sse
 
 cpu = pentium4
 arch = X86
@@ -1440,15 +2248,15 @@ features = fxsr sse sse2 sse3
 
 cpu = pentium_ii
 arch = X86
-features = fxsr sse sse2
+features = fxsr
 
 cpu = pentium_iii
 arch = X86
-features = fxsr sse sse2
+features = fxsr sse
 
 cpu = pentium_iii_no_xmm_regs
 arch = X86
-features = fxsr sse sse2
+features = fxsr sse
 
 cpu = pentium_m
 arch = X86
@@ -1456,15 +2264,15 @@ features = fxsr sse sse2
 
 cpu = pentium_mmx
 arch = X86
-features = sse sse2
+features = 
 
 cpu = pentium_pro
 arch = X86
-features = sse sse2
+features = 
 
 cpu = pentiumpro
 arch = X86
-features = sse sse2
+features = 
 
 cpu = prescott
 arch = X86
@@ -1528,11 +2336,11 @@ features = cmpxchg16b fxsr lahfsahf pclmulqdq popcnt sse sse2 sse3 sse4.1 sse4.2
 
 cpu = winchip-c6
 arch = X86
-features = sse sse2
+features = 
 
 cpu = winchip2
 arch = X86
-features = sse sse2
+features = 
 
 cpu = x86-64
 arch = X86
@@ -1568,5 +2376,513 @@ features = adx aes avx avx2 bmi1 bmi2 cmpxchg16b f16c fma fxsr lahfsahf lzcnt mo
 
 cpu = znver4
 arch = X86
+features = adx aes avx avx2 avx512bf16 avx512bitalg avx512bw avx512cd avx512dq avx512f avx512ifma avx512vbmi avx512vbmi2 avx512vl avx512vnni avx512vpopcntdq bmi1 bmi2 cmpxchg16b f16c fma fxsr gfni lahfsahf lzcnt movbe pclmulqdq popcnt prfchw rdrand rdseed sha sse sse2 sse3 sse4.1 sse4.2 sse4a ssse3 vaes vpclmulqdq xsave xsavec xsaveopt xsaves
+
+cpu = alderlake
+arch = X86_64
+features = adx aes avx avx2 bmi1 bmi2 cmpxchg16b f16c fma fxsr gfni lahfsahf lzcnt movbe pclmulqdq popcnt prfchw rdrand rdseed sha sse sse2 sse3 sse4.1 sse4.2 ssse3 vaes vpclmulqdq xsave xsavec xsaveopt xsaves
+
+cpu = amdfam10
+arch = X86_64
+features = cmpxchg16b fxsr lahfsahf lzcnt popcnt prfchw sse sse2 sse3 sse4a
+
+cpu = arrowlake
+arch = X86_64
+features = adx aes avx avx2 bmi1 bmi2 cmpxchg16b f16c fma fxsr gfni lahfsahf lzcnt movbe pclmulqdq popcnt prfchw rdrand rdseed sha sse sse2 sse3 sse4.1 sse4.2 ssse3 vaes vpclmulqdq xsave xsavec xsaveopt xsaves
+
+cpu = arrowlake-s
+arch = X86_64
+features = adx aes avx avx2 bmi1 bmi2 cmpxchg16b f16c fma fxsr gfni lahfsahf lzcnt movbe pclmulqdq popcnt prfchw rdrand rdseed sha sse sse2 sse3 sse4.1 sse4.2 ssse3 vaes vpclmulqdq xsave xsavec xsaveopt xsaves
+
+cpu = arrowlake_s
+arch = X86_64
+features = adx aes avx avx2 bmi1 bmi2 cmpxchg16b f16c fma fxsr gfni lahfsahf lzcnt movbe pclmulqdq popcnt prfchw rdrand rdseed sha sse sse2 sse3 sse4.1 sse4.2 ssse3 vaes vpclmulqdq xsave xsavec xsaveopt xsaves
+
+cpu = athlon
+arch = X86_64
+features = sse sse2
+
+cpu = athlon-4
+arch = X86_64
+features = fxsr sse sse2
+
+cpu = athlon-fx
+arch = X86_64
+features = fxsr sse sse2
+
+cpu = athlon-mp
+arch = X86_64
+features = fxsr sse sse2
+
+cpu = athlon-tbird
+arch = X86_64
+features = sse sse2
+
+cpu = athlon-xp
+arch = X86_64
+features = fxsr sse sse2
+
+cpu = athlon64
+arch = X86_64
+features = fxsr sse sse2
+
+cpu = athlon64-sse3
+arch = X86_64
+features = cmpxchg16b fxsr sse sse2 sse3
+
+cpu = atom
+arch = X86_64
+features = cmpxchg16b fxsr lahfsahf movbe sse sse2 sse3 ssse3
+
+cpu = atom_sse4_2
+arch = X86_64
+features = cmpxchg16b fxsr lahfsahf movbe pclmulqdq popcnt prfchw rdrand sse sse2 sse3 sse4.1 sse4.2 ssse3
+
+cpu = atom_sse4_2_movbe
+arch = X86_64
+features = aes cmpxchg16b fxsr lahfsahf movbe pclmulqdq popcnt prfchw rdrand rdseed sha sse sse2 sse3 sse4.1 sse4.2 ssse3 xsave xsavec xsaveopt xsaves
+
+cpu = barcelona
+arch = X86_64
+features = cmpxchg16b fxsr lahfsahf lzcnt popcnt prfchw sse sse2 sse3 sse4a
+
+cpu = bdver1
+arch = X86_64
+features = aes avx cmpxchg16b fxsr lahfsahf lzcnt pclmulqdq popcnt prfchw sse sse2 sse3 sse4.1 sse4.2 sse4a ssse3 xsave
+
+cpu = bdver2
+arch = X86_64
+features = aes avx bmi1 cmpxchg16b f16c fma fxsr lahfsahf lzcnt pclmulqdq popcnt prfchw sse sse2 sse3 sse4.1 sse4.2 sse4a ssse3 tbm xsave
+
+cpu = bdver3
+arch = X86_64
+features = aes avx bmi1 cmpxchg16b f16c fma fxsr lahfsahf lzcnt pclmulqdq popcnt prfchw sse sse2 sse3 sse4.1 sse4.2 sse4a ssse3 tbm xsave xsaveopt
+
+cpu = bdver4
+arch = X86_64
+features = aes avx avx2 bmi1 bmi2 cmpxchg16b f16c fma fxsr lahfsahf lzcnt movbe pclmulqdq popcnt prfchw rdrand sse sse2 sse3 sse4.1 sse4.2 sse4a ssse3 tbm xsave xsaveopt
+
+cpu = bonnell
+arch = X86_64
+features = cmpxchg16b fxsr lahfsahf movbe sse sse2 sse3 ssse3
+
+cpu = broadwell
+arch = X86_64
+features = adx avx avx2 bmi1 bmi2 cmpxchg16b ermsb f16c fma fxsr lahfsahf lzcnt movbe pclmulqdq popcnt prfchw rdrand rdseed sse sse2 sse3 sse4.1 sse4.2 ssse3 xsave xsaveopt
+
+cpu = btver1
+arch = X86_64
+features = cmpxchg16b fxsr lahfsahf lzcnt popcnt prfchw sse sse2 sse3 sse4a ssse3
+
+cpu = btver2
+arch = X86_64
+features = aes avx bmi1 cmpxchg16b f16c fxsr lahfsahf lzcnt movbe pclmulqdq popcnt prfchw sse sse2 sse3 sse4.1 sse4.2 sse4a ssse3 xsave xsaveopt
+
+cpu = c3
+arch = X86_64
+features = sse sse2
+
+cpu = c3-2
+arch = X86_64
+features = fxsr sse sse2
+
+cpu = cannonlake
+arch = X86_64
+features = adx aes avx avx2 avx512bw avx512cd avx512dq avx512f avx512ifma avx512vbmi avx512vl bmi1 bmi2 cmpxchg16b ermsb f16c fma fxsr lahfsahf lzcnt movbe pclmulqdq popcnt prfchw rdrand rdseed sha sse sse2 sse3 sse4.1 sse4.2 ssse3 xsave xsavec xsaveopt xsaves
+
+cpu = cascadelake
+arch = X86_64
+features = adx aes avx avx2 avx512bw avx512cd avx512dq avx512f avx512vl avx512vnni bmi1 bmi2 cmpxchg16b ermsb f16c fma fxsr lahfsahf lzcnt movbe pclmulqdq popcnt prfchw rdrand rdseed sse sse2 sse3 sse4.1 sse4.2 ssse3 xsave xsavec xsaveopt xsaves
+
+cpu = clearwaterforest
+arch = X86_64
+features = adx aes avx avx2 bmi1 bmi2 cmpxchg16b f16c fma fxsr gfni lahfsahf lzcnt movbe pclmulqdq popcnt prfchw rdrand rdseed sha sse sse2 sse3 sse4.1 sse4.2 ssse3 vaes vpclmulqdq xsave xsavec xsaveopt xsaves
+
+cpu = cooperlake
+arch = X86_64
+features = adx aes avx avx2 avx512bf16 avx512bw avx512cd avx512dq avx512f avx512vl avx512vnni bmi1 bmi2 cmpxchg16b ermsb f16c fma fxsr lahfsahf lzcnt movbe pclmulqdq popcnt prfchw rdrand rdseed sse sse2 sse3 sse4.1 sse4.2 ssse3 xsave xsavec xsaveopt xsaves
+
+cpu = core-avx-i
+arch = X86_64
+features = avx cmpxchg16b f16c fxsr lahfsahf pclmulqdq popcnt rdrand sse sse2 sse3 sse4.1 sse4.2 ssse3 xsave xsaveopt
+
+cpu = core-avx2
+arch = X86_64
+features = avx avx2 bmi1 bmi2 cmpxchg16b ermsb f16c fma fxsr lahfsahf lzcnt movbe pclmulqdq popcnt rdrand sse sse2 sse3 sse4.1 sse4.2 ssse3 xsave xsaveopt
+
+cpu = core2
+arch = X86_64
+features = cmpxchg16b fxsr lahfsahf sse sse2 sse3 ssse3
+
+cpu = core_2_duo_sse4_1
+arch = X86_64
+features = cmpxchg16b fxsr lahfsahf sse sse2 sse3 sse4.1 ssse3
+
+cpu = core_2_duo_ssse3
+arch = X86_64
+features = cmpxchg16b fxsr lahfsahf sse sse2 sse3 ssse3
+
+cpu = core_2nd_gen_avx
+arch = X86_64
+features = avx cmpxchg16b fxsr lahfsahf pclmulqdq popcnt sse sse2 sse3 sse4.1 sse4.2 ssse3 xsave xsaveopt
+
+cpu = core_3rd_gen_avx
+arch = X86_64
+features = avx cmpxchg16b f16c fxsr lahfsahf pclmulqdq popcnt rdrand sse sse2 sse3 sse4.1 sse4.2 ssse3 xsave xsaveopt
+
+cpu = core_4th_gen_avx
+arch = X86_64
+features = avx avx2 bmi1 bmi2 cmpxchg16b ermsb f16c fma fxsr lahfsahf lzcnt movbe pclmulqdq popcnt rdrand sse sse2 sse3 sse4.1 sse4.2 ssse3 xsave xsaveopt
+
+cpu = core_4th_gen_avx_tsx
+arch = X86_64
+features = avx avx2 bmi1 bmi2 cmpxchg16b ermsb f16c fma fxsr lahfsahf lzcnt movbe pclmulqdq popcnt rdrand sse sse2 sse3 sse4.1 sse4.2 ssse3 xsave xsaveopt
+
+cpu = core_5th_gen_avx
+arch = X86_64
+features = adx avx avx2 bmi1 bmi2 cmpxchg16b ermsb f16c fma fxsr lahfsahf lzcnt movbe pclmulqdq popcnt prfchw rdrand rdseed sse sse2 sse3 sse4.1 sse4.2 ssse3 xsave xsaveopt
+
+cpu = core_5th_gen_avx_tsx
+arch = X86_64
+features = adx avx avx2 bmi1 bmi2 cmpxchg16b ermsb f16c fma fxsr lahfsahf lzcnt movbe pclmulqdq popcnt prfchw rdrand rdseed sse sse2 sse3 sse4.1 sse4.2 ssse3 xsave xsaveopt
+
+cpu = core_aes_pclmulqdq
+arch = X86_64
+features = cmpxchg16b fxsr lahfsahf pclmulqdq popcnt sse sse2 sse3 sse4.1 sse4.2 ssse3
+
+cpu = core_i7_sse4_2
+arch = X86_64
+features = cmpxchg16b fxsr lahfsahf popcnt sse sse2 sse3 sse4.1 sse4.2 ssse3
+
+cpu = corei7
+arch = X86_64
+features = cmpxchg16b fxsr lahfsahf popcnt sse sse2 sse3 sse4.1 sse4.2 ssse3
+
+cpu = corei7-avx
+arch = X86_64
+features = avx cmpxchg16b fxsr lahfsahf pclmulqdq popcnt sse sse2 sse3 sse4.1 sse4.2 ssse3 xsave xsaveopt
+
+cpu = emeraldrapids
+arch = X86_64
+features = adx aes avx avx2 avx512bf16 avx512bitalg avx512bw avx512cd avx512dq avx512f avx512fp16 avx512ifma avx512vbmi avx512vbmi2 avx512vl avx512vnni avx512vpopcntdq bmi1 bmi2 cmpxchg16b ermsb f16c fma fxsr gfni lahfsahf lzcnt movbe pclmulqdq popcnt prfchw rdrand rdseed sha sse sse2 sse3 sse4.1 sse4.2 ssse3 vaes vpclmulqdq xsave xsavec xsaveopt xsaves
+
+cpu = generic
+arch = X86_64
+features = sse sse2
+
+cpu = geode
+arch = X86_64
+features = sse sse2
+
+cpu = goldmont
+arch = X86_64
+features = aes cmpxchg16b fxsr lahfsahf movbe pclmulqdq popcnt prfchw rdrand rdseed sha sse sse2 sse3 sse4.1 sse4.2 ssse3 xsave xsavec xsaveopt xsaves
+
+cpu = goldmont-plus
+arch = X86_64
+features = aes cmpxchg16b fxsr lahfsahf movbe pclmulqdq popcnt prfchw rdrand rdseed sha sse sse2 sse3 sse4.1 sse4.2 ssse3 xsave xsavec xsaveopt xsaves
+
+cpu = goldmont_plus
+arch = X86_64
+features = aes cmpxchg16b fxsr lahfsahf movbe pclmulqdq popcnt prfchw rdrand rdseed sha sse sse2 sse3 sse4.1 sse4.2 ssse3 xsave xsavec xsaveopt xsaves
+
+cpu = gracemont
+arch = X86_64
+features = adx aes avx avx2 bmi1 bmi2 cmpxchg16b f16c fma fxsr gfni lahfsahf lzcnt movbe pclmulqdq popcnt prfchw rdrand rdseed sha sse sse2 sse3 sse4.1 sse4.2 ssse3 vaes vpclmulqdq xsave xsavec xsaveopt xsaves
+
+cpu = grandridge
+arch = X86_64
+features = adx aes avx avx2 bmi1 bmi2 cmpxchg16b f16c fma fxsr gfni lahfsahf lzcnt movbe pclmulqdq popcnt prfchw rdrand rdseed sha sse sse2 sse3 sse4.1 sse4.2 ssse3 vaes vpclmulqdq xsave xsavec xsaveopt xsaves
+
+cpu = graniterapids
+arch = X86_64
+features = adx aes avx avx2 avx512bf16 avx512bitalg avx512bw avx512cd avx512dq avx512f avx512fp16 avx512ifma avx512vbmi avx512vbmi2 avx512vl avx512vnni avx512vpopcntdq bmi1 bmi2 cmpxchg16b ermsb f16c fma fxsr gfni lahfsahf lzcnt movbe pclmulqdq popcnt prfchw rdrand rdseed sha sse sse2 sse3 sse4.1 sse4.2 ssse3 vaes vpclmulqdq xsave xsavec xsaveopt xsaves
+
+cpu = graniterapids-d
+arch = X86_64
+features = adx aes avx avx2 avx512bf16 avx512bitalg avx512bw avx512cd avx512dq avx512f avx512fp16 avx512ifma avx512vbmi avx512vbmi2 avx512vl avx512vnni avx512vpopcntdq bmi1 bmi2 cmpxchg16b ermsb f16c fma fxsr gfni lahfsahf lzcnt movbe pclmulqdq popcnt prfchw rdrand rdseed sha sse sse2 sse3 sse4.1 sse4.2 ssse3 vaes vpclmulqdq xsave xsavec xsaveopt xsaves
+
+cpu = graniterapids_d
+arch = X86_64
+features = adx aes avx avx2 avx512bf16 avx512bitalg avx512bw avx512cd avx512dq avx512f avx512fp16 avx512ifma avx512vbmi avx512vbmi2 avx512vl avx512vnni avx512vpopcntdq bmi1 bmi2 cmpxchg16b ermsb f16c fma fxsr gfni lahfsahf lzcnt movbe pclmulqdq popcnt prfchw rdrand rdseed sha sse sse2 sse3 sse4.1 sse4.2 ssse3 vaes vpclmulqdq xsave xsavec xsaveopt xsaves
+
+cpu = haswell
+arch = X86_64
+features = avx avx2 bmi1 bmi2 cmpxchg16b ermsb f16c fma fxsr lahfsahf lzcnt movbe pclmulqdq popcnt rdrand sse sse2 sse3 sse4.1 sse4.2 ssse3 xsave xsaveopt
+
+cpu = i386
+arch = X86_64
+features = sse sse2
+
+cpu = i486
+arch = X86_64
+features = sse sse2
+
+cpu = i586
+arch = X86_64
+features = sse sse2
+
+cpu = i686
+arch = X86_64
+features = sse sse2
+
+cpu = icelake-client
+arch = X86_64
+features = adx aes avx avx2 avx512bitalg avx512bw avx512cd avx512dq avx512f avx512ifma avx512vbmi avx512vbmi2 avx512vl avx512vnni avx512vpopcntdq bmi1 bmi2 cmpxchg16b ermsb f16c fma fxsr gfni lahfsahf lzcnt movbe pclmulqdq popcnt prfchw rdrand rdseed sha sse sse2 sse3 sse4.1 sse4.2 ssse3 vaes vpclmulqdq xsave xsavec xsaveopt xsaves
+
+cpu = icelake-server
+arch = X86_64
+features = adx aes avx avx2 avx512bitalg avx512bw avx512cd avx512dq avx512f avx512ifma avx512vbmi avx512vbmi2 avx512vl avx512vnni avx512vpopcntdq bmi1 bmi2 cmpxchg16b ermsb f16c fma fxsr gfni lahfsahf lzcnt movbe pclmulqdq popcnt prfchw rdrand rdseed sha sse sse2 sse3 sse4.1 sse4.2 ssse3 vaes vpclmulqdq xsave xsavec xsaveopt xsaves
+
+cpu = icelake_client
+arch = X86_64
+features = adx aes avx avx2 avx512bitalg avx512bw avx512cd avx512dq avx512f avx512ifma avx512vbmi avx512vbmi2 avx512vl avx512vnni avx512vpopcntdq bmi1 bmi2 cmpxchg16b ermsb f16c fma fxsr gfni lahfsahf lzcnt movbe pclmulqdq popcnt prfchw rdrand rdseed sha sse sse2 sse3 sse4.1 sse4.2 ssse3 vaes vpclmulqdq xsave xsavec xsaveopt xsaves
+
+cpu = icelake_server
+arch = X86_64
+features = adx aes avx avx2 avx512bitalg avx512bw avx512cd avx512dq avx512f avx512ifma avx512vbmi avx512vbmi2 avx512vl avx512vnni avx512vpopcntdq bmi1 bmi2 cmpxchg16b ermsb f16c fma fxsr gfni lahfsahf lzcnt movbe pclmulqdq popcnt prfchw rdrand rdseed sha sse sse2 sse3 sse4.1 sse4.2 ssse3 vaes vpclmulqdq xsave xsavec xsaveopt xsaves
+
+cpu = ivybridge
+arch = X86_64
+features = avx cmpxchg16b f16c fxsr lahfsahf pclmulqdq popcnt rdrand sse sse2 sse3 sse4.1 sse4.2 ssse3 xsave xsaveopt
+
+cpu = k6
+arch = X86_64
+features = sse sse2
+
+cpu = k6-2
+arch = X86_64
+features = sse sse2
+
+cpu = k6-3
+arch = X86_64
+features = sse sse2
+
+cpu = k8
+arch = X86_64
+features = fxsr sse sse2
+
+cpu = k8-sse3
+arch = X86_64
+features = cmpxchg16b fxsr sse sse2 sse3
+
+cpu = knl
+arch = X86_64
+features = adx aes avx avx2 avx512cd avx512er avx512f avx512pf bmi1 bmi2 cmpxchg16b f16c fma fxsr lahfsahf lzcnt movbe pclmulqdq popcnt prfchw rdrand rdseed sse sse2 sse3 sse4.1 sse4.2 ssse3 xsave xsaveopt
+
+cpu = knm
+arch = X86_64
+features = adx aes avx avx2 avx512cd avx512er avx512f avx512pf avx512vpopcntdq bmi1 bmi2 cmpxchg16b f16c fma fxsr lahfsahf lzcnt movbe pclmulqdq popcnt prfchw rdrand rdseed sse sse2 sse3 sse4.1 sse4.2 ssse3 xsave xsaveopt
+
+cpu = lakemont
+arch = X86_64
+features = sse sse2
+
+cpu = lunarlake
+arch = X86_64
+features = adx aes avx avx2 bmi1 bmi2 cmpxchg16b f16c fma fxsr gfni lahfsahf lzcnt movbe pclmulqdq popcnt prfchw rdrand rdseed sha sse sse2 sse3 sse4.1 sse4.2 ssse3 vaes vpclmulqdq xsave xsavec xsaveopt xsaves
+
+cpu = meteorlake
+arch = X86_64
+features = adx aes avx avx2 bmi1 bmi2 cmpxchg16b f16c fma fxsr gfni lahfsahf lzcnt movbe pclmulqdq popcnt prfchw rdrand rdseed sha sse sse2 sse3 sse4.1 sse4.2 ssse3 vaes vpclmulqdq xsave xsavec xsaveopt xsaves
+
+cpu = mic_avx512
+arch = X86_64
+features = adx aes avx avx2 avx512cd avx512er avx512f avx512pf bmi1 bmi2 cmpxchg16b f16c fma fxsr lahfsahf lzcnt movbe pclmulqdq popcnt prfchw rdrand rdseed sse sse2 sse3 sse4.1 sse4.2 ssse3 xsave xsaveopt
+
+cpu = nehalem
+arch = X86_64
+features = cmpxchg16b fxsr lahfsahf popcnt sse sse2 sse3 sse4.1 sse4.2 ssse3
+
+cpu = nocona
+arch = X86_64
+features = cmpxchg16b fxsr sse sse2 sse3
+
+cpu = opteron
+arch = X86_64
+features = fxsr sse sse2
+
+cpu = opteron-sse3
+arch = X86_64
+features = cmpxchg16b fxsr sse sse2 sse3
+
+cpu = pantherlake
+arch = X86_64
+features = adx aes avx avx2 bmi1 bmi2 cmpxchg16b f16c fma fxsr gfni lahfsahf lzcnt movbe pclmulqdq popcnt prfchw rdrand rdseed sha sse sse2 sse3 sse4.1 sse4.2 ssse3 vaes vpclmulqdq xsave xsavec xsaveopt xsaves
+
+cpu = penryn
+arch = X86_64
+features = cmpxchg16b fxsr lahfsahf sse sse2 sse3 sse4.1 ssse3
+
+cpu = pentium
+arch = X86_64
+features = sse sse2
+
+cpu = pentium-m
+arch = X86_64
+features = fxsr sse sse2
+
+cpu = pentium-mmx
+arch = X86_64
+features = sse sse2
+
+cpu = pentium2
+arch = X86_64
+features = fxsr sse sse2
+
+cpu = pentium3
+arch = X86_64
+features = fxsr sse sse2
+
+cpu = pentium3m
+arch = X86_64
+features = fxsr sse sse2
+
+cpu = pentium4
+arch = X86_64
+features = fxsr sse sse2
+
+cpu = pentium4m
+arch = X86_64
+features = fxsr sse sse2
+
+cpu = pentium_4
+arch = X86_64
+features = fxsr sse sse2
+
+cpu = pentium_4_sse3
+arch = X86_64
+features = fxsr sse sse2 sse3
+
+cpu = pentium_ii
+arch = X86_64
+features = fxsr sse sse2
+
+cpu = pentium_iii
+arch = X86_64
+features = fxsr sse sse2
+
+cpu = pentium_iii_no_xmm_regs
+arch = X86_64
+features = fxsr sse sse2
+
+cpu = pentium_m
+arch = X86_64
+features = fxsr sse sse2
+
+cpu = pentium_mmx
+arch = X86_64
+features = sse sse2
+
+cpu = pentium_pro
+arch = X86_64
+features = sse sse2
+
+cpu = pentiumpro
+arch = X86_64
+features = sse sse2
+
+cpu = prescott
+arch = X86_64
+features = fxsr sse sse2 sse3
+
+cpu = raptorlake
+arch = X86_64
+features = adx aes avx avx2 bmi1 bmi2 cmpxchg16b f16c fma fxsr gfni lahfsahf lzcnt movbe pclmulqdq popcnt prfchw rdrand rdseed sha sse sse2 sse3 sse4.1 sse4.2 ssse3 vaes vpclmulqdq xsave xsavec xsaveopt xsaves
+
+cpu = rocketlake
+arch = X86_64
+features = adx aes avx avx2 avx512bitalg avx512bw avx512cd avx512dq avx512f avx512ifma avx512vbmi avx512vbmi2 avx512vl avx512vnni avx512vpopcntdq bmi1 bmi2 cmpxchg16b ermsb f16c fma fxsr gfni lahfsahf lzcnt movbe pclmulqdq popcnt prfchw rdrand rdseed sha sse sse2 sse3 sse4.1 sse4.2 ssse3 vaes vpclmulqdq xsave xsavec xsaveopt xsaves
+
+cpu = sandybridge
+arch = X86_64
+features = avx cmpxchg16b fxsr lahfsahf pclmulqdq popcnt sse sse2 sse3 sse4.1 sse4.2 ssse3 xsave xsaveopt
+
+cpu = sapphirerapids
+arch = X86_64
+features = adx aes avx avx2 avx512bf16 avx512bitalg avx512bw avx512cd avx512dq avx512f avx512fp16 avx512ifma avx512vbmi avx512vbmi2 avx512vl avx512vnni avx512vpopcntdq bmi1 bmi2 cmpxchg16b ermsb f16c fma fxsr gfni lahfsahf lzcnt movbe pclmulqdq popcnt prfchw rdrand rdseed sha sse sse2 sse3 sse4.1 sse4.2 ssse3 vaes vpclmulqdq xsave xsavec xsaveopt xsaves
+
+cpu = sierraforest
+arch = X86_64
+features = adx aes avx avx2 bmi1 bmi2 cmpxchg16b f16c fma fxsr gfni lahfsahf lzcnt movbe pclmulqdq popcnt prfchw rdrand rdseed sha sse sse2 sse3 sse4.1 sse4.2 ssse3 vaes vpclmulqdq xsave xsavec xsaveopt xsaves
+
+cpu = silvermont
+arch = X86_64
+features = cmpxchg16b fxsr lahfsahf movbe pclmulqdq popcnt prfchw rdrand sse sse2 sse3 sse4.1 sse4.2 ssse3
+
+cpu = skx
+arch = X86_64
+features = adx aes avx avx2 avx512bw avx512cd avx512dq avx512f avx512vl bmi1 bmi2 cmpxchg16b ermsb f16c fma fxsr lahfsahf lzcnt movbe pclmulqdq popcnt prfchw rdrand rdseed sse sse2 sse3 sse4.1 sse4.2 ssse3 xsave xsavec xsaveopt xsaves
+
+cpu = skylake
+arch = X86_64
+features = adx aes avx avx2 bmi1 bmi2 cmpxchg16b ermsb f16c fma fxsr lahfsahf lzcnt movbe pclmulqdq popcnt prfchw rdrand rdseed sse sse2 sse3 sse4.1 sse4.2 ssse3 xsave xsavec xsaveopt xsaves
+
+cpu = skylake-avx512
+arch = X86_64
+features = adx aes avx avx2 avx512bw avx512cd avx512dq avx512f avx512vl bmi1 bmi2 cmpxchg16b ermsb f16c fma fxsr lahfsahf lzcnt movbe pclmulqdq popcnt prfchw rdrand rdseed sse sse2 sse3 sse4.1 sse4.2 ssse3 xsave xsavec xsaveopt xsaves
+
+cpu = skylake_avx512
+arch = X86_64
+features = adx aes avx avx2 avx512bw avx512cd avx512dq avx512f avx512vl bmi1 bmi2 cmpxchg16b ermsb f16c fma fxsr lahfsahf lzcnt movbe pclmulqdq popcnt prfchw rdrand rdseed sse sse2 sse3 sse4.1 sse4.2 ssse3 xsave xsavec xsaveopt xsaves
+
+cpu = slm
+arch = X86_64
+features = cmpxchg16b fxsr lahfsahf movbe pclmulqdq popcnt prfchw rdrand sse sse2 sse3 sse4.1 sse4.2 ssse3
+
+cpu = tigerlake
+arch = X86_64
+features = adx aes avx avx2 avx512bitalg avx512bw avx512cd avx512dq avx512f avx512ifma avx512vbmi avx512vbmi2 avx512vl avx512vnni avx512vp2intersect avx512vpopcntdq bmi1 bmi2 cmpxchg16b ermsb f16c fma fxsr gfni lahfsahf lzcnt movbe pclmulqdq popcnt prfchw rdrand rdseed sha sse sse2 sse3 sse4.1 sse4.2 ssse3 vaes vpclmulqdq xsave xsavec xsaveopt xsaves
+
+cpu = tremont
+arch = X86_64
+features = aes cmpxchg16b fxsr gfni lahfsahf movbe pclmulqdq popcnt prfchw rdrand rdseed sha sse sse2 sse3 sse4.1 sse4.2 ssse3 xsave xsavec xsaveopt xsaves
+
+cpu = westmere
+arch = X86_64
+features = cmpxchg16b fxsr lahfsahf pclmulqdq popcnt sse sse2 sse3 sse4.1 sse4.2 ssse3
+
+cpu = winchip-c6
+arch = X86_64
+features = sse sse2
+
+cpu = winchip2
+arch = X86_64
+features = sse sse2
+
+cpu = x86-64
+arch = X86_64
+features = fxsr sse sse2
+
+cpu = x86-64-v2
+arch = X86_64
+features = cmpxchg16b fxsr lahfsahf popcnt sse sse2 sse3 sse4.1 sse4.2 ssse3
+
+cpu = x86-64-v3
+arch = X86_64
+features = avx avx2 bmi1 bmi2 cmpxchg16b f16c fma fxsr lahfsahf lzcnt movbe popcnt sse sse2 sse3 sse4.1 sse4.2 ssse3 xsave
+
+cpu = x86-64-v4
+arch = X86_64
+features = avx avx2 avx512bw avx512cd avx512dq avx512f avx512vl bmi1 bmi2 cmpxchg16b f16c fma fxsr lahfsahf lzcnt movbe popcnt sse sse2 sse3 sse4.1 sse4.2 ssse3 xsave
+
+cpu = yonah
+arch = X86_64
+features = fxsr sse sse2 sse3
+
+cpu = znver1
+arch = X86_64
+features = adx aes avx avx2 bmi1 bmi2 cmpxchg16b f16c fma fxsr lahfsahf lzcnt movbe pclmulqdq popcnt prfchw rdrand rdseed sha sse sse2 sse3 sse4.1 sse4.2 sse4a ssse3 xsave xsavec xsaveopt xsaves
+
+cpu = znver2
+arch = X86_64
+features = adx aes avx avx2 bmi1 bmi2 cmpxchg16b f16c fma fxsr lahfsahf lzcnt movbe pclmulqdq popcnt prfchw rdrand rdseed sha sse sse2 sse3 sse4.1 sse4.2 sse4a ssse3 xsave xsavec xsaveopt xsaves
+
+cpu = znver3
+arch = X86_64
+features = adx aes avx avx2 bmi1 bmi2 cmpxchg16b f16c fma fxsr lahfsahf lzcnt movbe pclmulqdq popcnt prfchw rdrand rdseed sha sse sse2 sse3 sse4.1 sse4.2 sse4a ssse3 vaes vpclmulqdq xsave xsavec xsaveopt xsaves
+
+cpu = znver4
+arch = X86_64
 features = adx aes avx avx2 avx512bf16 avx512bitalg avx512bw avx512cd avx512dq avx512f avx512ifma avx512vbmi avx512vbmi2 avx512vl avx512vnni avx512vpopcntdq bmi1 bmi2 cmpxchg16b f16c fma fxsr gfni lahfsahf lzcnt movbe pclmulqdq popcnt prfchw rdrand rdseed sha sse sse2 sse3 sse4.1 sse4.2 sse4a ssse3 vaes vpclmulqdq xsave xsavec xsaveopt xsaves
 
