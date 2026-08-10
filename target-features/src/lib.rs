@@ -67,9 +67,14 @@ macro_rules! architectures {
 }
 
 impl Architecture {
-    /// Is arm or aarch64
+    /// Is arm, aarch64, or arm64ec
     pub const fn is_arm_family(&self) -> bool {
-        matches!(self, Self::Arm | Self::AArch64)
+        matches!(self, Self::Arm | Self::AArch64 | Self::Arm64EC)
+    }
+
+    /// Is loongarch32 or loongarch64
+    pub const fn is_loongarch_family(&self) -> bool {
+        matches!(self, Self::LoongArch32 | Self::LoongArch64)
     }
 
     /// Is mips or mips64
@@ -101,10 +106,12 @@ impl Architecture {
 architectures! {
     "arm": Arm,
     "aarch64": AArch64,
+    "arm64ec": Arm64EC,
     "bpf": Bpf,
     "hexagon": Hexagon,
     "mips": Mips,
     "mips64": Mips64,
+    "loongarch32": LoongArch32,
     "loongarch64": LoongArch64,
     "nvptx": Nvptx,
     "nvptx64": Nvptx64,

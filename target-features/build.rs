@@ -123,22 +123,14 @@ fn main() -> Result<(), Box<dyn Error>> {
     let build_features = std::env::var("CARGO_CFG_TARGET_FEATURE")
         .map(|x| x.split(',').map(ToString::to_string).collect())
         .unwrap_or_else(|_| Vec::new());
-    let build_arch = match std::env::var("CARGO_CFG_TARGET_ARCH").unwrap().as_str() {
-        "arm" => "Arm",
-        "aarch64" => "AArch64",
-        "bpf" => "Bpf",
-        "hexagon" => "Hexagon",
-        "mips" | "mips64" => "Mips",
-        "powerpc" | "powerpc64" => "PowerPC",
-        "riscv32" | "riscv64" => "RiscV",
-        "wasm32" | "wasm64" => "Wasm",
-        "x86" | "x86_64" => "X86",
-        _ => "Unsupported",
-    };
+    let build_arch = std::env::var("CARGO_CFG_TARGET_ARCH").unwrap();
     writeln!(module, "/// The target of this build.")?;
     writeln!(module, "#[allow(clippy::let_and_return)]")?;
     writeln!(module, "pub const BUILD_TARGET: Target = {{")?;
-    writeln!(module, "    let arch = Architecture::{build_arch};")?;
+    writeln!(
+        module,
+        "    let arch = Architecture::from_str({build_arch:?});"
+    )?;
     writeln!(module, "    let target = Target::new(arch);")?;
     for feature in build_features {
         writeln!(module, "    let target = if let Ok(feature) = Feature::new(arch, \"{feature}\") {{ target.with_feature(feature) }} else {{ target }};")?;

@@ -1,3 +1,6 @@
 #!/bin/sh
+set -eu
+
+# Requires `rustup component add rustc-dev --toolchain nightly`.
 cargo +nightly run --manifest-path list-target-features/Cargo.toml
-mv *.txt target-features/
+mv rustc-version.txt target-cpus.txt target-features.txt target-features/

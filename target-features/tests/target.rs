@@ -21,6 +21,7 @@ fn cpu() {
             "sse4.1",
             "sse4.2",
             "ssse3",
+            "x87",
         ]
     );
 }
@@ -33,4 +34,21 @@ fn unknown_cpu() {
 #[test]
 fn unknown_feature() {
     let _ = Feature::new(Architecture::X86, "this-doesn't-exist").unwrap_err();
+}
+
+#[test]
+fn runtime_detection() {
+    for (architecture, feature) in [
+        (Architecture::AArch64, "cssc"),
+        (Architecture::Arm64EC, "cssc"),
+        (Architecture::LoongArch32, "ual"),
+        (Architecture::Mips64, "msa"),
+        (Architecture::RiscV64, "v"),
+        (Architecture::S390X, "concurrent-functions"),
+        (Architecture::X86_64, "amx-tile"),
+    ] {
+        assert!(Feature::new(architecture, feature)
+            .unwrap()
+            .can_detect_at_runtime());
+    }
 }
