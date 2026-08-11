@@ -6,20 +6,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [0.2.0] - 2026-08-10
+## [0.2.0] - 2026-09-05
 ### Added
-- Added Arm64EC, LoongArch32/64, NVPTX/64, S390X, and SPARC/64 architectures
-- Added `Feature::can_detect_at_runtime` to report runtime detection availability
-- Added architecture name and family queries
+- Added support for Arm64EC, LoongArch32/64, NVPTX64, S390X, and SPARC/64 compilation targets
 
 ### Changed
-- Split MIPS, PowerPC, RISC-V, WebAssembly, and x86 into 32- and 64-bit variants
-- Made `Architecture` non-exhaustive
-- Renamed `CURRENT_TARGET` to `BUILD_TARGET`
-- Generated feature implications from rustc's target-feature graph
+- Redesigned the API around `TargetFeatures`. This release is not API-compatible with version 0.1
+- Feature sets are now created using architecture-specific constants or the `target_features!` macro
+- `TargetFeatures::enabled_for_target()` replaces `CURRENT_TARGET`
+- Improved `suggested_simd_width` for additional architectures and target features
+- Raised the minimum supported Rust version to 1.82
 
-### Fixed
-- Improved `suggested_simd_width`
+### Removed
+- Removed support for describing other architectures and specific CPUs
 
 ## [0.1.6] - 2024-03-15
 ### Changed

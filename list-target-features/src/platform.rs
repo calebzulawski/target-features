@@ -5,18 +5,12 @@ use std::process::{Command, Stdio};
 
 use rustc_target::spec::{Target, TargetTuple};
 
-use crate::{architectures::ArchitectureSpec, runtime_detection};
-
-pub(crate) struct Cpu {
-    pub(crate) cpu: String,
-    pub(crate) features: Vec<String>,
-}
+use crate::architectures::ArchitectureSpec;
 
 pub(crate) struct Feature {
     pub(crate) feature: String,
     pub(crate) description: String,
     pub(crate) implies: Vec<String>,
-    pub(crate) runtime: bool,
 }
 
 fn listed_features(triple: &str) -> Vec<(String, String)> {
@@ -42,68 +36,6 @@ fn listed_features(triple: &str) -> Vec<(String, String)> {
     features
 }
 
-fn cpu_features(
-    triple: &str,
-    target_cpu: &str,
-    listed_features: &[(String, String)],
-) -> Vec<String> {
-    let output = Command::new("rustc")
-        .args(["+nightly", "--print", "cfg", "--target", triple])
-        .arg(format!("-Ctarget-cpu={}", target_cpu))
-        .env("PATH", std::env::var("PATH").unwrap())
-        .stderr(Stdio::inherit())
-        .output()
-        .unwrap();
-
-    assert!(output.status.success());
-
-    let mut features = std::str::from_utf8(&output.stdout)
-        .unwrap()
-        .lines()
-        .filter_map(|s| {
-            s.strip_prefix("target_feature=\"")
-                .and_then(|s| s.strip_suffix('"'))
-                .map(ToString::to_string)
-        })
-        .collect::<Vec<_>>();
-    features.retain(|feature| listed_features.iter().any(|(listed, _)| listed == feature));
-    features
-}
-
-pub(crate) fn cpus(architecture: &ArchitectureSpec) -> Vec<Cpu> {
-    let triple = architecture.triple;
-    let listed_features = listed_features(triple);
-    let output = Command::new("rustc")
-        .args(["+nightly", "--print", "target-cpus", "--target", triple])
-        .env("PATH", std::env::var("PATH").unwrap())
-        .stderr(Stdio::inherit())
-        .output()
-        .unwrap();
-
-    assert!(output.status.success());
-
-    let mut cpus = Vec::new();
-    for line in std::str::from_utf8(&output.stdout).unwrap().lines().skip(1) {
-        let cpu = line.trim().split(' ').next().unwrap().trim().to_string();
-        if cpu.starts_with("native") {
-            continue;
-        }
-        if cpu.is_empty() {
-            break;
-        }
-
-        if cpu == "mips5" {
-            continue; // unsupported by LLVM
-        }
-
-        let features = cpu_features(triple, &cpu, &listed_features);
-
-        cpus.push(Cpu { cpu, features })
-    }
-
-    cpus
-}
-
 pub(crate) fn features(architecture: &ArchitectureSpec) -> Vec<Feature> {
     let triple = architecture.triple;
     let listed_features = listed_features(triple);
@@ -111,28 +43,42 @@ pub(crate) fn features(architecture: &ArchitectureSpec) -> Vec<Feature> {
     let target_features = target.rust_target_features_map();
 
     let make_feature = |feature: &str, description: &str| {
-        let mut implies = if target_features.contains_key(feature) {
-            target
-                .implied_target_features(feature, &target_features)
+        let mut implies = Vec::new();
+        if target_features.contains_key(feature) {
+            let mut closure = target.implied_target_features(feature, &target_features);
+
+            // Tied features must always be enabled and disabled together. Add
+            // the complete implication closure of every member in a matching
+            // tied group, repeating in case groups ever overlap.
+            loop {
+                let old_len = closure.len();
+                for tied in target.tied_target_features() {
+                    if tied.iter().any(|tied| closure.contains(tied)) {
+                        for tied in *tied {
+                            closure.extend(target.implied_target_features(tied, &target_features));
+                        }
+                    }
+                }
+                if closure.len() == old_len {
+                    break;
+                }
+            }
+
+            implies = closure
                 .into_iter()
                 .filter(|implied| {
                     *implied != feature
                         && listed_features.iter().any(|(listed, _)| listed == *implied)
                 })
                 .map(ToString::to_string)
-                .collect::<Vec<_>>()
-        } else {
-            Vec::new()
-        };
+                .collect();
+        }
         implies.sort();
-
-        let runtime = runtime_detection::detect(architecture.runtime_detection, triple, feature);
 
         Feature {
             feature: feature.to_string(),
             description: description.to_string(),
             implies,
-            runtime,
         }
     };
 

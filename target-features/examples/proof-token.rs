@@ -1,10 +1,10 @@
-// This example demonstrates using `Target` to create a "proof token type", a token that
+// This example demonstrates using `TargetFeatures` to create a "proof token type", a token that
 // demonstrates that particular target features have already been detected, and that those features
 // can be used safely.
 
 #![allow(unused, unused_macros, unused_imports)]
 
-use target_features::Target;
+use target_features::TargetFeatures;
 
 /// Make sure proof tokens can't be improperly constructed
 mod unconstructible {
@@ -23,8 +23,8 @@ use unconstructible::Unconstructible;
 /// The type must be implemented such that it's impossible to safely construct without ensuring the
 /// specified target features are supported.
 unsafe trait Proof: Sized {
-    /// The proven target
-    const TARGET: Target;
+    /// The proven target features
+    const TARGET: TargetFeatures;
 
     /// Detect the support for the target features
     fn detect() -> Option<Self>;
@@ -43,7 +43,9 @@ macro_rules! make_target_proof {
 
         unsafe impl Proof for $proof {
             // Build on the already-known target features
-            const TARGET: Target = target_features::BUILD_TARGET$(.with_feature_str($feature))*;
+            const TARGET: TargetFeatures =
+                TargetFeatures::enabled_for_target()
+                    .with(target_features::target_features!($($feature),*));
 
             fn detect() -> Option<Self> {
                 if true $(&& is_x86_feature_detected!($feature))* {
@@ -71,7 +73,7 @@ fn safe_avx_fn<P: Proof>(_: P) {
     // Future improvements to const generics might make it possible to assert this at compile time.
     // Since P::TARGET is const, this assert disappears if the required features are present.
     assert!(
-        P::TARGET.supports_feature_str("avx"),
+        P::TARGET.contains(target_features::x86_64::AVX),
         "avx feature not supported"
     );
     unsafe { unsafe_avx_fn() }

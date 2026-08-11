@@ -1,133 +1,93 @@
-use crate::Architecture;
+#[cfg(target_arch = "aarch64")]
+use crate::aarch64 as features;
+#[cfg(target_arch = "arm")]
+use crate::arm as features;
+#[cfg(target_arch = "arm64ec")]
+use crate::arm64ec as features;
+#[cfg(target_arch = "hexagon")]
+use crate::hexagon as features;
+#[cfg(target_arch = "loongarch32")]
+use crate::loongarch32 as features;
+#[cfg(target_arch = "loongarch64")]
+use crate::loongarch64 as features;
+#[cfg(target_arch = "mips")]
+use crate::mips as features;
+#[cfg(target_arch = "mips64")]
+use crate::mips64 as features;
+#[cfg(target_arch = "powerpc")]
+use crate::powerpc as features;
+#[cfg(target_arch = "powerpc64")]
+use crate::powerpc64 as features;
+#[cfg(target_arch = "riscv32")]
+use crate::riscv32 as features;
+#[cfg(target_arch = "riscv64")]
+use crate::riscv64 as features;
+#[cfg(target_arch = "s390x")]
+use crate::s390x as features;
+#[cfg(target_arch = "wasm32")]
+use crate::wasm32 as features;
+#[cfg(target_arch = "wasm64")]
+use crate::wasm64 as features;
+#[cfg(target_arch = "x86")]
+use crate::x86 as features;
+#[cfg(target_arch = "x86_64")]
+use crate::x86_64 as features;
 
 mod sealed {
-    pub trait SealedSimdType {}
+    pub trait SealedSimdElement {}
 }
 
 #[doc(hidden)]
-pub enum SimdTypeImpl {
+pub enum SimdElementImpl {
     Float32,
     Float64,
     Other,
 }
 
-/// Types which can be SIMD vector elements.
-pub trait SimdType: sealed::SealedSimdType {
+/// Types that can be elements of SIMD vectors.
+pub trait SimdElement: sealed::SealedSimdElement {
     #[doc(hidden)]
-    const IMPL: SimdTypeImpl;
+    const IMPL: SimdElementImpl;
 }
 
-impl sealed::SealedSimdType for u8 {}
-impl SimdType for u8 {
-    const IMPL: SimdTypeImpl = SimdTypeImpl::Other;
+macro_rules! impl_simd_element {
+    ($impl:ident: $($ty:ty),* $(,)?) => {
+        $(
+            impl sealed::SealedSimdElement for $ty {}
+            impl SimdElement for $ty {
+                const IMPL: SimdElementImpl = SimdElementImpl::$impl;
+            }
+        )*
+    };
 }
 
-impl sealed::SealedSimdType for u16 {}
-impl SimdType for u16 {
-    const IMPL: SimdTypeImpl = SimdTypeImpl::Other;
+impl_simd_element!(Other: u8, u16, u32, u64, usize, i8, i16, i32, i64, isize);
+impl_simd_element!(Float32: f32);
+impl_simd_element!(Float64: f64);
+
+impl<T> sealed::SealedSimdElement for *const T {}
+impl<T> SimdElement for *const T {
+    const IMPL: SimdElementImpl = SimdElementImpl::Other;
 }
 
-impl sealed::SealedSimdType for u32 {}
-impl SimdType for u32 {
-    const IMPL: SimdTypeImpl = SimdTypeImpl::Other;
+impl<T> sealed::SealedSimdElement for *mut T {}
+impl<T> SimdElement for *mut T {
+    const IMPL: SimdElementImpl = SimdElementImpl::Other;
 }
 
-impl sealed::SealedSimdType for u64 {}
-impl SimdType for u64 {
-    const IMPL: SimdTypeImpl = SimdTypeImpl::Other;
-}
-
-impl sealed::SealedSimdType for usize {}
-impl SimdType for usize {
-    const IMPL: SimdTypeImpl = SimdTypeImpl::Other;
-}
-
-impl sealed::SealedSimdType for i8 {}
-impl SimdType for i8 {
-    const IMPL: SimdTypeImpl = SimdTypeImpl::Other;
-}
-
-impl sealed::SealedSimdType for i16 {}
-impl SimdType for i16 {
-    const IMPL: SimdTypeImpl = SimdTypeImpl::Other;
-}
-
-impl sealed::SealedSimdType for i32 {}
-impl SimdType for i32 {
-    const IMPL: SimdTypeImpl = SimdTypeImpl::Other;
-}
-
-impl sealed::SealedSimdType for i64 {}
-impl SimdType for i64 {
-    const IMPL: SimdTypeImpl = SimdTypeImpl::Other;
-}
-
-impl sealed::SealedSimdType for isize {}
-impl SimdType for isize {
-    const IMPL: SimdTypeImpl = SimdTypeImpl::Other;
-}
-
-impl sealed::SealedSimdType for f32 {}
-impl SimdType for f32 {
-    const IMPL: SimdTypeImpl = SimdTypeImpl::Float32;
-}
-
-impl sealed::SealedSimdType for f64 {}
-impl SimdType for f64 {
-    const IMPL: SimdTypeImpl = SimdTypeImpl::Float64;
-}
-
-impl<T> sealed::SealedSimdType for *const T {}
-impl<T> SimdType for *const T {
-    const IMPL: SimdTypeImpl = SimdTypeImpl::Other;
-}
-
-impl<T> sealed::SealedSimdType for *mut T {}
-impl<T> SimdType for *mut T {
-    const IMPL: SimdTypeImpl = SimdTypeImpl::Other;
-}
-
-impl crate::Target {
-    /// Returns a suggested number of elements for a SIMD vector of the provided type.
+impl crate::TargetFeatures {
+    /// Returns a suggested number of elements for a SIMD vector of type `T`.
     ///
     /// The returned value is an approximation and not necessarily indicative of the
     /// optimal vector width.  A few caveats:
     /// * Every instruction set is different, and this function doesn't take into account any
     ///   particular operations--it's just a guess, and should be accurate at least for basic arithmetic.
-    /// * Variable length vector instruction sets (ARM SVE and RISC-V V) only return the minimum
+    /// * Variable-length vector instruction sets (ARM SVE and RISC-V V) only return the minimum
     ///   vector length.
-    ///
-    /// The following features are accounted for:
-    ///
-    /// | Architecture        | Feature                                 | Width                              |
-    /// | ------------------- | --------------------------------------- | ---------------------------------- |
-    /// | `arm`               | `neon`                                  | 128-bit (excluding `f64`)          |
-    /// | `arm`               | `mve`                                   | 128-bit (integers up to 32-bit)    |
-    /// | `arm`               | `mve.fp`                                | 128-bit (`f32`)                    |
-    /// | `aarch64`/`arm64ec` | `neon`                                  | 128-bit                            |
-    /// | `hexagon`           | `hvx-length128b`                        | 1024-bit (only integers)           |
-    /// | `hexagon`           | `hvx-length128b` and `hvx-ieee-fp`      | 1024-bit (`f32`)                   |
-    /// | `hexagon`           | `hvx`                                   | 512-bit (only integers)            |
-    /// | `loongarch{32,64}`  | `lasx`                                  | 256-bit                            |
-    /// | `loongarch{32,64}`  | `lsx`                                   | 128-bit                            |
-    /// | `mips{64}`          | `msa`                                   | 128-bit                            |
-    /// | `powerpc{64}`       | `vsx`                                   | 128-bit                            |
-    /// | `powerpc{64}`       | `altivec`                               | 128-bit (excluding `f64`)          |
-    /// | `riscv{32,64}`      | `zve32*`                                | 32-bit minimum                     |
-    /// | `riscv{32,64}`      | `zve64*`                                | 64-bit minimum                     |
-    /// | `riscv{32,64}`      | `v`                                     | 128-bit minimum                    |
-    /// | `riscv{32,64}`      | `zvl*b`                                 | specified minimum                  |
-    /// | `s390x`             | `vector`                                | 128-bit                            |
-    /// | `wasm{32,64}`       | `simd128`                               | 128-bit                            |
-    /// | `x86{_64}`          | `avx512f`                               | 512-bit (excluding 8/16-bit integers) |
-    /// | `x86{_64}`          | `avx512bw`                              | 512-bit (8/16-bit integers)        |
-    /// | `x86{_64}`          | `avx2`                                  | 256-bit                            |
-    /// | `x86{_64}`          | `avx`                                   | 256-bit (only floating point)      |
-    /// | `x86{_64}`          | `sse2`                                  | 128-bit                            |
-    /// | `x86{_64}`          | `sse`                                   | 128-bit (`f32` only)               |
-    pub const fn suggested_simd_width<T: SimdType>(&self) -> Option<usize> {
-        let is_f32 = T::IMPL as u8 == SimdTypeImpl::Float32 as u8;
-        let is_f64 = T::IMPL as u8 == SimdTypeImpl::Float64 as u8;
+    #[allow(unused_variables)]
+    pub const fn suggested_simd_width<T: SimdElement>(&self) -> Option<usize> {
+        let is_f32 = T::IMPL as u8 == SimdElementImpl::Float32 as u8;
+        let is_f64 = T::IMPL as u8 == SimdElementImpl::Float64 as u8;
         let is_integer = !is_f32 && !is_f64;
         let element_size = core::mem::size_of::<T>();
 
@@ -136,149 +96,164 @@ impl crate::Target {
         let v512 = 64 / element_size;
         let v1024 = 128 / element_size;
 
-        if let Architecture::Arm = self.architecture() {
-            // Neon on arm doesn't support f64
-            if (self.supports_feature_str("neon") && !is_f64)
-                || (is_f32 && self.supports_feature_str("mve.fp"))
-                || (is_integer && element_size <= 4 && self.supports_feature_str("mve"))
+        #[cfg(target_arch = "arm")]
+        {
+            return if (self.contains(features::NEON) && !is_f64)
+                || (is_f32 && self.contains(features::MVE_FP))
+                || (is_integer && element_size <= 4 && self.contains(features::MVE))
             {
                 Some(v128)
             } else {
                 None
-            }
-        } else if matches!(
-            self.architecture(),
-            Architecture::AArch64 | Architecture::Arm64EC
-        ) {
-            if self.supports_feature_str("neon") {
+            };
+        }
+
+        #[cfg(any(target_arch = "aarch64", target_arch = "arm64ec"))]
+        {
+            return if self.contains(features::NEON) {
                 Some(v128)
             } else {
                 None
-            }
-        } else if let Architecture::Hexagon = self.architecture() {
-            if is_f64 {
+            };
+        }
+
+        #[cfg(target_arch = "hexagon")]
+        {
+            return if is_f64 {
                 None
             } else if is_f32 {
-                // General SIMD arithmetic requires IEEE semantics.
-                if self.supports_feature_str("hvx-length128b")
-                    && self.supports_feature_str("hvxv68")
-                    && self.supports_feature_str("hvx-ieee-fp")
+                if self.contains(features::HVX_LENGTH128B)
+                    && self.contains(features::HVXV68)
+                    && self.contains(features::HVX_IEEE_FP)
                 {
                     Some(v1024)
                 } else {
                     None
                 }
-            } else if self.supports_feature_str("hvx-length128b") {
+            } else if self.contains(features::HVX_LENGTH128B) {
                 Some(v1024)
-            } else if self.supports_feature_str("hvx") {
+            } else if self.contains(features::HVX) {
                 Some(v512)
             } else {
                 None
-            }
-        } else if self.architecture().is_loongarch_family() {
-            if self.supports_feature_str("lasx") {
+            };
+        }
+
+        #[cfg(any(target_arch = "loongarch32", target_arch = "loongarch64"))]
+        {
+            return if self.contains(features::LASX) {
                 Some(v256)
-            } else if self.supports_feature_str("lsx") {
+            } else if self.contains(features::LSX) {
                 Some(v128)
             } else {
                 None
-            }
-        } else if self.architecture().is_mips_family() {
-            if self.supports_feature_str("msa") {
+            };
+        }
+
+        #[cfg(any(target_arch = "mips", target_arch = "mips64"))]
+        {
+            return if self.contains(features::MSA) {
                 Some(v128)
             } else {
                 None
-            }
-        } else if self.architecture().is_powerpc_family() {
-            // Altivec without VSX doesn't support f64
-            if self.supports_feature_str("vsx") || (self.supports_feature_str("altivec") && !is_f64)
+            };
+        }
+
+        #[cfg(any(target_arch = "powerpc", target_arch = "powerpc64"))]
+        {
+            return if self.contains(features::VSX) || (self.contains(features::ALTIVEC) && !is_f64)
             {
                 Some(v128)
             } else {
                 None
-            }
-        } else if self.architecture().is_riscv_family() {
+            };
+        }
+
+        #[cfg(any(target_arch = "riscv32", target_arch = "riscv64"))]
+        {
             let supports_element = if is_f64 {
-                self.supports_feature_str("zve64d")
+                self.contains(features::ZVE64D)
             } else if is_f32 {
-                self.supports_feature_str("zve32f")
+                self.contains(features::ZVE32F)
             } else if element_size <= 4 {
-                self.supports_feature_str("zve32x")
+                self.contains(features::ZVE32X)
             } else if element_size <= 8 {
-                self.supports_feature_str("zve64x")
+                self.contains(features::ZVE64X)
             } else {
                 false
             };
 
-            if supports_element {
-                let vector_bytes = if self.supports_feature_str("zvl65536b") {
-                    8192
-                } else if self.supports_feature_str("zvl32768b") {
-                    4096
-                } else if self.supports_feature_str("zvl16384b") {
-                    2048
-                } else if self.supports_feature_str("zvl8192b") {
-                    1024
-                } else if self.supports_feature_str("zvl4096b") {
-                    512
-                } else if self.supports_feature_str("zvl2048b") {
-                    256
-                } else if self.supports_feature_str("zvl1024b") {
-                    128
-                } else if self.supports_feature_str("zvl512b") {
-                    64
-                } else if self.supports_feature_str("zvl256b") {
-                    32
-                } else if self.supports_feature_str("zvl128b") {
-                    16
-                } else if self.supports_feature_str("zvl64b") {
-                    8
-                } else if self.supports_feature_str("zvl32b") {
-                    4
-                } else {
-                    0
-                };
+            let vector_bytes = if self.contains(features::ZVL65536B) {
+                8192
+            } else if self.contains(features::ZVL32768B) {
+                4096
+            } else if self.contains(features::ZVL16384B) {
+                2048
+            } else if self.contains(features::ZVL8192B) {
+                1024
+            } else if self.contains(features::ZVL4096B) {
+                512
+            } else if self.contains(features::ZVL2048B) {
+                256
+            } else if self.contains(features::ZVL1024B) {
+                128
+            } else if self.contains(features::ZVL512B) {
+                64
+            } else if self.contains(features::ZVL256B) {
+                32
+            } else if self.contains(features::ZVL128B) {
+                16
+            } else if self.contains(features::ZVL64B) {
+                8
+            } else if self.contains(features::ZVL32B) {
+                4
+            } else {
+                0
+            };
 
-                if vector_bytes == 0 {
-                    None
-                } else {
-                    Some(vector_bytes / element_size)
-                }
+            return if supports_element && vector_bytes != 0 {
+                Some(vector_bytes / element_size)
             } else {
                 None
-            }
-        } else if let Architecture::S390X = self.architecture() {
-            if self.supports_feature_str("vector") {
+            };
+        }
+
+        #[cfg(target_arch = "s390x")]
+        {
+            return if self.contains(features::VECTOR) {
                 Some(v128)
             } else {
                 None
-            }
-        } else if self.architecture().is_wasm_family() {
-            if self.supports_feature_str("simd128") {
+            };
+        }
+
+        #[cfg(any(target_arch = "wasm32", target_arch = "wasm64"))]
+        {
+            return if self.contains(features::SIMD128) {
                 Some(v128)
             } else {
                 None
-            }
-        } else if self.architecture().is_x86_family() {
-            if self.supports_feature_str("avx512f")
-                && (!is_integer || element_size >= 4 || self.supports_feature_str("avx512bw"))
+            };
+        }
+
+        #[cfg(any(target_arch = "x86", target_arch = "x86_64"))]
+        {
+            return if self.contains(features::AVX512F)
+                && (!is_integer || element_size >= 4 || self.contains(features::AVX512BW))
             {
                 Some(v512)
-            } else if self.supports_feature_str("avx2")
-                || (is_f32 || is_f64) && self.supports_feature_str("avx")
+            } else if self.contains(features::AVX2)
+                || ((is_f32 || is_f64) && self.contains(features::AVX))
             {
-                // AVX supports f32 and f64
                 Some(v256)
-            } else if self.supports_feature_str("sse2")
-                || is_f32 && self.supports_feature_str("sse")
-            {
-                // SSE supports f32
+            } else if self.contains(features::SSE2) || (is_f32 && self.contains(features::SSE)) {
                 Some(v128)
             } else {
                 None
-            }
-        } else {
-            None
+            };
         }
+
+        #[allow(unreachable_code)]
+        None
     }
 }

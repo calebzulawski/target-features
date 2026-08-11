@@ -9,12 +9,15 @@ on:
 env:
   CARGO_TERM_COLOR: always
 
+permissions:
+  contents: read
+
 jobs:
   test:
     strategy:
       matrix:
         version:
-          - 1.61.0
+          - 1.82.0
           - stable
           - beta
           - nightly
@@ -22,38 +25,27 @@ jobs:
           - macos-latest
           - ubuntu-latest
           - windows-latest
-        features:
-          - --all-features
-          - --no-default-features
-
     runs-on: ${{ matrix.os }}
     
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v7
     - name: Install toolchain
-      uses: actions-rs/toolchain@v1
+      uses: dtolnay/rust-toolchain@master
       with:
         toolchain: ${{ matrix.version }}
-        override: true
-        profile: minimal
     - name: Run tests
-      run: cargo test --verbose ${{ matrix.features }}
+      run: cargo test --verbose
 
   lint:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v7
     - name: Install toolchain
-      uses: actions-rs/toolchain@v1
+      uses: dtolnay/rust-toolchain@nightly
       with:
-        toolchain: nightly
-        override: true
-        profile: minimal
         components: clippy, rustfmt
     - name: Clippy lint
       run: cargo clippy --all-features --all-targets -- -D warnings
-    - name: Clippy lint no-std
-      run: cargo clippy --no-default-features --all-targets -- -D warnings
     - name: Check formatting
       run: cargo fmt -- --check
     - name: Deadlinks
