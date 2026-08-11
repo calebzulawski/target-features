@@ -1,5 +1,9 @@
 use crate::Architecture;
 
+mod sealed {
+    pub trait SealedSimdType {}
+}
+
 #[doc(hidden)]
 pub enum SimdTypeImpl {
     Float32,
@@ -8,63 +12,77 @@ pub enum SimdTypeImpl {
 }
 
 /// Types which can be SIMD vector elements.
-pub trait SimdType {
+pub trait SimdType: sealed::SealedSimdType {
     #[doc(hidden)]
     const IMPL: SimdTypeImpl;
 }
 
+impl sealed::SealedSimdType for u8 {}
 impl SimdType for u8 {
     const IMPL: SimdTypeImpl = SimdTypeImpl::Other;
 }
 
+impl sealed::SealedSimdType for u16 {}
 impl SimdType for u16 {
     const IMPL: SimdTypeImpl = SimdTypeImpl::Other;
 }
 
+impl sealed::SealedSimdType for u32 {}
 impl SimdType for u32 {
     const IMPL: SimdTypeImpl = SimdTypeImpl::Other;
 }
 
+impl sealed::SealedSimdType for u64 {}
 impl SimdType for u64 {
     const IMPL: SimdTypeImpl = SimdTypeImpl::Other;
 }
 
+impl sealed::SealedSimdType for usize {}
 impl SimdType for usize {
     const IMPL: SimdTypeImpl = SimdTypeImpl::Other;
 }
 
+impl sealed::SealedSimdType for i8 {}
 impl SimdType for i8 {
     const IMPL: SimdTypeImpl = SimdTypeImpl::Other;
 }
 
+impl sealed::SealedSimdType for i16 {}
 impl SimdType for i16 {
     const IMPL: SimdTypeImpl = SimdTypeImpl::Other;
 }
 
+impl sealed::SealedSimdType for i32 {}
 impl SimdType for i32 {
     const IMPL: SimdTypeImpl = SimdTypeImpl::Other;
 }
 
+impl sealed::SealedSimdType for i64 {}
 impl SimdType for i64 {
     const IMPL: SimdTypeImpl = SimdTypeImpl::Other;
 }
 
+impl sealed::SealedSimdType for isize {}
 impl SimdType for isize {
     const IMPL: SimdTypeImpl = SimdTypeImpl::Other;
 }
 
+impl sealed::SealedSimdType for f32 {}
 impl SimdType for f32 {
     const IMPL: SimdTypeImpl = SimdTypeImpl::Float32;
 }
 
+impl sealed::SealedSimdType for f64 {}
 impl SimdType for f64 {
     const IMPL: SimdTypeImpl = SimdTypeImpl::Float64;
 }
 
+impl<T> sealed::SealedSimdType for *const T {}
 impl<T> SimdType for *const T {
     const IMPL: SimdTypeImpl = SimdTypeImpl::Other;
 }
 
+impl<T> sealed::SealedSimdType for *mut T {}
 impl<T> SimdType for *mut T {
     const IMPL: SimdTypeImpl = SimdTypeImpl::Other;
 }
@@ -101,7 +119,8 @@ impl crate::Target {
     /// | `riscv{32,64}`      | `zvl*b`                                 | specified minimum                  |
     /// | `s390x`             | `vector`                                | 128-bit                            |
     /// | `wasm{32,64}`       | `simd128`                               | 128-bit                            |
-    /// | `x86{_64}`          | `avx512f`                               | 512-bit                            |
+    /// | `x86{_64}`          | `avx512f`                               | 512-bit (excluding 8/16-bit integers) |
+    /// | `x86{_64}`          | `avx512bw`                              | 512-bit (8/16-bit integers)        |
     /// | `x86{_64}`          | `avx2`                                  | 256-bit                            |
     /// | `x86{_64}`          | `avx`                                   | 256-bit (only floating point)      |
     /// | `x86{_64}`          | `sse2`                                  | 128-bit                            |
@@ -241,7 +260,9 @@ impl crate::Target {
                 None
             }
         } else if self.architecture().is_x86_family() {
-            if self.supports_feature_str("avx512f") {
+            if self.supports_feature_str("avx512f")
+                && (!is_integer || element_size >= 4 || self.supports_feature_str("avx512bw"))
+            {
                 Some(v512)
             } else if self.supports_feature_str("avx2")
                 || (is_f32 || is_f64) && self.supports_feature_str("avx")

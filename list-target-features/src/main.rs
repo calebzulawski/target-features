@@ -1,6 +1,7 @@
 #![feature(rustc_private)]
 
 mod architectures;
+mod documentation;
 mod platform;
 mod runtime_detection;
 
@@ -29,40 +30,42 @@ fn rustc_version() -> String {
 }
 
 fn main() {
-    let mut rust_version =
-        std::fs::File::create(std::env::current_dir().unwrap().join("rustc-version.txt")).unwrap();
+    let current_dir = std::env::current_dir().unwrap();
+    let mut rust_version = std::fs::File::create(current_dir.join("rustc-version.txt")).unwrap();
     writeln!(rust_version, "{}", rustc_version()).unwrap();
 
-    let mut features =
-        std::fs::File::create(std::env::current_dir().unwrap().join("target-features.txt"))
-            .unwrap();
+    let mut target_features =
+        std::fs::File::create(current_dir.join("target-features.txt")).unwrap();
+    let mut target_cpus = std::fs::File::create(current_dir.join("target-cpus.txt")).unwrap();
+    let mut target_docs = std::fs::File::create(current_dir.join("docs.rs")).unwrap();
+
     for architecture in ARCHITECTURES {
         println!("reading arch: {}", architecture.name);
+        let features = platform::features(architecture);
         for Feature {
             feature,
             description,
             implies,
             runtime,
-        } in platform::features(architecture)
+        } in &features
         {
-            writeln!(features, "feature = {feature}").unwrap();
-            writeln!(features, "arch = {}", architecture.name).unwrap();
-            writeln!(features, "implies = {}", implies.join(" ")).unwrap();
-            writeln!(features, "description = {description}").unwrap();
-            writeln!(features, "runtime = {runtime}").unwrap();
-            writeln!(features).unwrap();
+            writeln!(target_features, "feature = {feature}").unwrap();
+            writeln!(target_features, "arch = {}", architecture.name).unwrap();
+            writeln!(target_features, "implies = {}", implies.join(" ")).unwrap();
+            writeln!(target_features, "description = {description}").unwrap();
+            writeln!(target_features, "runtime = {runtime}").unwrap();
+            writeln!(target_features).unwrap();
         }
-    }
 
-    let mut cpus =
-        std::fs::File::create(std::env::current_dir().unwrap().join("target-cpus.txt")).unwrap();
-    for architecture in ARCHITECTURES {
         println!("reading CPUs for arch: {}", architecture.name);
-        for Cpu { cpu, features } in platform::cpus(architecture) {
-            writeln!(cpus, "cpu = {cpu}").unwrap();
-            writeln!(cpus, "arch = {}", architecture.name).unwrap();
-            writeln!(cpus, "features = {}", features.join(" ")).unwrap();
-            writeln!(cpus).unwrap();
+        let cpus = platform::cpus(architecture);
+        for Cpu { cpu, features } in &cpus {
+            writeln!(target_cpus, "cpu = {cpu}").unwrap();
+            writeln!(target_cpus, "arch = {}", architecture.name).unwrap();
+            writeln!(target_cpus, "features = {}", features.join(" ")).unwrap();
+            writeln!(target_cpus).unwrap();
         }
+
+        documentation::write(&mut target_docs, architecture.name, &features, &cpus).unwrap();
     }
 }

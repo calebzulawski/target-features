@@ -1,4 +1,4 @@
-use std::{collections::HashMap, error::Error, fs::File, io::Write, path::Path};
+use std::{error::Error, fs::File, io::Write, path::Path};
 
 fn main() -> Result<(), Box<dyn Error>> {
     let rustc_version = include_str!("rustc-version.txt").trim();
@@ -137,63 +137,6 @@ fn main() -> Result<(), Box<dyn Error>> {
     }
     writeln!(module, "    target")?;
     writeln!(module, "}};")?;
-
-    // Generate the features docs
-    let mut docs = File::create(Path::new(&out_dir).join("docs.rs"))?;
-    let mut by_arch = HashMap::<_, (Vec<_>, Vec<_>)>::new();
-    for (feature, arch, description, implies, runtime) in features {
-        by_arch
-            .entry(arch)
-            .or_default()
-            .0
-            .push((feature, description, implies, runtime));
-    }
-    for (cpu, arch, features) in cpus {
-        by_arch.entry(arch).or_default().1.push((cpu, features));
-    }
-    let mut by_arch = by_arch.drain().collect::<Vec<_>>();
-    by_arch.sort();
-    for (arch, (features, cpus)) in by_arch.drain(..) {
-        writeln!(docs, "/// {} documentation", arch.to_lowercase())?;
-        writeln!(docs, "///")?;
-        writeln!(docs, "/// ## Features")?;
-        writeln!(
-            docs,
-            "/// | Feature | Description | Also Enables<sup>†</sup> |"
-        )?;
-        writeln!(
-            docs,
-            "/// | ------- | ----------- | ------------------------ |"
-        )?;
-        for (feature, description, implies, _) in features {
-            write!(docs, "/// | `{feature}` | {description} | ")?;
-            for (i, feature) in implies.into_iter().enumerate() {
-                if i != 0 {
-                    write!(docs, ", ")?;
-                }
-                write!(docs, "`{feature}`")?;
-            }
-            writeln!(docs, " |")?;
-        }
-        writeln!(docs, "///")?;
-        writeln!(docs, "/// <sup>†</sup> This is often empirical, rather than specified in any standard, i.e. all available CPUs with a particular feature also have another feature.")?;
-        writeln!(docs, "///")?;
-        writeln!(docs, "/// ## CPUs")?;
-        writeln!(docs, "/// | CPU | Enabled Features |")?;
-        writeln!(docs, "/// | --- | -------- |")?;
-        for (cpu, features) in cpus {
-            writeln!(
-                docs,
-                "/// | `{cpu}` | {} |",
-                features
-                    .iter()
-                    .map(|f| format!("`{f}`"))
-                    .collect::<Vec<_>>()
-                    .join(", ")
-            )?;
-        }
-        writeln!(docs, "pub mod {} {{}}", arch.to_lowercase())?;
-    }
 
     // Rerun build if the source features changed
     println!("cargo:rerun-if-changed=rustc-version.txt");

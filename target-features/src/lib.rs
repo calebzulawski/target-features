@@ -7,9 +7,7 @@
 include!(concat!(env!("OUT_DIR"), "/generated.rs"));
 
 /// List of features available for each architecture.
-pub mod docs {
-    include!(concat!(env!("OUT_DIR"), "/docs.rs"));
-}
+pub mod docs;
 
 mod simd;
 pub use simd::*;
