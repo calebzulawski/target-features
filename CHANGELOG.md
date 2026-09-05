@@ -6,6 +6,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.2.0] - 2026-09-05
+### Added
+- Added support for Arm64EC, LoongArch32/64, NVPTX64, S390X, and SPARC/64 compilation targets
+
+### Changed
+- Redesigned the API around `TargetFeatures`. This release is not API-compatible with version 0.1
+- Feature sets are now created using architecture-specific constants or the `target_features!` macro
+- `TargetFeatures::enabled_for_target()` replaces `CURRENT_TARGET`
+- Improved `suggested_simd_width` for additional architectures and target features
+- Raised the minimum supported Rust version to 1.82
+
+### Removed
+- Removed support for describing other architectures and specific CPUs
+
 ## [0.1.6] - 2024-03-15
 ### Changed
 - Updated feature list
@@ -35,7 +49,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Initial release
 
-[Unreleased]: https://github.com/calebzulawski/target-features/compare/0.1.6...HEAD
+[Unreleased]: https://github.com/calebzulawski/target-features/compare/0.2.0...HEAD
+[0.2.0]: https://github.com/calebzulawski/target-features/compare/0.1.6...0.2.0
 [0.1.6]: https://github.com/calebzulawski/target-features/compare/0.1.5...0.1.6
 [0.1.5]: https://github.com/calebzulawski/target-features/compare/0.1.4...0.1.5
 [0.1.4]: https://github.com/calebzulawski/target-features/compare/0.1.3...0.1.4
